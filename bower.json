@@ -1,0 +1,15 @@
+{
+  "name": "lib.js",
+  "dependencies": {
+    "zepto": "https://github.com/madrobby/zepto/raw/master/src/zepto.js",
+    "underscore": "https://github.com/jashkenas/underscore/raw/master/underscore.js"
+  },
+  "exportsOverride": {
+    "zepto": {
+      "main": "lib/zepto.js"
+    },
+    "underscore": {
+      "main": "lib/underscore.js"
+    }
+  }
+}

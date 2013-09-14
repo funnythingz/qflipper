@@ -29,6 +29,62 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var PointSingleton = (function () {
+        function PointSingleton() {
+            if (PointSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            PointSingleton._instance = this;
+        }
+        PointSingleton.getInstance = function () {
+            if (PointSingleton._instance === null) {
+                PointSingleton._instance = new PointSingleton();
+            }
+            return PointSingleton._instance;
+        };
+
+        PointSingleton.prototype.getNow = function () {
+            return this.now;
+        };
+        PointSingleton._instance = null;
+        return PointSingleton;
+    })();
+    Q.PointSingleton = PointSingleton;
+
+    Q.Point = PointSingleton.getInstance();
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var PositionSingleton = (function () {
+        function PositionSingleton() {
+            if (PositionSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            PositionSingleton._instance = this;
+        }
+        PositionSingleton.getInstance = function () {
+            if (PositionSingleton._instance === null) {
+                PositionSingleton._instance = new PositionSingleton();
+            }
+            return PositionSingleton._instance;
+        };
+
+        PositionSingleton.prototype.getStartY = function () {
+            return this.startY;
+        };
+
+        PositionSingleton.prototype.getStartX = function () {
+            return this.startX;
+        };
+        PositionSingleton._instance = null;
+        return PositionSingleton;
+    })();
+    Q.PositionSingleton = PositionSingleton;
+
+    Q.Position = PositionSingleton.getInstance();
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var SizeSingleton = (function () {
         function SizeSingleton() {
             if (SizeSingleton._instance) {

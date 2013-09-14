@@ -1,4 +1,6 @@
 /// <reference path="size.ts" />
+/// <reference path="point.ts" />
+/// <reference path="position.ts" />
 
 
 module Q {

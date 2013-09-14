@@ -1,62 +1,39 @@
-var TYPOS;
-(function (TYPOS) {
-    var Age = (function () {
-        function Age(count) {
-            this.count = count;
+var Q;
+(function (Q) {
+    var Flick = (function () {
+        function Flick() {
         }
-        return Age;
+        Flick.prototype.start = function (id) {
+            console.log(id);
+            console.log(Q.Size);
+        };
+        return Flick;
     })();
-    TYPOS.Age = Age;
-})(TYPOS || (TYPOS = {}));
-;var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var TYPOS;
-(function (TYPOS) {
-    var Human = (function () {
-        function Human(first, last, age) {
-            this.name = new TYPOS.Name(first, last);
-            this.age = new TYPOS.Age(age);
+    Q.Flick = Flick;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var SizeSingleton = (function () {
+        function SizeSingleton() {
+            if (SizeSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            SizeSingleton._instance = this;
         }
-        Human.prototype.sayName = function () {
-            return this.name;
+        SizeSingleton.getInstance = function () {
+            if (SizeSingleton._instance === null) {
+                SizeSingleton._instance = new SizeSingleton();
+            }
+            return SizeSingleton._instance;
         };
 
-        Human.prototype.sayAge = function () {
-            return this.age;
+        SizeSingleton.prototype.getTotalWidth = function () {
+            return this.totalWidth;
         };
-        return Human;
+        SizeSingleton._instance = null;
+        return SizeSingleton;
     })();
-    TYPOS.Human = Human;
+    Q.SizeSingleton = SizeSingleton;
 
-    var M = (function (_super) {
-        __extends(M, _super);
-        function M() {
-            _super.apply(this, arguments);
-        }
-        return M;
-    })(Human);
-    TYPOS.M = M;
-    var F = (function (_super) {
-        __extends(F, _super);
-        function F() {
-            _super.apply(this, arguments);
-        }
-        return F;
-    })(Human);
-    TYPOS.F = F;
-})(TYPOS || (TYPOS = {}));
-;var TYPOS;
-(function (TYPOS) {
-    var Name = (function () {
-        function Name(first, last) {
-            this.first = first;
-            this.last = last;
-        }
-        return Name;
-    })();
-    TYPOS.Name = Name;
-})(TYPOS || (TYPOS = {}));
+    Q.Size = SizeSingleton.getInstance();
+})(Q || (Q = {}));

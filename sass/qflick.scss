@@ -1,2 +1,25 @@
 @charset "utf-8";
 @import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+$_single-width: 320;
+$_item-length: 3;
+$_total-width: $_single-width * $_item-length;
+
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.qflickViwe {
+  width: #{$_single-width}px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.qflick {
+  width: #{$_total-width}px;
+  @include clearfix;
+}
+.item {
+  width: #{$_single-width}px;
+  float: left;
+}

@@ -31,7 +31,7 @@ qflick.js is implemented in TypeScript
 </div>
 
 <script>
-  var qflick = new Qflick();
+  var qflick = new Q.Flick();
   qflick.start('#qflick');
 </script>
 

@@ -4,8 +4,24 @@ var Q;
         function Flick() {
         }
         Flick.prototype.start = function (id) {
-            console.log(id);
-            console.log(Q.Size);
+        };
+
+        Flick.prototype.refresh = function () {
+        };
+
+        Flick.prototype.toNext = function () {
+        };
+
+        Flick.prototype.toPrev = function () {
+        };
+
+        Flick.prototype.moveToPoint = function (point) {
+        };
+
+        Flick.prototype.hasNext = function () {
+        };
+
+        Flick.prototype.hasPrev = function () {
         };
         return Flick;
     })();

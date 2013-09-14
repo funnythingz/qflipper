@@ -6,8 +6,24 @@ module Q {
     export class Flick {
 
         start(id: string) {
-            console.log(id);
-            console.log(Size);
+        }
+
+        refresh() {
+        }
+
+        toNext() {
+        }
+
+        toPrev() {
+        }
+
+        moveToPoint(point: number) {
+        }
+
+        private hasNext() {
+        }
+
+        private hasPrev() {
         }
 
     }

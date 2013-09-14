@@ -28,6 +28,11 @@ qflick.js is implemented in TypeScript
   </div>
 </div>
 
+<script>
+  var qflick = new Qflick();
+  qflick.start('#qflick');
+</script>
+
 </body></html>
 ```
 

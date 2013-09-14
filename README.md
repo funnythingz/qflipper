@@ -9,6 +9,8 @@ qflick.js is implemented in TypeScript
 
 ```html
 <html><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
+  <link rel="stylesheet" href="qflick.css" media="all" type="text/css">
   <script src="zepto.js"></script>
   <script src="underscore.js"></script>
   <script src="qflick.js"></script>

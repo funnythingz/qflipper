@@ -1,7 +1,7 @@
 qflick.js
 =====
 
-qflick.js is implemented in TypeScript
+つくってるなう
 
 ## Get Started
 

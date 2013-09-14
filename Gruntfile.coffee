@@ -11,7 +11,7 @@ module.exports = (grunt)->
 
     concat:
       typesc:
-        src: ['src/qflick/*.js']
+        src: ['src/qflick/**/*.js']
         dest: 'public/qflick.js'
 
       lib:

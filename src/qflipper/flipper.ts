@@ -1,3 +1,5 @@
+/// <reference path="../../definitions/underscore.d.ts" />
+/// <reference path="../../definitions/zepto.d.ts" />
 /// <reference path="flipfactory.ts" />
 /// <reference path="enum/start-enum.ts" />
 /// <reference path="enum/fliptype-enum.ts" />
@@ -12,7 +14,7 @@ module Q {
 
         start(id: string, option: any) {
             this.flipFactory = new FlipFactory();
-            this.flipFactory.createFlip(id, this.checkFlipType(option.type));
+            this.flipFactory.createFlip($('#' + id), this.checkFlipType(option.type));
             this.startEnum = StartEnum.Success;
         }
 

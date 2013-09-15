@@ -4,7 +4,7 @@ module Q {
     
     export class RichFlipFactory {
 
-        constructor(elm: ZeptoCollection) {
+        createRichFlip(elm: ZeptoCollection) {
             return new RichFlip(elm);
         }
 

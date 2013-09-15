@@ -1,5 +1,5 @@
 /// <reference path="../../interface/iflip.ts" />
-/// <reference path="../../model/point.ts" />
+/// <reference path="../../data/point.ts" />
 
 module Q {
     

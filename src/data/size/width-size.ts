@@ -1,4 +1,4 @@
-/// <reference path="../size.ts" />
+/// <reference path="size.ts" />
 
 module Q {
 

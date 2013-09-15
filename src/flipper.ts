@@ -1,6 +1,6 @@
 /// <reference path="../definitions/underscore.d.ts" />
 /// <reference path="../definitions/zepto.d.ts" />
-/// <reference path="flip-creater.ts" />
+/// <reference path="service/flip-service.ts" />
 /// <reference path="enum/start-enum.ts" />
 /// <reference path="enum/fliptype-enum.ts" />
 
@@ -8,38 +8,38 @@ module Q {
     
     export class Flipper {
 
-        private flipCreater: any;
+        private flipService: any;
         private startEnum: StartEnum = StartEnum.Failure;
         private flipTypeEnum: FlipTypeEnum = FlipTypeEnum.Simple;
 
         start(id: string, option: any) {
-            this.flipCreater = new FlipCreater($(id), this.checkFlipType(option.type));
+            this.flipService = new FlipService($(id), this.checkFlipType(option.type));
             this.startEnum = StartEnum.Success;
             this.refresh();
-            console.log(this.flipCreater);
+            console.log(this.flipService);
         }
 
         refresh() {
             if(this.checkStart()) {
-                this.flipCreater.refresh();
+                this.flipService.refresh();
             }
         }
 
         toNext() {
             if(this.checkStart()) {
-                this.flipCreater.toNext();
+                this.flipService.toNext();
             }
         }
 
         toPrev() {
             if(this.checkStart()) {
-                this.flipCreater.toPrev();
+                this.flipService.toPrev();
             }
         }
 
         moveToPoint(point: number) {
             if(this.checkStart()) {
-                this.flipCreater.moveToPoint(point);
+                this.flipService.moveToPoint(point);
             }
         }
 

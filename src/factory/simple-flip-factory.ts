@@ -4,7 +4,7 @@ module Q {
     
     export class SimpleFlipFactory {
 
-        constructor(elm: ZeptoCollection) {
+        createSimpleFlip(elm: ZeptoCollection) {
             return new SimpleFlip(elm);
         }
 

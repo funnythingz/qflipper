@@ -1,5 +1,137 @@
 var Q;
 (function (Q) {
+    var Item = (function () {
+        function Item(name) {
+            if (typeof name === "undefined") { name = 'item'; }
+            this.name = name;
+        }
+        Item.prototype.getName = function () {
+            this.name;
+        };
+        return Item;
+    })();
+    Q.Item = Item;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Lamp = (function () {
+        function Lamp(name) {
+            if (typeof name === "undefined") { name = 'lamp'; }
+            this.name = name;
+        }
+        Lamp.prototype.getName = function () {
+            this.name;
+        };
+        return Lamp;
+    })();
+    Q.Lamp = Lamp;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Options = (function () {
+        function Options(item, lamp) {
+            if (typeof item === "undefined") { item = new Q.Item(); }
+            if (typeof lamp === "undefined") { lamp = new Q.Lamp(); }
+            this.item = item;
+            this.lamp = lamp;
+        }
+        return Options;
+    })();
+    Q.Options = Options;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Point = (function () {
+        function Point() {
+        }
+        Point.prototype.setPoint = function (point) {
+            this.now = point;
+        };
+
+        Point.prototype.getNow = function () {
+            return this.now;
+        };
+
+        Point.prototype.getMax = function () {
+            return this.max;
+        };
+        return Point;
+    })();
+    Q.Point = Point;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Position = (function () {
+        function Position() {
+        }
+        Position.prototype.setY = function (y) {
+            this.y = y;
+        };
+
+        Position.prototype.setX = function (x) {
+            this.x = x;
+        };
+
+        Position.prototype.getY = function () {
+            return this.y;
+        };
+
+        Position.prototype.getX = function () {
+            return this.x;
+        };
+        return Position;
+    })();
+    Q.Position = Position;
+})(Q || (Q = {}));
+;var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Q;
+(function (Q) {
+    var ItemSize = (function (_super) {
+        __extends(ItemSize, _super);
+        function ItemSize(totalSize) {
+            _super.call(this, totalSize);
+        }
+        return ItemSize;
+    })(Q.Size);
+    Q.ItemSize = ItemSize;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Size = (function () {
+        function Size(totalSize) {
+            this.total = totalSize;
+        }
+        Size.prototype.getTotal = function () {
+            return this.total;
+        };
+        return Size;
+    })();
+    Q.Size = Size;
+})(Q || (Q = {}));
+;var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Q;
+(function (Q) {
+    var WidthSize = (function (_super) {
+        __extends(WidthSize, _super);
+        function WidthSize(totalSize) {
+            _super.call(this, totalSize);
+        }
+        return WidthSize;
+    })(Q.Size);
+    Q.WidthSize = WidthSize;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     (function (FlipTypeEnum) {
         FlipTypeEnum[FlipTypeEnum["Simple"] = 0] = "Simple";
         FlipTypeEnum[FlipTypeEnum["Rich"] = 1] = "Rich";
@@ -100,9 +232,11 @@ var Q;
 ;var Q;
 (function (Q) {
     var RichFlipFactory = (function () {
-        function RichFlipFactory(elm) {
-            return new Q.RichFlip(elm);
+        function RichFlipFactory() {
         }
+        RichFlipFactory.prototype.createRichFlip = function (elm) {
+            return new Q.RichFlip(elm);
+        };
         return RichFlipFactory;
     })();
     Q.RichFlipFactory = RichFlipFactory;
@@ -110,27 +244,14 @@ var Q;
 ;var Q;
 (function (Q) {
     var SimpleFlipFactory = (function () {
-        function SimpleFlipFactory(elm) {
-            return new Q.SimpleFlip(elm);
+        function SimpleFlipFactory() {
         }
+        SimpleFlipFactory.prototype.createSimpleFlip = function (elm) {
+            return new Q.SimpleFlip(elm);
+        };
         return SimpleFlipFactory;
     })();
     Q.SimpleFlipFactory = SimpleFlipFactory;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var FlipCreater = (function () {
-        function FlipCreater(elm, type) {
-            if (type === Q.FlipTypeEnum.Simple) {
-                return new Q.SimpleFlipFactory(elm);
-            }
-            if (type === Q.FlipTypeEnum.Rich) {
-                return new Q.RichFlipFactory(elm);
-            }
-        }
-        return FlipCreater;
-    })();
-    Q.FlipCreater = FlipCreater;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -140,33 +261,33 @@ var Q;
             this.flipTypeEnum = Q.FlipTypeEnum.Simple;
         }
         Flipper.prototype.start = function (id, option) {
-            this.flipCreater = new Q.FlipCreater($(id), this.checkFlipType(option.type));
+            this.flipService = new Q.FlipService($(id), this.checkFlipType(option.type));
             this.startEnum = Q.StartEnum.Success;
             this.refresh();
-            console.log(this.flipCreater);
+            console.log(this.flipService);
         };
 
         Flipper.prototype.refresh = function () {
             if (this.checkStart()) {
-                this.flipCreater.refresh();
+                this.flipService.refresh();
             }
         };
 
         Flipper.prototype.toNext = function () {
             if (this.checkStart()) {
-                this.flipCreater.toNext();
+                this.flipService.toNext();
             }
         };
 
         Flipper.prototype.toPrev = function () {
             if (this.checkStart()) {
-                this.flipCreater.toPrev();
+                this.flipService.toPrev();
             }
         };
 
         Flipper.prototype.moveToPoint = function (point) {
             if (this.checkStart()) {
-                this.flipCreater.moveToPoint(point);
+                this.flipService.moveToPoint(point);
             }
         };
 
@@ -193,133 +314,18 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var Point = (function () {
-        function Point() {
+    var FlipService = (function () {
+        function FlipService(elm, type) {
+            if (type === Q.FlipTypeEnum.Simple) {
+                var simpleFlipFactory = new Q.SimpleFlipFactory();
+                return simpleFlipFactory.createSimpleFlip(elm);
+            }
+            if (type === Q.FlipTypeEnum.Rich) {
+                var richFlipFactory = new Q.RichFlipFactory();
+                return richFlipFactory.createRichFlip(elm);
+            }
         }
-        Point.prototype.setPoint = function (point) {
-            this.now = point;
-        };
-
-        Point.prototype.getNow = function () {
-            return this.now;
-        };
-
-        Point.prototype.getMax = function () {
-            return this.max;
-        };
-        return Point;
+        return FlipService;
     })();
-    Q.Point = Point;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Position = (function () {
-        function Position() {
-        }
-        Position.prototype.setY = function (y) {
-            this.y = y;
-        };
-
-        Position.prototype.setX = function (x) {
-            this.x = x;
-        };
-
-        Position.prototype.getY = function () {
-            return this.y;
-        };
-
-        Position.prototype.getX = function () {
-            return this.x;
-        };
-        return Position;
-    })();
-    Q.Position = Position;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Size = (function () {
-        function Size(totalSize) {
-            this.total = totalSize;
-        }
-        Size.prototype.getTotal = function () {
-            return this.total;
-        };
-        return Size;
-    })();
-    Q.Size = Size;
-})(Q || (Q = {}));
-;var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var Q;
-(function (Q) {
-    var ItemSize = (function (_super) {
-        __extends(ItemSize, _super);
-        function ItemSize(totalSize) {
-            _super.call(this, totalSize);
-        }
-        return ItemSize;
-    })(Q.Size);
-    Q.ItemSize = ItemSize;
-})(Q || (Q = {}));
-;var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var Q;
-(function (Q) {
-    var WidthSize = (function (_super) {
-        __extends(WidthSize, _super);
-        function WidthSize(totalSize) {
-            _super.call(this, totalSize);
-        }
-        return WidthSize;
-    })(Q.Size);
-    Q.WidthSize = WidthSize;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Item = (function () {
-        function Item(name) {
-            if (typeof name === "undefined") { name = 'item'; }
-            this.name = name;
-        }
-        Item.prototype.getName = function () {
-            this.name;
-        };
-        return Item;
-    })();
-    Q.Item = Item;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Lamp = (function () {
-        function Lamp(name) {
-            if (typeof name === "undefined") { name = 'lamp'; }
-            this.name = name;
-        }
-        Lamp.prototype.getName = function () {
-            this.name;
-        };
-        return Lamp;
-    })();
-    Q.Lamp = Lamp;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Options = (function () {
-        function Options(item, lamp) {
-            if (typeof item === "undefined") { item = new Q.Item(); }
-            if (typeof lamp === "undefined") { lamp = new Q.Lamp(); }
-            this.item = item;
-            this.lamp = lamp;
-        }
-        return Options;
-    })();
-    Q.Options = Options;
+    Q.FlipService = FlipService;
 })(Q || (Q = {}));

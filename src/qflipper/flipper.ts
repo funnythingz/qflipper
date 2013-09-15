@@ -5,7 +5,7 @@
 
 module Q {
     
-    export class Flick {
+    export class Flipper {
 
         start(id: string) {
         }

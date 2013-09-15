@@ -4,15 +4,15 @@ module.exports = (grunt)->
 
     uglify:
       typesc:
-        files: 'public/qflick.min.js': ['public/qflick.js']
+        files: 'public/qflipper.min.js': ['public/qflipper.js']
 
       lib:
         files: 'public/lib.min.js': ['public/lib.js']
 
     concat:
       typesc:
-        src: ['src/qflick/**/*.js']
-        dest: 'public/qflick.js'
+        src: ['src/qflipper/**/*.js']
+        dest: 'public/qflipper.js'
 
       lib:
         src: ['lib/*/index.js']

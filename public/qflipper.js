@@ -1,31 +1,31 @@
 var Q;
 (function (Q) {
-    var Flick = (function () {
-        function Flick() {
+    var Flipper = (function () {
+        function Flipper() {
         }
-        Flick.prototype.start = function (id) {
+        Flipper.prototype.start = function (id) {
         };
 
-        Flick.prototype.refresh = function () {
+        Flipper.prototype.refresh = function () {
         };
 
-        Flick.prototype.toNext = function () {
+        Flipper.prototype.toNext = function () {
         };
 
-        Flick.prototype.toPrev = function () {
+        Flipper.prototype.toPrev = function () {
         };
 
-        Flick.prototype.moveToPoint = function (point) {
+        Flipper.prototype.moveToPoint = function (point) {
         };
 
-        Flick.prototype.hasNext = function () {
+        Flipper.prototype.hasNext = function () {
         };
 
-        Flick.prototype.hasPrev = function () {
+        Flipper.prototype.hasPrev = function () {
         };
-        return Flick;
+        return Flipper;
     })();
-    Q.Flick = Flick;
+    Q.Flipper = Flipper;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

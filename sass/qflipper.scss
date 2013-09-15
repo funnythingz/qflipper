@@ -10,12 +10,12 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.qflickViwe {
+.qflipperView {
   width: #{$_single-width}px;
   margin-right: auto;
   margin-left: auto;
 }
-.qflick {
+.qflipper {
   width: #{$_total-width}px;
   @include clearfix;
 }

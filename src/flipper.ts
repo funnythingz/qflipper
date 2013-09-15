@@ -1,5 +1,5 @@
-/// <reference path="../../definitions/underscore.d.ts" />
-/// <reference path="../../definitions/zepto.d.ts" />
+/// <reference path="../definitions/underscore.d.ts" />
+/// <reference path="../definitions/zepto.d.ts" />
 /// <reference path="flip-collection.ts" />
 /// <reference path="enum/start-enum.ts" />
 /// <reference path="enum/fliptype-enum.ts" />

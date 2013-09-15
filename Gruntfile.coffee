@@ -11,7 +11,7 @@ module.exports = (grunt)->
 
     concat:
       typesc:
-        src: ['src/qflipper/**/*.js']
+        src: ['src/**/*.js']
         dest: 'public/qflipper.js'
 
       lib:

@@ -2,10 +2,14 @@ module Q {
 
     export class Size {
 
-        private totalWidth: number;
+        private total: number;
 
-        getTotalWidth(): number {
-            return this.totalWidth;
+        constructor(totalSize: number) {
+            this.total = totalSize;
+        }
+
+        getTotal(): number {
+            return this.total;
         }
 
     }

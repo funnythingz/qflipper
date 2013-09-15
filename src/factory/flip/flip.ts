@@ -10,11 +10,12 @@ module Q {
 
         constructor(elm: ZeptoCollection) {
             this.point = new Point();
+            this.resetPoint();
             this.$el = elm;
         }
 
         refresh() {
-            this.point.setPoint(0);
+            this.resetPoint();
         }
 
         toNext() {
@@ -45,6 +46,10 @@ module Q {
                 return true;
             }
             return false;
+        }
+
+        private resetPoint() {
+            this.point.setPoint(0);
         }
 
     }

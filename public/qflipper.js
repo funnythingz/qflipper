@@ -19,10 +19,11 @@ var Q;
     var Flip = (function () {
         function Flip(elm) {
             this.point = new Q.Point();
+            this.resetPoint();
             this.$el = elm;
         }
         Flip.prototype.refresh = function () {
-            this.point.setPoint(0);
+            this.resetPoint();
         };
 
         Flip.prototype.toNext = function () {
@@ -53,6 +54,10 @@ var Q;
                 return true;
             }
             return false;
+        };
+
+        Flip.prototype.resetPoint = function () {
+            this.point.setPoint(0);
         };
         return Flip;
     })();
@@ -211,6 +216,14 @@ var Q;
     var Position = (function () {
         function Position() {
         }
+        Position.prototype.setY = function (y) {
+            this.y = y;
+        };
+
+        Position.prototype.setX = function (x) {
+            this.x = x;
+        };
+
         Position.prototype.getY = function () {
             return this.y;
         };
@@ -225,12 +238,47 @@ var Q;
 ;var Q;
 (function (Q) {
     var Size = (function () {
-        function Size() {
+        function Size(totalSize) {
+            this.total = totalSize;
         }
-        Size.prototype.getTotalWidth = function () {
-            return this.totalWidth;
+        Size.prototype.getTotal = function () {
+            return this.total;
         };
         return Size;
     })();
     Q.Size = Size;
+})(Q || (Q = {}));
+;var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Q;
+(function (Q) {
+    var ItemSize = (function (_super) {
+        __extends(ItemSize, _super);
+        function ItemSize(totalSize) {
+            _super.call(this, totalSize);
+        }
+        return ItemSize;
+    })(Q.Size);
+    Q.ItemSize = ItemSize;
+})(Q || (Q = {}));
+;var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Q;
+(function (Q) {
+    var WidthSize = (function (_super) {
+        __extends(WidthSize, _super);
+        function WidthSize(totalSize) {
+            _super.call(this, totalSize);
+        }
+        return WidthSize;
+    })(Q.Size);
+    Q.WidthSize = WidthSize;
 })(Q || (Q = {}));

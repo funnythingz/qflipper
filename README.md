@@ -1,4 +1,4 @@
-qflick.js
+qflipper.js
 =====
 
 つくってるなう
@@ -13,11 +13,11 @@ qflick.js
   <link rel="stylesheet" href="qflick.css" media="all" type="text/css">
   <script src="zepto.js"></script>
   <script src="underscore.js"></script>
-  <script src="qflick.js"></script>
+  <script src="qflipper.js"></script>
 </head><body>
 
-<div class="qflickView">
-  <div id="qflick" class="qflick">
+<div class="qflipperView">
+  <div id="qflipper" class="qflipper">
     <div class="item">
       <p class="sentence">1</p>
     </div>
@@ -31,8 +31,8 @@ qflick.js
 </div>
 
 <script>
-  var qflick = new Q.Flick();
-  qflick.start('#qflick');
+  var qflipper = new Q.Flipper();
+  qflipper.start('#qflipper');
 </script>
 
 </body></html>
@@ -45,12 +45,12 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.qflickViwe {
+.qflipperView {
   width: 320px;
   margin-right: auto;
   margin-left: auto;
 }
-.qflick {
+.qflipper {
 }
 .item {
   width: 280px;

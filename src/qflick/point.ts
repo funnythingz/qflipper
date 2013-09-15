@@ -1,31 +1,18 @@
 module Q {
 
-    export class PointSingleton {
+    export class Point {
 
         private now: number;
-
-        private static _instance:PointSingleton = null;
-
-        constructor() {
-            if(PointSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            PointSingleton._instance = this;
-        }
-
-        static getInstance(): PointSingleton {
-            if(PointSingleton._instance === null) {
-                PointSingleton._instance = new PointSingleton();
-            }
-            return PointSingleton._instance;
-        }
+        private max: number;
 
         getNow(): number {
             return this.now;
         }
 
-    }
+        getMax(): number {
+            return this.max;
+        }
 
-    export var Point = PointSingleton.getInstance();
+    }
 
 }

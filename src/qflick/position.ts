@@ -1,36 +1,18 @@
 module Q {
 
-    export class PositionSingleton {
+    export class Position {
 
-        private startY: number;
-        private startX: number;
+        private y: number;
+        private x: number;
 
-        private static _instance:PositionSingleton = null;
-
-        constructor() {
-            if(PositionSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            PositionSingleton._instance = this;
+        getY(): number {
+            return this.y;
         }
 
-        static getInstance(): PositionSingleton {
-            if(PositionSingleton._instance === null) {
-                PositionSingleton._instance = new PositionSingleton();
-            }
-            return PositionSingleton._instance;
-        }
-
-        getStartY(): number {
-            return this.startY;
-        }
-
-        getStartX(): number {
-            return this.startX;
+        getX(): number {
+            return this.x;
         }
 
     }
-
-    export var Position = PositionSingleton.getInstance();
 
 }

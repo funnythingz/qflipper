@@ -29,83 +29,45 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var PointSingleton = (function () {
-        function PointSingleton() {
-            if (PointSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            PointSingleton._instance = this;
+    var Point = (function () {
+        function Point() {
         }
-        PointSingleton.getInstance = function () {
-            if (PointSingleton._instance === null) {
-                PointSingleton._instance = new PointSingleton();
-            }
-            return PointSingleton._instance;
-        };
-
-        PointSingleton.prototype.getNow = function () {
+        Point.prototype.getNow = function () {
             return this.now;
         };
-        PointSingleton._instance = null;
-        return PointSingleton;
-    })();
-    Q.PointSingleton = PointSingleton;
 
-    Q.Point = PointSingleton.getInstance();
+        Point.prototype.getMax = function () {
+            return this.max;
+        };
+        return Point;
+    })();
+    Q.Point = Point;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var PositionSingleton = (function () {
-        function PositionSingleton() {
-            if (PositionSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            PositionSingleton._instance = this;
+    var Position = (function () {
+        function Position() {
         }
-        PositionSingleton.getInstance = function () {
-            if (PositionSingleton._instance === null) {
-                PositionSingleton._instance = new PositionSingleton();
-            }
-            return PositionSingleton._instance;
+        Position.prototype.getY = function () {
+            return this.y;
         };
 
-        PositionSingleton.prototype.getStartY = function () {
-            return this.startY;
+        Position.prototype.getX = function () {
+            return this.x;
         };
-
-        PositionSingleton.prototype.getStartX = function () {
-            return this.startX;
-        };
-        PositionSingleton._instance = null;
-        return PositionSingleton;
+        return Position;
     })();
-    Q.PositionSingleton = PositionSingleton;
-
-    Q.Position = PositionSingleton.getInstance();
+    Q.Position = Position;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var SizeSingleton = (function () {
-        function SizeSingleton() {
-            if (SizeSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            SizeSingleton._instance = this;
+    var Size = (function () {
+        function Size() {
         }
-        SizeSingleton.getInstance = function () {
-            if (SizeSingleton._instance === null) {
-                SizeSingleton._instance = new SizeSingleton();
-            }
-            return SizeSingleton._instance;
-        };
-
-        SizeSingleton.prototype.getTotalWidth = function () {
+        Size.prototype.getTotalWidth = function () {
             return this.totalWidth;
         };
-        SizeSingleton._instance = null;
-        return SizeSingleton;
+        return Size;
     })();
-    Q.SizeSingleton = SizeSingleton;
-
-    Q.Size = SizeSingleton.getInstance();
+    Q.Size = Size;
 })(Q || (Q = {}));

@@ -15,8 +15,8 @@ module Q {
         start(id: string, option: any) {
             this.flipCreater = new FlipCreater($(id), this.checkFlipType(option.type));
             this.startEnum = StartEnum.Success;
-            console.log(this.flipCreater);
             this.refresh();
+            console.log(this.flipCreater);
         }
 
         refresh() {

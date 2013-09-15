@@ -142,8 +142,8 @@ var Q;
         Flipper.prototype.start = function (id, option) {
             this.flipCreater = new Q.FlipCreater($(id), this.checkFlipType(option.type));
             this.startEnum = Q.StartEnum.Success;
-            console.log(this.flipCreater);
             this.refresh();
+            console.log(this.flipCreater);
         };
 
         Flipper.prototype.refresh = function () {
@@ -281,4 +281,45 @@ var Q;
         return WidthSize;
     })(Q.Size);
     Q.WidthSize = WidthSize;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Item = (function () {
+        function Item(name) {
+            if (typeof name === "undefined") { name = 'item'; }
+            this.name = name;
+        }
+        Item.prototype.getName = function () {
+            this.name;
+        };
+        return Item;
+    })();
+    Q.Item = Item;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Lamp = (function () {
+        function Lamp(name) {
+            if (typeof name === "undefined") { name = 'lamp'; }
+            this.name = name;
+        }
+        Lamp.prototype.getName = function () {
+            this.name;
+        };
+        return Lamp;
+    })();
+    Q.Lamp = Lamp;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Options = (function () {
+        function Options(item, lamp) {
+            if (typeof item === "undefined") { item = new Q.Item(); }
+            if (typeof lamp === "undefined") { lamp = new Q.Lamp(); }
+            this.item = item;
+            this.lamp = lamp;
+        }
+        return Options;
+    })();
+    Q.Options = Options;
 })(Q || (Q = {}));

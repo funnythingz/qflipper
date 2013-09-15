@@ -4,12 +4,12 @@ module Q {
 
         private name: string;
 
-        constructor(name: string = 'item') {
+        constructor(name: string = (name)? name: 'item') {
             this.name = name;
         }
 
         getName() {
-            this.name;
+            return this.name;
         }
 
     }

@@ -1,4 +1,5 @@
 /// <reference path="../../interface/iflip.ts" />
+/// <reference path="../../data/item-size.ts" />
 /// <reference path="../../data/point.ts" />
 
 module Q {
@@ -7,11 +8,14 @@ module Q {
 
         private point: Point;
         private $el: ZeptoCollection;
+        private options: Options;
 
-        constructor(elm: ZeptoCollection) {
-            this.point = new Point();
-            this.resetPoint();
-            this.$el = elm;
+        private itemSize: ItemSize;
+
+        constructor($elm: ZeptoCollection, options: Options) {
+            this.$el = $elm;
+            this.options = options;
+            this.init();
         }
 
         refresh() {
@@ -46,6 +50,12 @@ module Q {
                 return true;
             }
             return false;
+        }
+
+        private init() {
+            this.point = new Point();
+            this.resetPoint();
+            this.itemSize = new ItemSize(this.$el);
         }
 
         private resetPoint() {

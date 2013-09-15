@@ -5,14 +5,16 @@ module Q {
     
     export class FlipService {
 
-        constructor(elm: ZeptoCollection, type: FlipTypeEnum) {
-            if(type === FlipTypeEnum.Simple) {
+        constructor($elm: ZeptoCollection,
+                    options: Options)
+        {
+            if(_.isEqual(options.type.getType(), FlipTypeEnum.Simple)) {
                 var simpleFlipFactory = new SimpleFlipFactory();
-                return simpleFlipFactory.createSimpleFlip(elm);
+                return simpleFlipFactory.createSimpleFlip($elm, options);
             }
-            if(type === FlipTypeEnum.Rich) {
+            if(_.isEqual(options.type.getType(), FlipTypeEnum.Rich)) {
                 var richFlipFactory =  new RichFlipFactory();
-                return richFlipFactory.createRichFlip(elm);
+                return richFlipFactory.createRichFlip($elm, options);
             }
         }
 

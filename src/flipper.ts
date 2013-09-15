@@ -1,22 +1,26 @@
 /// <reference path="../definitions/underscore.d.ts" />
 /// <reference path="../definitions/zepto.d.ts" />
 /// <reference path="service/flip-service.ts" />
+/// <reference path="data/options/options.ts" />
 /// <reference path="enum/start-enum.ts" />
-/// <reference path="enum/fliptype-enum.ts" />
 
 module Q {
     
     export class Flipper {
 
         private flipService: any;
+        private options: Options;
         private startEnum: StartEnum = StartEnum.Failure;
-        private flipTypeEnum: FlipTypeEnum = FlipTypeEnum.Simple;
 
         start(id: string, option: any) {
-            this.flipService = new FlipService($(id), this.checkFlipType(option.type));
+            this.options = new Options();
+            this.options.createType(option.type);
+            this.options.createItem((option.item)? option.item: 'item');
+            this.options.createLamp((option.lamp)? option.lamp: 'lamp');
+
+            this.flipService = new FlipService($(id), this.options);
             this.startEnum = StartEnum.Success;
             this.refresh();
-            console.log(this.flipService);
         }
 
         refresh() {
@@ -49,15 +53,6 @@ module Q {
             }
             if(this.startEnum === StartEnum.Failure) {
                 return false;
-            }
-        }
-
-        private checkFlipType(type: string): FlipTypeEnum {
-            if(type === 'simple') {
-                return FlipTypeEnum.Simple;
-            }
-            if(type === 'rich') {
-                return FlipTypeEnum.Rich;
             }
         }
 

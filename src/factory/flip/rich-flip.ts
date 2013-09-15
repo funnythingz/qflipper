@@ -4,8 +4,8 @@ module Q {
     
     export class RichFlip extends Flip {
 
-        constructor(elm: ZeptoCollection) {
-            super(elm);
+        constructor($elm: ZeptoCollection, options: Options) {
+            super($elm, options);
         }
 
     }

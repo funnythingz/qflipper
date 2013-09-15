@@ -114,8 +114,8 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var FlipCollection = (function () {
-        function FlipCollection(elm, type) {
+    var FlipCreater = (function () {
+        function FlipCreater(elm, type) {
             if (type === Q.FlipTypeEnum.Simple) {
                 return new Q.SimpleFlipFactory(elm);
             }
@@ -123,9 +123,9 @@ var Q;
                 return new Q.RichFlipFactory(elm);
             }
         }
-        return FlipCollection;
+        return FlipCreater;
     })();
-    Q.FlipCollection = FlipCollection;
+    Q.FlipCreater = FlipCreater;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -135,33 +135,33 @@ var Q;
             this.flipTypeEnum = Q.FlipTypeEnum.Simple;
         }
         Flipper.prototype.start = function (id, option) {
-            this.flipCollection = new Q.FlipCollection($(id), this.checkFlipType(option.type));
+            this.flipCreater = new Q.FlipCreater($(id), this.checkFlipType(option.type));
             this.startEnum = Q.StartEnum.Success;
-            console.log(this.flipCollection);
+            console.log(this.flipCreater);
             this.refresh();
         };
 
         Flipper.prototype.refresh = function () {
             if (this.checkStart()) {
-                this.flipCollection.refresh();
+                this.flipCreater.refresh();
             }
         };
 
         Flipper.prototype.toNext = function () {
             if (this.checkStart()) {
-                this.flipCollection.toNext();
+                this.flipCreater.toNext();
             }
         };
 
         Flipper.prototype.toPrev = function () {
             if (this.checkStart()) {
-                this.flipCollection.toPrev();
+                this.flipCreater.toPrev();
             }
         };
 
         Flipper.prototype.moveToPoint = function (point) {
             if (this.checkStart()) {
-                this.flipCollection.moveToPoint(point);
+                this.flipCreater.moveToPoint(point);
             }
         };
 

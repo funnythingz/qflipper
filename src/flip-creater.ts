@@ -3,7 +3,7 @@
 
 module Q {
     
-    export class FlipCollection {
+    export class FlipCreater {
 
         constructor(elm: ZeptoCollection, type: FlipTypeEnum) {
             if(type === FlipTypeEnum.Simple) {

@@ -269,12 +269,19 @@ var Q;
             this.transAnimation();
         };
 
+        Flip.prototype.setTouchEvent = function () {
+            this.$el.on('touchstart', function (event) {
+                console.log('touchstart');
+            });
+        };
+
         Flip.prototype.init = function () {
             this.point = new Q.Point();
             this.resetPoint();
             this.itemSize = new Q.ItemSize(this.$el, this.options);
             this.animater = new Q.Animater(this.$el);
             this.setFlipView();
+            this.setTouchEvent();
         };
 
         Flip.prototype.hasNext = function () {
@@ -340,6 +347,11 @@ var Q;
         function SimpleFlip($el, options) {
             _super.call(this, $el, options);
         }
+        SimpleFlip.prototype.setTouchEvent = function () {
+            this.$el.on('touchstart', function (event) {
+                console.log(event);
+            });
+        };
         return SimpleFlip;
     })(Q.Flip);
     Q.SimpleFlip = SimpleFlip;

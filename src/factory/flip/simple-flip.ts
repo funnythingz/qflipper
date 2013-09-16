@@ -8,6 +8,13 @@ module Q {
             super($el, options);
         }
 
+        // @override
+        setTouchEvent() {
+            this.$el.on('touchstart', (event) => {
+                console.log(event);
+            });
+        }
+
     }
 
 }

@@ -7,11 +7,11 @@ module Q {
     
     export class Flip implements IFlip {
 
-        private point: Point;
-        private $el: JQuery;
-        private options: Options;
-        private itemSize: ItemSize;
-        private animater: Animater;
+        point: Point;
+        $el: JQuery;
+        options: Options;
+        itemSize: ItemSize;
+        animater: Animater;
 
         constructor($el: JQuery, options: Options) {
             this.$el = $el;
@@ -51,12 +51,19 @@ module Q {
             this.transAnimation();
         }
 
+        setTouchEvent() {
+            this.$el.on('touchstart', (event) => {
+                console.log('touchstart');
+            });
+        }
+
         private init() {
             this.point = new Point();
             this.resetPoint();
             this.itemSize = new ItemSize(this.$el, this.options);
             this.animater = new Animater(this.$el);
             this.setFlipView();
+            this.setTouchEvent();
         }
 
         private hasNext(): boolean {

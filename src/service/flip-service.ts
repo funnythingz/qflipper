@@ -5,9 +5,7 @@ module Q {
     
     export class FlipService {
 
-        constructor($el: JQuery,
-                    options: Options)
-        {
+        constructor($el: JQuery, options: Options){
             if(_.isEqual(options.type.getType(), FlipTypeEnum.Simple)) {
                 var simpleFlipFactory = new SimpleFlipFactory();
                 return simpleFlipFactory.createSimpleFlip($el, options);

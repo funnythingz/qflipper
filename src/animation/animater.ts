@@ -35,9 +35,9 @@ module Q {
             var _$el = this.$el;
             var _prefix: string;
 
-            _.each(list, function(val, key){
-                if(parseInt(val, 10) >= 0 && _$el.css(key) !== undefined) {
-                    _prefix = PrefixEnum[val];
+            $.each(list, (val, key) => {
+                if(parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                    _prefix = PrefixEnum[key];
                 }
             });
 

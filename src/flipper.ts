@@ -1,5 +1,5 @@
 /// <reference path="../definitions/underscore.d.ts" />
-/// <reference path="../definitions/zepto.d.ts" />
+/// <reference path="../definitions/jquery.d.ts" />
 /// <reference path="service/flip-service.ts" />
 /// <reference path="data/options/options.ts" />
 /// <reference path="enum/start-enum.ts" />
@@ -15,8 +15,8 @@ module Q {
         start(id: string, option: any) {
             this.options = new Options();
             this.options.createType(option.type);
-            this.options.createItem((option.item)? option.item: 'item');
-            this.options.createLamp((option.lamp)? option.lamp: 'lamp');
+            this.options.createItem((option.item)? option.item: '.item');
+            this.options.createLamp((option.lamp)? option.lamp: '.lamp');
 
             this.flipService = new FlipService($(id), this.options);
             this.startEnum = StartEnum.Success;

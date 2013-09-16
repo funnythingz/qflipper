@@ -7,13 +7,13 @@ module Q {
     export class Flip implements IFlip {
 
         private point: Point;
-        private $el: ZeptoCollection;
+        private $el: JQuery;
         private options: Options;
 
         private itemSize: ItemSize;
 
-        constructor($elm: ZeptoCollection, options: Options) {
-            this.$el = $elm;
+        constructor($el: JQuery, options: Options) {
+            this.$el = $el;
             this.options = options;
             this.init();
         }
@@ -55,7 +55,7 @@ module Q {
         private init() {
             this.point = new Point();
             this.resetPoint();
-            this.itemSize = new ItemSize(this.$el);
+            this.itemSize = new ItemSize(this.$el, this.options);
         }
 
         private resetPoint() {

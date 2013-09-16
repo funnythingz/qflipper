@@ -1,9 +1,16 @@
 var Q;
 (function (Q) {
     var ItemSize = (function () {
-        function ItemSize($el) {
-            console.log($el.html());
+        function ItemSize($el, options) {
+            var items = $(options.item.getName(), $el);
+            this.soloWidth = items.width();
+            this.totalWidth = $el.width();
+            this.totalLength = items.length;
         }
+        ItemSize.prototype.getSoloWidth = function () {
+            return this.soloWidth;
+        };
+
         ItemSize.prototype.getTotalWidth = function () {
             return this.totalWidth;
         };
@@ -145,8 +152,8 @@ var Q;
 ;var Q;
 (function (Q) {
     var Flip = (function () {
-        function Flip($elm, options) {
-            this.$el = $elm;
+        function Flip($el, options) {
+            this.$el = $el;
             this.options = options;
             this.init();
         }
@@ -187,7 +194,7 @@ var Q;
         Flip.prototype.init = function () {
             this.point = new Q.Point();
             this.resetPoint();
-            this.itemSize = new Q.ItemSize(this.$el);
+            this.itemSize = new Q.ItemSize(this.$el, this.options);
         };
 
         Flip.prototype.resetPoint = function () {
@@ -207,8 +214,8 @@ var Q;
 (function (Q) {
     var RichFlip = (function (_super) {
         __extends(RichFlip, _super);
-        function RichFlip($elm, options) {
-            _super.call(this, $elm, options);
+        function RichFlip($el, options) {
+            _super.call(this, $el, options);
         }
         return RichFlip;
     })(Q.Flip);
@@ -224,8 +231,8 @@ var Q;
 (function (Q) {
     var SimpleFlip = (function (_super) {
         __extends(SimpleFlip, _super);
-        function SimpleFlip($elm, options) {
-            _super.call(this, $elm, options);
+        function SimpleFlip($el, options) {
+            _super.call(this, $el, options);
         }
         return SimpleFlip;
     })(Q.Flip);
@@ -236,8 +243,8 @@ var Q;
     var RichFlipFactory = (function () {
         function RichFlipFactory() {
         }
-        RichFlipFactory.prototype.createRichFlip = function ($elm, options) {
-            return new Q.RichFlip($elm, options);
+        RichFlipFactory.prototype.createRichFlip = function ($el, options) {
+            return new Q.RichFlip($el, options);
         };
         return RichFlipFactory;
     })();
@@ -248,8 +255,8 @@ var Q;
     var SimpleFlipFactory = (function () {
         function SimpleFlipFactory() {
         }
-        SimpleFlipFactory.prototype.createSimpleFlip = function ($elm, options) {
-            return new Q.SimpleFlip($elm, options);
+        SimpleFlipFactory.prototype.createSimpleFlip = function ($el, options) {
+            return new Q.SimpleFlip($el, options);
         };
         return SimpleFlipFactory;
     })();
@@ -264,8 +271,8 @@ var Q;
         Flipper.prototype.start = function (id, option) {
             this.options = new Q.Options();
             this.options.createType(option.type);
-            this.options.createItem((option.item) ? option.item : 'item');
-            this.options.createLamp((option.lamp) ? option.lamp : 'lamp');
+            this.options.createItem((option.item) ? option.item : '.item');
+            this.options.createLamp((option.lamp) ? option.lamp : '.lamp');
 
             this.flipService = new Q.FlipService($(id), this.options);
             this.startEnum = Q.StartEnum.Success;
@@ -311,14 +318,14 @@ var Q;
 ;var Q;
 (function (Q) {
     var FlipService = (function () {
-        function FlipService($elm, options) {
+        function FlipService($el, options) {
             if (_.isEqual(options.type.getType(), Q.FlipTypeEnum.Simple)) {
                 var simpleFlipFactory = new Q.SimpleFlipFactory();
-                return simpleFlipFactory.createSimpleFlip($elm, options);
+                return simpleFlipFactory.createSimpleFlip($el, options);
             }
             if (_.isEqual(options.type.getType(), Q.FlipTypeEnum.Rich)) {
                 var richFlipFactory = new Q.RichFlipFactory();
-                return richFlipFactory.createRichFlip($elm, options);
+                return richFlipFactory.createRichFlip($el, options);
             }
         }
         return FlipService;

@@ -5,16 +5,16 @@ module Q {
     
     export class FlipService {
 
-        constructor($elm: ZeptoCollection,
+        constructor($el: JQuery,
                     options: Options)
         {
             if(_.isEqual(options.type.getType(), FlipTypeEnum.Simple)) {
                 var simpleFlipFactory = new SimpleFlipFactory();
-                return simpleFlipFactory.createSimpleFlip($elm, options);
+                return simpleFlipFactory.createSimpleFlip($el, options);
             }
             if(_.isEqual(options.type.getType(), FlipTypeEnum.Rich)) {
                 var richFlipFactory =  new RichFlipFactory();
-                return richFlipFactory.createRichFlip($elm, options);
+                return richFlipFactory.createRichFlip($el, options);
             }
         }
 

@@ -4,8 +4,8 @@ module Q {
     
     export class SimpleFlipFactory {
 
-        createSimpleFlip($elm: ZeptoCollection, options: Options) {
-            return new SimpleFlip($elm, options);
+        createSimpleFlip($el: JQuery, options: Options) {
+            return new SimpleFlip($el, options);
         }
 
     }

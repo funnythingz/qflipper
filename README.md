@@ -33,8 +33,8 @@ qflipper.js
     </div>
   </div>
   <div>
-    <button id="moveToNext">next</button>
     <button id="moveToPrev">prev</button>
+    <button id="moveToNext">next</button>
   </div>
   <div>
     <input type="text" id="input" value="0">

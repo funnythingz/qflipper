@@ -9,8 +9,8 @@ module Q {
         constructor($el: JQuery, options: Options) {
             var items = $(options.item.getName(), $el);
             this.soloWidth = items.width();
-            this.totalWidth = $el.width();
             this.totalLength = items.length;
+            this.totalWidth = this.soloWidth * this.totalLength;
         }
 
         getSoloWidth(): number {

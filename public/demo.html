@@ -22,12 +22,30 @@
       </div>
     </div>
   </div>
+  <button id="moveToNext">next</button>
+  <button id="moveToPrev">prev</button>
+  <input type="text" id="input" value="0">
+  <button id="moveToPoint">point</button>
 </section>
 
-<script>
+<script>(function(){
+
   console.log(Q);
   var qflipper = new Q.Flipper();
   qflipper.start('#qflipper', {type: 'simple'});
-</script>
+
+  $('#moveToNext').on('click', function(){
+    qflipper.toNext();
+  });
+
+  $('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+  });
+
+  $('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+  });
+
+})();</script>
 
 </body></html>

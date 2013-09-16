@@ -4,8 +4,8 @@ var Q;
         function ItemSize($el, options) {
             var items = $(options.item.getName(), $el);
             this.soloWidth = items.width();
-            this.totalWidth = $el.width();
             this.totalLength = items.length;
+            this.totalWidth = this.soloWidth * this.totalLength;
         }
         ItemSize.prototype.getSoloWidth = function () {
             return this.soloWidth;
@@ -101,10 +101,6 @@ var Q;
         Point.prototype.getNow = function () {
             return this.now;
         };
-
-        Point.prototype.getMax = function () {
-            return this.max;
-        };
         return Point;
     })();
     Q.Point = Point;
@@ -159,33 +155,41 @@ var Q;
         }
         Flip.prototype.refresh = function () {
             this.resetPoint();
+            console.log(this.point.getNow());
         };
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
+                console.log(this.point.getNow());
             }
         };
 
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
+                console.log(this.point.getNow());
             }
         };
 
         Flip.prototype.moveToPoint = function (point) {
-            this.point.setPoint(point);
+            if (point < this.itemSize.getTotalLength() - 1) {
+                this.point.setPoint(point);
+            } else if (point >= this.itemSize.getTotalLength()) {
+                this.point.setPoint(this.itemSize.getTotalLength() - 1);
+            }
+            console.log(this.point.getNow());
         };
 
         Flip.prototype.hasNext = function () {
-            if (this.point.getNow() < this.point.getMax()) {
+            if (this.point.getNow() < this.itemSize.getTotalLength() - 1) {
                 return true;
             }
             return false;
         };
 
         Flip.prototype.hasPrev = function () {
-            if (0 < this.point.getNow() && this.point.getNow() <= this.point.getMax()) {
+            if (0 < this.point.getNow() && this.point.getNow() <= this.itemSize.getTotalLength() - 1) {
                 return true;
             }
             return false;
@@ -195,10 +199,15 @@ var Q;
             this.point = new Q.Point();
             this.resetPoint();
             this.itemSize = new Q.ItemSize(this.$el, this.options);
+            this.setFlipView();
         };
 
         Flip.prototype.resetPoint = function () {
             this.point.setPoint(0);
+        };
+
+        Flip.prototype.setFlipView = function () {
+            this.$el.css({ width: this.itemSize.getTotalWidth().toString() + 'px' });
         };
         return Flip;
     })();

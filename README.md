@@ -1,7 +1,7 @@
 qflipper.js
 =====
 
-つくってるなう
+jQueryでフリックするやつをTypeScriptでつくってる
 
 ## Get Started
 

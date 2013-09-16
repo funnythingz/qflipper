@@ -32,7 +32,6 @@ qflipper.js
       </div>
     </div>
   </div>
-
   <div>
     <button id="moveToNext">next</button>
     <button id="moveToPrev">prev</button>
@@ -44,6 +43,7 @@ qflipper.js
   <div>
     <button id="refresh">refresh</button>
   </div>
+</section>
 
 </body></html>
 ```

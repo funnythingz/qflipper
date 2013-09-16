@@ -1,4 +1,5 @@
 /// <reference path="type.ts" />
+/// <reference path="view.ts" />
 /// <reference path="item.ts" />
 /// <reference path="lamp.ts" />
 
@@ -7,11 +8,16 @@ module Q {
     export class Options {
 
         type: Type;
+        view: View;
         item: Item;
         lamp: Lamp;
 
         createType(type: string) {
             this.type = new Type(type);
+        }
+
+        createView(view: string) {
+            this.view = new View(view);
         }
 
         createItem(item: string) {

@@ -4,7 +4,7 @@ module Q {
 
         private name: string;
 
-        constructor(name: string = (name)? name: 'lamp') {
+        constructor(name: string) {
             this.name = name;
         }
 

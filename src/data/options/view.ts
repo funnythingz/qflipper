@@ -1,6 +1,6 @@
 module Q {
 
-    export class Item {
+    export class View {
 
         private name: string;
 

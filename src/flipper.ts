@@ -12,11 +12,12 @@ module Q {
         private options: Options;
         private startEnum: StartEnum = StartEnum.Failure;
 
-        start(id: string, option: any) {
+        start(id: string, options: any) {
             this.options = new Options();
-            this.options.createType(option.type);
-            this.options.createItem((option.item)? option.item: '.item');
-            this.options.createLamp((option.lamp)? option.lamp: '.lamp');
+            this.options.createType(options.type);
+            this.options.createView((options.view)? options.view: '.view');
+            this.options.createItem((options.item)? options.item: '.item');
+            this.options.createLamp((options.lamp)? options.lamp: '.lamp');
 
             this.flipService = new FlipService($(id), this.options);
             this.startEnum = StartEnum.Success;

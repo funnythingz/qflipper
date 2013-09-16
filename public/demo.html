@@ -9,7 +9,7 @@
 <p>simple</p>
 
 <section>
-  <div class="qflipperView">
+  <div class="view" id="qflipperView">
     <div id="qflipper" class="qflipper">
       <div class="item">
         <p class="sentence">1</p>
@@ -39,7 +39,7 @@
 
   console.log(Q);
   var qflipper = new Q.Flipper();
-  qflipper.start('#qflipper', {type: 'simple'});
+  qflipper.start('#qflipper', {type: 'simple', view: '#qflipperView'});
 
   $('#moveToNext').on('click', function(){
     qflipper.toNext();

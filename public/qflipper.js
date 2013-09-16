@@ -2,9 +2,8 @@ var Q;
 (function (Q) {
     var ItemSize = (function () {
         function ItemSize($el, options) {
-            var items = $(options.item.getName(), $el);
-            this.soloWidth = items.width();
-            this.totalLength = items.length;
+            this.soloWidth = $(options.view.getName()).width();
+            this.totalLength = $(options.item.getName(), $el).length;
             this.totalWidth = this.soloWidth * this.totalLength;
         }
         ItemSize.prototype.getSoloWidth = function () {
@@ -26,7 +25,6 @@ var Q;
 (function (Q) {
     var Item = (function () {
         function Item(name) {
-            if (typeof name === "undefined") { name = (name) ? name : 'item'; }
             this.name = name;
         }
         Item.prototype.getName = function () {
@@ -40,7 +38,6 @@ var Q;
 (function (Q) {
     var Lamp = (function () {
         function Lamp(name) {
-            if (typeof name === "undefined") { name = (name) ? name : 'lamp'; }
             this.name = name;
         }
         Lamp.prototype.getName = function () {
@@ -57,6 +54,10 @@ var Q;
         }
         Options.prototype.createType = function (type) {
             this.type = new Q.Type(type);
+        };
+
+        Options.prototype.createView = function (view) {
+            this.view = new Q.View(view);
         };
 
         Options.prototype.createItem = function (item) {
@@ -88,6 +89,19 @@ var Q;
         return Type;
     })();
     Q.Type = Type;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var View = (function () {
+        function View(name) {
+            this.name = name;
+        }
+        View.prototype.getName = function () {
+            return this.name;
+        };
+        return View;
+    })();
+    Q.View = View;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -277,11 +291,12 @@ var Q;
         function Flipper() {
             this.startEnum = Q.StartEnum.Failure;
         }
-        Flipper.prototype.start = function (id, option) {
+        Flipper.prototype.start = function (id, options) {
             this.options = new Q.Options();
-            this.options.createType(option.type);
-            this.options.createItem((option.item) ? option.item : '.item');
-            this.options.createLamp((option.lamp) ? option.lamp : '.lamp');
+            this.options.createType(options.type);
+            this.options.createView((options.view) ? options.view : '.view');
+            this.options.createItem((options.item) ? options.item : '.item');
+            this.options.createLamp((options.lamp) ? options.lamp : '.lamp');
 
             this.flipService = new Q.FlipService($(id), this.options);
             this.startEnum = Q.StartEnum.Success;

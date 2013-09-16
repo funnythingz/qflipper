@@ -22,10 +22,17 @@
       </div>
     </div>
   </div>
-  <button id="moveToNext">next</button>
-  <button id="moveToPrev">prev</button>
-  <input type="text" id="input" value="0">
-  <button id="moveToPoint">point</button>
+  <div>
+    <button id="moveToNext">next</button>
+    <button id="moveToPrev">prev</button>
+  </div>
+  <div>
+    <input type="text" id="input" value="0">
+    <button id="moveToPoint">point</button>
+  </div>
+  <div>
+    <button id="refresh">refresh</button>
+  </div>
 </section>
 
 <script>(function(){
@@ -44,6 +51,10 @@
 
   $('#moveToPoint').on('click', function(){
     qflipper.moveToPoint(parseInt($('#input').val()));
+  });
+
+  $('#refresh').on('click', function(){
+    qflipper.refresh();
   });
 
 })();</script>

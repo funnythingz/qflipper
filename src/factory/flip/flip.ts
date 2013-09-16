@@ -1,7 +1,7 @@
 /// <reference path="../../interface/iflip.ts" />
 /// <reference path="../../data/item-size.ts" />
 /// <reference path="../../data/point.ts" />
-/// <reference path="../../animation/trans-animater.ts" />
+/// <reference path="../../animation/animater.ts" />
 
 module Q {
     
@@ -11,7 +11,7 @@ module Q {
         private $el: JQuery;
         private options: Options;
         private itemSize: ItemSize;
-        private transAnimater: TransAnimater;
+        private animater: Animater;
 
         constructor($el: JQuery, options: Options) {
             this.$el = $el;
@@ -22,14 +22,14 @@ module Q {
         refresh() {
             this.resetPoint();
             console.log(this.point.getNow());
-            this.loadAnimation();
+            this.transAnimation();
         }
 
         toNext() {
             if(this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
                 console.log(this.point.getNow());
-                this.loadAnimation();
+                this.transAnimation();
             }
         }
 
@@ -37,7 +37,7 @@ module Q {
             if(this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
                 console.log(this.point.getNow());
-                this.loadAnimation();
+                this.transAnimation();
             }
         }
 
@@ -48,14 +48,14 @@ module Q {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
             console.log(this.point.getNow());
-            this.loadAnimation();
+            this.transAnimation();
         }
 
         private init() {
             this.point = new Point();
             this.resetPoint();
             this.itemSize = new ItemSize(this.$el, this.options);
-            this.transAnimater = new TransAnimater(this.$el);
+            this.animater = new Animater(this.$el);
             this.setFlipView();
         }
 
@@ -81,8 +81,12 @@ module Q {
             this.$el.css({width: this.itemSize.getTotalWidth().toString() + 'px'});
         }
 
-        private loadAnimation() {
-            this.transAnimater.loadAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
+        private transAnimation() {
+            this.animater.transAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
+        }
+
+        private noTransAnimation() {
+            this.animater.noTransAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
         }
 
     }

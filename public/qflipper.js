@@ -1,16 +1,42 @@
 var Q;
 (function (Q) {
-    var TransAnimater = (function () {
-        function TransAnimater($el) {
+    var Animater = (function () {
+        function Animater($el) {
             this.$el = $el;
-            this.$el.css('webkitTransition', '-webkit-transform 0.3s ease-in-out');
         }
-        TransAnimater.prototype.loadAnimation = function (movePosition) {
-            this.$el.css('webkitTransform', 'translate3d(' + movePosition + 'px, 0, 0)');
+        Animater.prototype.transAnimation = function (movePosition) {
+            this.setTransition();
+            this.$el.css('-' + this.getPrefix(Q.TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
         };
-        return TransAnimater;
+
+        Animater.prototype.noTransAnimation = function (movePosition) {
+            this.unsetTransition();
+            this.$el.css('-' + this.getPrefix(Q.TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+        };
+
+        Animater.prototype.setTransition = function () {
+            this.$el.css('-' + this.getPrefix(Q.TransitionEnum) + '-transition', '-' + this.getPrefix(Q.TransformEnum) + '-transform .3s ease-in-out');
+        };
+
+        Animater.prototype.unsetTransition = function () {
+            this.$el.css('-' + this.getPrefix(Q.TransitionEnum) + '-transition', 'none');
+        };
+
+        Animater.prototype.getPrefix = function (list) {
+            var _$el = this.$el;
+            var _prefix;
+
+            _.each(list, function (val, key) {
+                if (parseInt(val, 10) >= 0 && _$el.css(key) !== undefined) {
+                    _prefix = Q.PrefixEnum[val];
+                }
+            });
+
+            return _prefix;
+        };
+        return Animater;
     })();
-    Q.TransAnimater = TransAnimater;
+    Q.Animater = Animater;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -167,11 +193,41 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    (function (PrefixEnum) {
+        PrefixEnum[PrefixEnum["webkit"] = 0] = "webkit";
+        PrefixEnum[PrefixEnum["moz"] = 1] = "moz";
+        PrefixEnum[PrefixEnum["o"] = 2] = "o";
+        PrefixEnum[PrefixEnum["ms"] = 3] = "ms";
+    })(Q.PrefixEnum || (Q.PrefixEnum = {}));
+    var PrefixEnum = Q.PrefixEnum;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     (function (StartEnum) {
         StartEnum[StartEnum["Success"] = 0] = "Success";
         StartEnum[StartEnum["Failure"] = 1] = "Failure";
     })(Q.StartEnum || (Q.StartEnum = {}));
     var StartEnum = Q.StartEnum;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    (function (TransformEnum) {
+        TransformEnum[TransformEnum["WebkitTransform"] = 0] = "WebkitTransform";
+        TransformEnum[TransformEnum["MozTransform"] = 1] = "MozTransform";
+        TransformEnum[TransformEnum["OTransform"] = 2] = "OTransform";
+        TransformEnum[TransformEnum["msTransform"] = 3] = "msTransform";
+    })(Q.TransformEnum || (Q.TransformEnum = {}));
+    var TransformEnum = Q.TransformEnum;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    (function (TransitionEnum) {
+        TransitionEnum[TransitionEnum["WebkitTransitionProperty"] = 0] = "WebkitTransitionProperty";
+        TransitionEnum[TransitionEnum["MozTransitionProperty"] = 1] = "MozTransitionProperty";
+        TransitionEnum[TransitionEnum["OTransitionProperty"] = 2] = "OTransitionProperty";
+        TransitionEnum[TransitionEnum["msTransitionProperty"] = 3] = "msTransitionProperty";
+    })(Q.TransitionEnum || (Q.TransitionEnum = {}));
+    var TransitionEnum = Q.TransitionEnum;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -184,14 +240,14 @@ var Q;
         Flip.prototype.refresh = function () {
             this.resetPoint();
             console.log(this.point.getNow());
-            this.loadAnimation();
+            this.transAnimation();
         };
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
                 console.log(this.point.getNow());
-                this.loadAnimation();
+                this.transAnimation();
             }
         };
 
@@ -199,7 +255,7 @@ var Q;
             if (this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
                 console.log(this.point.getNow());
-                this.loadAnimation();
+                this.transAnimation();
             }
         };
 
@@ -210,14 +266,14 @@ var Q;
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
             console.log(this.point.getNow());
-            this.loadAnimation();
+            this.transAnimation();
         };
 
         Flip.prototype.init = function () {
             this.point = new Q.Point();
             this.resetPoint();
             this.itemSize = new Q.ItemSize(this.$el, this.options);
-            this.transAnimater = new Q.TransAnimater(this.$el);
+            this.animater = new Q.Animater(this.$el);
             this.setFlipView();
         };
 
@@ -243,8 +299,12 @@ var Q;
             this.$el.css({ width: this.itemSize.getTotalWidth().toString() + 'px' });
         };
 
-        Flip.prototype.loadAnimation = function () {
-            this.transAnimater.loadAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
+        Flip.prototype.transAnimation = function () {
+            this.animater.transAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
+        };
+
+        Flip.prototype.noTransAnimation = function () {
+            this.animater.noTransAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
         };
         return Flip;
     })();

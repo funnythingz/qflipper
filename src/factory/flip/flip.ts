@@ -1,6 +1,7 @@
 /// <reference path="../../interface/iflip.ts" />
 /// <reference path="../../data/item-size.ts" />
 /// <reference path="../../data/point.ts" />
+/// <reference path="../../animation/trans-animater.ts" />
 
 module Q {
     
@@ -10,6 +11,7 @@ module Q {
         private $el: JQuery;
         private options: Options;
         private itemSize: ItemSize;
+        private transAnimater: TransAnimater;
 
         constructor($el: JQuery, options: Options) {
             this.$el = $el;
@@ -19,30 +21,42 @@ module Q {
 
         refresh() {
             this.resetPoint();
-            console.log(this.point.getNow())
+            console.log(this.point.getNow());
+            this.loadAnimation();
         }
 
         toNext() {
             if(this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
-                console.log(this.point.getNow())
+                console.log(this.point.getNow());
+                this.loadAnimation();
             }
         }
 
         toPrev() {
             if(this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
-                console.log(this.point.getNow())
+                console.log(this.point.getNow());
+                this.loadAnimation();
             }
         }
 
         moveToPoint(point: number) {
-            if(point < this.itemSize.getTotalLength() - 1) {
+            if(point < this.itemSize.getTotalLength()) {
                 this.point.setPoint(point);
             } else if (point >= this.itemSize.getTotalLength()) {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
-            console.log(this.point.getNow())
+            console.log(this.point.getNow());
+            this.loadAnimation();
+        }
+
+        private init() {
+            this.point = new Point();
+            this.resetPoint();
+            this.itemSize = new ItemSize(this.$el, this.options);
+            this.transAnimater = new TransAnimater(this.$el);
+            this.setFlipView();
         }
 
         private hasNext(): boolean {
@@ -59,13 +73,6 @@ module Q {
             return false;
         }
 
-        private init() {
-            this.point = new Point();
-            this.resetPoint();
-            this.itemSize = new ItemSize(this.$el, this.options);
-            this.setFlipView();
-        }
-
         private resetPoint() {
             this.point.setPoint(0);
         }
@@ -73,6 +80,11 @@ module Q {
         private setFlipView() {
             this.$el.css({width: this.itemSize.getTotalWidth().toString() + 'px'});
         }
+
+        private loadAnimation() {
+            this.transAnimater.loadAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
+        }
+
     }
 
 }

@@ -1,5 +1,19 @@
 var Q;
 (function (Q) {
+    var TransAnimater = (function () {
+        function TransAnimater($el) {
+            this.$el = $el;
+            this.$el.css('webkitTransition', '-webkit-transform 0.3s ease-in-out');
+        }
+        TransAnimater.prototype.loadAnimation = function (movePosition) {
+            this.$el.css('webkitTransform', 'translate3d(' + movePosition + 'px, 0, 0)');
+        };
+        return TransAnimater;
+    })();
+    Q.TransAnimater = TransAnimater;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var ItemSize = (function () {
         function ItemSize($el, options) {
             this.soloWidth = $(options.view.getName()).width();
@@ -170,12 +184,14 @@ var Q;
         Flip.prototype.refresh = function () {
             this.resetPoint();
             console.log(this.point.getNow());
+            this.loadAnimation();
         };
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
                 console.log(this.point.getNow());
+                this.loadAnimation();
             }
         };
 
@@ -183,16 +199,26 @@ var Q;
             if (this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
                 console.log(this.point.getNow());
+                this.loadAnimation();
             }
         };
 
         Flip.prototype.moveToPoint = function (point) {
-            if (point < this.itemSize.getTotalLength() - 1) {
+            if (point < this.itemSize.getTotalLength()) {
                 this.point.setPoint(point);
             } else if (point >= this.itemSize.getTotalLength()) {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
             console.log(this.point.getNow());
+            this.loadAnimation();
+        };
+
+        Flip.prototype.init = function () {
+            this.point = new Q.Point();
+            this.resetPoint();
+            this.itemSize = new Q.ItemSize(this.$el, this.options);
+            this.transAnimater = new Q.TransAnimater(this.$el);
+            this.setFlipView();
         };
 
         Flip.prototype.hasNext = function () {
@@ -209,19 +235,16 @@ var Q;
             return false;
         };
 
-        Flip.prototype.init = function () {
-            this.point = new Q.Point();
-            this.resetPoint();
-            this.itemSize = new Q.ItemSize(this.$el, this.options);
-            this.setFlipView();
-        };
-
         Flip.prototype.resetPoint = function () {
             this.point.setPoint(0);
         };
 
         Flip.prototype.setFlipView = function () {
             this.$el.css({ width: this.itemSize.getTotalWidth().toString() + 'px' });
+        };
+
+        Flip.prototype.loadAnimation = function () {
+            this.transAnimater.loadAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
         };
         return Flip;
     })();

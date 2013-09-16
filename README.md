@@ -10,10 +10,12 @@ qflipper.js
 ```html
 <html><head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
-  <link rel="stylesheet" href="qflick.css" media="all" type="text/css">
   <script src="jquery.js"></script>
   <script src="underscore.js"></script>
   <script src="qflipper.js"></script>
+  
+  <link rel="stylesheet" href="qflick.css" media="all" type="text/css">
+  <script src="script.js"></script>
 </head><body>
 
 <section>
@@ -42,30 +44,6 @@ qflipper.js
   <div>
     <button id="refresh">refresh</button>
   </div>
-</section>
-
-<script>(function(){
-
-  var qflipper = new Q.Flipper();
-  qflipper.start('#qflipper', {type: 'simple'});
-
-  $('#moveToNext').on('click', function(){
-    qflipper.toNext();
-  });
-
-  $('#moveToPrev').on('click', function(){
-    qflipper.toPrev();
-  });
-
-  $('#moveToPoint').on('click', function(){
-    qflipper.moveToPoint(parseInt($('#input').val()));
-  });
-
-  $('#refresh').on('click', function(){
-    qflipper.refresh();
-  });
-
-})();</script>
 
 </body></html>
 ```
@@ -88,6 +66,31 @@ a {
   width: 320px;
   float: left;
 }
+```
+
+> JavaScript
+
+```JS
+$(function(){
+  var qflipper = new Q.Flipper();
+  qflipper.start('#qflipper', {type: 'simple'});
+
+  $('#moveToNext').on('click', function(){
+    qflipper.toNext();
+  });
+
+  $('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+  });
+
+  $('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+  });
+
+  $('#refresh').on('click', function(){
+    qflipper.refresh();
+  });
+});
 ```
 
 &copy; funnythingz

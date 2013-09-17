@@ -3,40 +3,56 @@ var Q;
     var Animater = (function () {
         function Animater($el) {
             this.$el = $el;
+
+            var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
+            this.transformPrefix = transformPrefixChecker.getPrefix();
+
+            var transitionPrefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
+            this.transitionPrefix = transitionPrefixChecker.getPrefix();
         }
         Animater.prototype.transAnimation = function (movePosition) {
             this.setTransition();
-            this.$el.css('-' + this.getPrefix(Q.TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
         };
 
         Animater.prototype.noTransAnimation = function (movePosition) {
             this.unsetTransition();
-            this.$el.css('-' + this.getPrefix(Q.TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
         };
 
         Animater.prototype.setTransition = function () {
-            this.$el.css('-' + this.getPrefix(Q.TransitionEnum) + '-transition', '-' + this.getPrefix(Q.TransformEnum) + '-transform .3s ease-in-out');
+            this.$el.css('-' + this.transitionPrefix + '-transition', '-' + this.transformPrefix + '-transform .3s ease-in-out');
         };
 
         Animater.prototype.unsetTransition = function () {
-            this.$el.css('-' + this.getPrefix(Q.TransitionEnum) + '-transition', 'none');
-        };
-
-        Animater.prototype.getPrefix = function (list) {
-            var _$el = this.$el;
-            var _prefix;
-
-            $.each(list, function (val, key) {
-                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                    _prefix = Q.PrefixEnum[key];
-                }
-            });
-
-            return _prefix;
+            this.$el.css('-' + this.transitionPrefix + '-transition', 'none');
         };
         return Animater;
     })();
     Q.Animater = Animater;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var PrefixChecker = (function () {
+        function PrefixChecker(_$el, checkList) {
+            this.prefixEnum = Q.PrefixEnum;
+            var _prefix;
+            var _self = this;
+
+            $.each(checkList, function (val, key) {
+                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                    _prefix = _self.prefixEnum[key];
+                }
+            });
+
+            return _prefix;
+        }
+        PrefixChecker.prototype.getPrefix = function () {
+            return this._prefix;
+        };
+        return PrefixChecker;
+    })();
+    Q.PrefixChecker = PrefixChecker;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

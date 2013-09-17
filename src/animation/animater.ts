@@ -1,48 +1,45 @@
 /// <reference path="../enum/transition-enum.ts" />
 /// <reference path="../enum/transform-enum.ts" />
-/// <reference path="../enum/prefix-enum.ts" />
+/// <reference path="prefix-checker.ts" />
 
 module Q {
     
     export class Animater {
 
         private $el: JQuery;
+        private transformPrefix: string;
+        private transitionPrefix: string;
 
         constructor($el: JQuery) {
             this.$el = $el;
+
+            var transformPrefixChecker = new PrefixChecker($el, TransformEnum);
+            this.transformPrefix = transformPrefixChecker.getPrefix();
+
+            var transitionPrefixChecker = new PrefixChecker($el, TransitionEnum);
+            this.transitionPrefix = transitionPrefixChecker.getPrefix();
+
         }
 
         transAnimation(movePosition: number) {
             this.setTransition();
-            this.$el.css('-' + this.getPrefix(TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
         }
 
         noTransAnimation(movePosition: number) {
             this.unsetTransition();
-            this.$el.css('-' + this.getPrefix(TransformEnum) + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
         }
 
         private setTransition() {
-            this.$el.css('-' + this.getPrefix(TransitionEnum) + '-transition',
-                         '-' + this.getPrefix(TransformEnum) + '-transform .3s ease-in-out');
+            this.$el.css('-' + this.transitionPrefix + '-transition',
+                         '-' + this.transformPrefix + '-transform .3s ease-in-out');
         }
 
         private unsetTransition() {
-            this.$el.css('-' + this.getPrefix(TransitionEnum) + '-transition', 'none');
+            this.$el.css('-' + this.transitionPrefix + '-transition', 'none');
         }
 
-        private getPrefix(list): string {
-            var _$el = this.$el;
-            var _prefix: string;
-
-            $.each(list, (val, key) => {
-                if(parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                    _prefix = PrefixEnum[key];
-                }
-            });
-
-            return _prefix;
-        }
     }
 
 }

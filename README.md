@@ -11,7 +11,6 @@ jQueryでフリックするやつをTypeScriptでつくってる
 <html><head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
   <script src="jquery.js"></script>
-  <script src="underscore.js"></script>
   <script src="qflipper.js"></script>
   
   <link rel="stylesheet" href="qflick.css" media="all" type="text/css">

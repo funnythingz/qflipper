@@ -6,17 +6,10 @@ module.exports = (grunt)->
       typesc:
         files: 'public/qflipper.min.js': ['public/qflipper.js']
 
-      lib:
-        files: 'public/lib.min.js': ['public/lib.js']
-
     concat:
-      typesc:
+      qflipper:
         src: ['src/**/*.js']
         dest: 'public/qflipper.js'
-
-      lib:
-        src: ['lib/*/index.js']
-        dest: 'public/lib.js'
 
       options:
         separator: ';'

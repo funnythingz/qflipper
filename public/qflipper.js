@@ -3,6 +3,7 @@ var Q;
     var Animater = (function () {
         function Animater($el) {
             this.$el = $el;
+            this.$el = $el;
 
             var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
             this.transformPrefix = transformPrefixChecker.getPrefix();
@@ -45,7 +46,7 @@ var Q;
                 }
             });
 
-            return _prefix;
+            this._prefix = _prefix;
         }
         PrefixChecker.prototype.getPrefix = function () {
             return this._prefix;

@@ -17,7 +17,7 @@ module Q {
                 }
             });
 
-            return _prefix;
+            this._prefix = _prefix;
         }
 
         getPrefix(): string {

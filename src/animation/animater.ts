@@ -6,11 +6,10 @@ module Q {
     
     export class Animater {
 
-        private $el: JQuery;
         private transformPrefix: string;
         private transitionPrefix: string;
 
-        constructor($el: JQuery) {
+        constructor(private $el: JQuery) {
             this.$el = $el;
 
             var transformPrefixChecker = new PrefixChecker($el, TransformEnum);

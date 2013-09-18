@@ -7,10 +7,10 @@ module Q {
         private type: FlipTypeEnum;
 
         constructor(type: string = (type)? type: 'simple') {
-            if(_.isEqual(type, 'simple')) {
+            if(type === 'simple') {
                 this.type = FlipTypeEnum.Simple;
             }
-            if(_.isEqual(type, 'rich')) {
+            if(type === 'rich') {
                 this.type = FlipTypeEnum.Rich;
             }
         }

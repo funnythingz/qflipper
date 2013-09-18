@@ -133,10 +133,10 @@ var Q;
     var Type = (function () {
         function Type(type) {
             if (typeof type === "undefined") { type = (type) ? type : 'simple'; }
-            if (_.isEqual(type, 'simple')) {
+            if (type === 'simple') {
                 this.type = Q.FlipTypeEnum.Simple;
             }
-            if (_.isEqual(type, 'rich')) {
+            if (type === 'rich') {
                 this.type = Q.FlipTypeEnum.Rich;
             }
         }
@@ -455,11 +455,11 @@ var Q;
 (function (Q) {
     var FlipService = (function () {
         function FlipService($el, options) {
-            if (_.isEqual(options.type.getType(), Q.FlipTypeEnum.Simple)) {
+            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
                 var simpleFlipFactory = new Q.SimpleFlipFactory();
                 return simpleFlipFactory.createSimpleFlip($el, options);
             }
-            if (_.isEqual(options.type.getType(), Q.FlipTypeEnum.Rich)) {
+            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
                 var richFlipFactory = new Q.RichFlipFactory();
                 return richFlipFactory.createRichFlip($el, options);
             }

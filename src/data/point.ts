@@ -2,14 +2,14 @@ module Q {
 
     export class Point {
 
-        private now: number;
+        private point: number;
 
         setPoint(point: number) {
-            this.now = point;
+            this.point = point;
         }
 
         getNow(): number {
-            return this.now;
+            return this.point;
         }
 
     }

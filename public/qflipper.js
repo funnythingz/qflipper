@@ -166,11 +166,11 @@ var Q;
         function Point() {
         }
         Point.prototype.setPoint = function (point) {
-            this.now = point;
+            this.point = point;
         };
 
         Point.prototype.getNow = function () {
-            return this.now;
+            return this.point;
         };
         return Point;
     })();

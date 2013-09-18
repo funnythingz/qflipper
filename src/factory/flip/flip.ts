@@ -8,14 +8,11 @@ module Q {
     export class Flip implements IFlip {
 
         point: Point;
-        $el: JQuery;
-        options: Options;
         itemSize: ItemSize;
         animater: Animater;
 
-        constructor($el: JQuery, options: Options) {
-            this.$el = $el;
-            this.options = options;
+        constructor(public $el: JQuery,
+                    public options: Options) {
             this.init();
         }
 

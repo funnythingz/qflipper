@@ -1,7 +1,3 @@
-/// <reference path="../enum/transition-enum.ts" />
-/// <reference path="../enum/transform-enum.ts" />
-/// <reference path="prefix-checker.ts" />
-
 module Q {
     
     export class Animater {

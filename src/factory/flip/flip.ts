@@ -1,8 +1,3 @@
-/// <reference path="../../interface/iflip.ts" />
-/// <reference path="../../data/item-size.ts" />
-/// <reference path="../../data/point.ts" />
-/// <reference path="../../animation/animater.ts" />
-
 module Q {
     
     export class Flip implements IFlip {

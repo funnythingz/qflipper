@@ -1,7 +1,4 @@
-/// <reference path="../definitions/jquery.d.ts" />
-/// <reference path="service/flip-service.ts" />
-/// <reference path="data/options/options.ts" />
-/// <reference path="enum/start-enum.ts" />
+/// <reference path="./reference.ts" />
 
 module Q {
     

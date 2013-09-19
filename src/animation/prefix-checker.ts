@@ -1,5 +1,3 @@
-/// <reference path="../enum/prefix-enum.ts" />
-
 module Q {
 
     export class PrefixChecker {

@@ -1,5 +1,3 @@
-/// <reference path="../../enum/fliptype-enum.ts" />
-
 module Q {
 
     export class Type {

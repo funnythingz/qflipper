@@ -1,8 +1,3 @@
-/// <reference path="type.ts" />
-/// <reference path="view.ts" />
-/// <reference path="item.ts" />
-/// <reference path="lamp.ts" />
-
 module Q {
 
     export class Options {

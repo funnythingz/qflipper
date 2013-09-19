@@ -1,5 +1,3 @@
-/// <reference path="flip/rich-flip.ts" />
-
 module Q {
     
     export class RichFlipFactory {

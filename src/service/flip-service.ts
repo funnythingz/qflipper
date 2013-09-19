@@ -1,6 +1,3 @@
-/// <reference path="../factory/simple-flip-factory.ts" />
-/// <reference path="../factory/rich-flip-factory.ts" />
-
 module Q {
     
     export class FlipService {

@@ -2,7 +2,10 @@ module Q {
     
     export class SimpleFlip extends Flip {
 
-        constructor($el: JQuery, options: Options) {
+        constructor(
+            $el: JQuery,
+            options: Options
+        ) {
             super($el, options);
         }
 

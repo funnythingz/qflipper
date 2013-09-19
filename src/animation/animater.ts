@@ -5,7 +5,9 @@ module Q {
         private transformPrefix: string;
         private transitionPrefix: string;
 
-        constructor(private $el: JQuery) {
+        constructor(
+            private $el: JQuery
+        ) {
             this.$el = $el;
 
             var transformPrefixChecker = new PrefixChecker($el, TransformEnum);

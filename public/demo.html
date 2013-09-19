@@ -44,8 +44,7 @@
 <script>(function(){
 
   console.log(Q);
-  var qflipper = new Q.Flipper();
-  qflipper.start('#qflipper', {type: 'simple', view: '#qflipperView'});
+  var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
 
   $('#moveToNext').on('click', function(){
     qflipper.toNext();

@@ -1,14 +1,23 @@
 module Q {
     
-    export class Flip implements IFlip {
+    export class Flip {
 
         point: Point;
         itemSize: ItemSize;
         animater: Animater;
 
-        constructor(public $el: JQuery,
-                    public options: Options) {
-            this.init();
+        constructor(
+            public $el: JQuery,
+            public options: Options
+        ) {
+            this.point = new Point();
+            this.resetPoint();
+
+            this.itemSize = new ItemSize(this.$el, this.options);
+            this.animater = new Animater(this.$el);
+
+            this.setFlipView();
+            this.setTouchEvent();
         }
 
         refresh() {
@@ -43,33 +52,24 @@ module Q {
             this.transAnimation();
         }
 
-        setTouchEvent() {
-            this.$el.on('touchstart', (event) => {
-                console.log('touchstart');
-            });
-        }
-
-        private init() {
-            this.point = new Point();
-            this.resetPoint();
-            this.itemSize = new ItemSize(this.$el, this.options);
-            this.animater = new Animater(this.$el);
-            this.setFlipView();
-            this.setTouchEvent();
-        }
-
-        private hasNext(): boolean {
+        hasNext(): boolean {
             if(this.point.getNow() < this.itemSize.getTotalLength() - 1) {
                 return true;
             }
             return false;
         }
 
-        private hasPrev(): boolean {
+        hasPrev(): boolean {
             if(0 < this.point.getNow() && this.point.getNow() <= this.itemSize.getTotalLength() - 1) {
                 return true;
             }
             return false;
+        }
+
+        setTouchEvent() {
+            this.$el.on('touchstart', (event) => {
+                console.log('touchstart');
+            });
         }
 
         private resetPoint() {

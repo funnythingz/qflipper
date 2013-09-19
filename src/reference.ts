@@ -10,7 +10,6 @@
 /// <reference path="factory/flip/rich-flip.ts" />
 /// <reference path="animation/prefix-checker.ts" />
 /// <reference path="animation/animater.ts" />
-/// <reference path="enum/start-enum.ts" />
 /// <reference path="enum/transform-enum.ts" />
 /// <reference path="enum/transition-enum.ts" />
 /// <reference path="enum/prefix-enum.ts" />

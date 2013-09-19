@@ -220,14 +220,6 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    (function (StartEnum) {
-        StartEnum[StartEnum["Success"] = 0] = "Success";
-        StartEnum[StartEnum["Failure"] = 1] = "Failure";
-    })(Q.StartEnum || (Q.StartEnum = {}));
-    var StartEnum = Q.StartEnum;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
     (function (TransformEnum) {
         TransformEnum[TransformEnum["WebkitTransform"] = 0] = "WebkitTransform";
         TransformEnum[TransformEnum["MozTransform"] = 1] = "MozTransform";
@@ -252,7 +244,14 @@ var Q;
         function Flip($el, options) {
             this.$el = $el;
             this.options = options;
-            this.init();
+            this.point = new Q.Point();
+            this.resetPoint();
+
+            this.itemSize = new Q.ItemSize(this.$el, this.options);
+            this.animater = new Q.Animater(this.$el);
+
+            this.setFlipView();
+            this.setTouchEvent();
         }
         Flip.prototype.refresh = function () {
             this.resetPoint();
@@ -286,21 +285,6 @@ var Q;
             this.transAnimation();
         };
 
-        Flip.prototype.setTouchEvent = function () {
-            this.$el.on('touchstart', function (event) {
-                console.log('touchstart');
-            });
-        };
-
-        Flip.prototype.init = function () {
-            this.point = new Q.Point();
-            this.resetPoint();
-            this.itemSize = new Q.ItemSize(this.$el, this.options);
-            this.animater = new Q.Animater(this.$el);
-            this.setFlipView();
-            this.setTouchEvent();
-        };
-
         Flip.prototype.hasNext = function () {
             if (this.point.getNow() < this.itemSize.getTotalLength() - 1) {
                 return true;
@@ -313,6 +297,12 @@ var Q;
                 return true;
             }
             return false;
+        };
+
+        Flip.prototype.setTouchEvent = function () {
+            this.$el.on('touchstart', function (event) {
+                console.log('touchstart');
+            });
         };
 
         Flip.prototype.resetPoint = function () {
@@ -400,52 +390,38 @@ var Q;
 ;var Q;
 (function (Q) {
     var Flipper = (function () {
-        function Flipper() {
-            this.startEnum = Q.StartEnum.Failure;
-        }
-        Flipper.prototype.start = function (id, options) {
-            this.options = new Q.Options();
-            this.options.createType(options.type);
-            this.options.createView((options.view) ? options.view : '.view');
-            this.options.createItem((options.item) ? options.item : '.item');
-            this.options.createLamp((options.lamp) ? options.lamp : '.lamp');
+        function Flipper(id, args) {
+            var options = new Q.Options();
+            options.createType((args.type) ? args.type : 'simple');
+            options.createView((args.view) ? args.view : '.view');
+            options.createItem((args.item) ? args.item : '.item');
+            options.createLamp((args.lamp) ? args.lamp : '.lamp');
 
-            this.flipService = new Q.FlipService($(id), this.options);
-            this.startEnum = Q.StartEnum.Success;
+            this.flipService = new Q.FlipService($(id), options);
             this.refresh();
-        };
-
+        }
         Flipper.prototype.refresh = function () {
-            if (this.checkStart()) {
-                this.flipService.refresh();
-            }
+            this.flipService.refresh();
         };
 
         Flipper.prototype.toNext = function () {
-            if (this.checkStart()) {
-                this.flipService.toNext();
-            }
+            this.flipService.toNext();
         };
 
         Flipper.prototype.toPrev = function () {
-            if (this.checkStart()) {
-                this.flipService.toPrev();
-            }
+            this.flipService.toPrev();
         };
 
         Flipper.prototype.moveToPoint = function (point) {
-            if (this.checkStart()) {
-                this.flipService.moveToPoint(point);
-            }
+            this.flipService.moveToPoint(point);
         };
 
-        Flipper.prototype.checkStart = function () {
-            if (this.startEnum === Q.StartEnum.Success) {
-                return true;
-            }
-            if (this.startEnum === Q.StartEnum.Failure) {
-                return false;
-            }
+        Flipper.prototype.hasNext = function () {
+            return this.flipService.hasNext();
+        };
+
+        Flipper.prototype.hasPrev = function () {
+            return this.flipService.hasPrev();
         };
         return Flipper;
     })();

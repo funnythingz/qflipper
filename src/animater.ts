@@ -8,14 +8,11 @@ module Q {
         constructor(
             private $el: JQuery
         ) {
-            this.$el = $el;
-
             var transformPrefixChecker = new PrefixChecker($el, TransformEnum);
             this.transformPrefix = transformPrefixChecker.getPrefix();
 
             var transitionPrefixChecker = new PrefixChecker($el, TransitionEnum);
             this.transitionPrefix = transitionPrefixChecker.getPrefix();
-
         }
 
         transAnimation(movePosition: number) {

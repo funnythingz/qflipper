@@ -3,8 +3,6 @@ var Q;
     var Animater = (function () {
         function Animater($el) {
             this.$el = $el;
-            this.$el = $el;
-
             var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
             this.transformPrefix = transformPrefixChecker.getPrefix();
 
@@ -301,6 +299,18 @@ var Q;
     })();
     Q.Flip = Flip;
 })(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var RichFlipFactory = (function () {
+        function RichFlipFactory() {
+        }
+        RichFlipFactory.prototype.createRichFlip = function ($el, options) {
+            return new Q.RichFlip($el, options);
+        };
+        return RichFlipFactory;
+    })();
+    Q.RichFlipFactory = RichFlipFactory;
+})(Q || (Q = {}));
 ;var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -317,6 +327,18 @@ var Q;
         return RichFlip;
     })(Q.Flip);
     Q.RichFlip = RichFlip;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var SimpleFlipFactory = (function () {
+        function SimpleFlipFactory() {
+        }
+        SimpleFlipFactory.prototype.createSimpleFlip = function ($el, options) {
+            return new Q.SimpleFlip($el, options);
+        };
+        return SimpleFlipFactory;
+    })();
+    Q.SimpleFlipFactory = SimpleFlipFactory;
 })(Q || (Q = {}));
 ;var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -339,30 +361,6 @@ var Q;
         return SimpleFlip;
     })(Q.Flip);
     Q.SimpleFlip = SimpleFlip;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var RichFlipFactory = (function () {
-        function RichFlipFactory() {
-        }
-        RichFlipFactory.prototype.createRichFlip = function ($el, options) {
-            return new Q.RichFlip($el, options);
-        };
-        return RichFlipFactory;
-    })();
-    Q.RichFlipFactory = RichFlipFactory;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var SimpleFlipFactory = (function () {
-        function SimpleFlipFactory() {
-        }
-        SimpleFlipFactory.prototype.createSimpleFlip = function ($el, options) {
-            return new Q.SimpleFlip($el, options);
-        };
-        return SimpleFlipFactory;
-    })();
-    Q.SimpleFlipFactory = SimpleFlipFactory;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -424,13 +422,13 @@ var Q;
 ;var Q;
 (function (Q) {
     var PrefixChecker = (function () {
-        function PrefixChecker(_$el, checkList) {
+        function PrefixChecker($el, checkList) {
             this.prefixEnum = Q.PrefixEnum;
             var _prefix;
             var _self = this;
 
             $.each(checkList, function (val, key) {
-                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                if (parseInt(key, 10) >= 0 && $el.css(val) !== undefined) {
                     _prefix = _self.prefixEnum[key];
                 }
             });

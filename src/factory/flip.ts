@@ -2,9 +2,9 @@ module Q {
     
     export class Flip {
 
-        point: Point;
-        itemSize: ItemSize;
-        animater: Animater;
+        private point: Point;
+        private itemSize: ItemSize;
+        private animater: Animater;
 
         constructor(
             public $el: JQuery,

@@ -44,7 +44,8 @@ module Q {
         moveToPoint(point: number) {
             if(point < this.itemSize.getTotalLength()) {
                 this.point.setPoint(point);
-            } else if (point >= this.itemSize.getTotalLength()) {
+            }
+            if (point >= this.itemSize.getTotalLength()) {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
             console.log(this.point.getNow());

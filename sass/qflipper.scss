@@ -2,10 +2,15 @@
 @import "compass/css3";
 @import "compass/utilities/general/clearfix";
 
-$_single-width: 320;
+$_single-width: 300;
 
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.view-wrapper {
+  width: 100%;
+  overflow: hidden;
 }
 
 .view {

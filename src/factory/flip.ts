@@ -17,7 +17,6 @@ module Q {
             this.animater = new Animater(this.$el);
 
             this.setFlipView();
-            this.setTouchEvent();
         }
 
         refresh() {
@@ -64,12 +63,6 @@ module Q {
                 return true;
             }
             return false;
-        }
-
-        setTouchEvent() {
-            this.$el.on('touchstart', (event) => {
-                console.log('touchstart');
-            });
         }
 
         private resetPoint() {

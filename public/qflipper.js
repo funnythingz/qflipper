@@ -154,22 +154,16 @@ var Q;
 ;var Q;
 (function (Q) {
     var Position = (function () {
-        function Position() {
-        }
-        Position.prototype.setY = function (y) {
-            this.y = y;
-        };
-
-        Position.prototype.setX = function (x) {
+        function Position(x, y) {
             this.x = x;
+            this.y = y;
+        }
+        Position.prototype.getX = function () {
+            return this.x;
         };
 
         Position.prototype.getY = function () {
             return this.y;
-        };
-
-        Position.prototype.getX = function () {
-            return this.x;
         };
         return Position;
     })();
@@ -226,7 +220,6 @@ var Q;
             this.animater = new Q.Animater(this.$el);
 
             this.setFlipView();
-            this.setTouchEvent();
         }
         Flip.prototype.refresh = function () {
             this.resetPoint();
@@ -272,12 +265,6 @@ var Q;
                 return true;
             }
             return false;
-        };
-
-        Flip.prototype.setTouchEvent = function () {
-            this.$el.on('touchstart', function (event) {
-                console.log('touchstart');
-            });
         };
 
         Flip.prototype.resetPoint = function () {
@@ -352,14 +339,24 @@ var Q;
         __extends(SimpleFlip, _super);
         function SimpleFlip($el, options) {
             _super.call(this, $el, options);
+
+            this.setTouchEvent();
         }
         SimpleFlip.prototype.setTouchEvent = function () {
+            var startPosition;
+            var distancePosition;
+
             this.$el.on('touchstart', function (event) {
                 console.log(event.type);
-                console.log(event.originalEvent.touches);
+                startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+                console.log(startPosition.getX());
+                console.log(startPosition.getY());
             });
             this.$el.on('touchmove', function (event) {
                 console.log(event.type);
+                distancePosition = new Q.Position(startPosition.getX() - event.originalEvent.touches[0].clientX, startPosition.getY() - event.originalEvent.touches[0].clientY);
+                console.log(distancePosition.getX());
+                console.log(distancePosition.getY());
             });
             this.$el.on('touchend', function (event) {
                 console.log(event.type);

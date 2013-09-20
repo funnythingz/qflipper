@@ -355,7 +355,17 @@ var Q;
         }
         SimpleFlip.prototype.setTouchEvent = function () {
             this.$el.on('touchstart', function (event) {
-                console.log(event);
+                console.log(event.type);
+                console.log(event.originalEvent.touches);
+            });
+            this.$el.on('touchmove', function (event) {
+                console.log(event.type);
+            });
+            this.$el.on('touchend', function (event) {
+                console.log(event.type);
+            });
+            this.$el.on('touchcancel', function (event) {
+                console.log(event.type);
             });
         };
         return SimpleFlip;

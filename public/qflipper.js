@@ -34,29 +34,6 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var PrefixChecker = (function () {
-        function PrefixChecker(_$el, checkList) {
-            this.prefixEnum = Q.PrefixEnum;
-            var _prefix;
-            var _self = this;
-
-            $.each(checkList, function (val, key) {
-                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                    _prefix = _self.prefixEnum[key];
-                }
-            });
-
-            this._prefix = _prefix;
-        }
-        PrefixChecker.prototype.getPrefix = function () {
-            return this._prefix;
-        };
-        return PrefixChecker;
-    })();
-    Q.PrefixChecker = PrefixChecker;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
     var ItemSize = (function () {
         function ItemSize($el, options) {
             this.soloWidth = $(options.view.getName()).width();
@@ -389,6 +366,23 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var FlipService = (function () {
+        function FlipService($el, options) {
+            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
+                var simpleFlipFactory = new Q.SimpleFlipFactory();
+                return simpleFlipFactory.createSimpleFlip($el, options);
+            }
+            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
+                var richFlipFactory = new Q.RichFlipFactory();
+                return richFlipFactory.createRichFlip($el, options);
+            }
+        }
+        return FlipService;
+    })();
+    Q.FlipService = FlipService;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var Flipper = (function () {
         function Flipper(id, args) {
             var options = new Q.Options();
@@ -429,18 +423,24 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var FlipService = (function () {
-        function FlipService($el, options) {
-            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
-                var simpleFlipFactory = new Q.SimpleFlipFactory();
-                return simpleFlipFactory.createSimpleFlip($el, options);
-            }
-            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
-                var richFlipFactory = new Q.RichFlipFactory();
-                return richFlipFactory.createRichFlip($el, options);
-            }
+    var PrefixChecker = (function () {
+        function PrefixChecker(_$el, checkList) {
+            this.prefixEnum = Q.PrefixEnum;
+            var _prefix;
+            var _self = this;
+
+            $.each(checkList, function (val, key) {
+                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                    _prefix = _self.prefixEnum[key];
+                }
+            });
+
+            this._prefix = _prefix;
         }
-        return FlipService;
+        PrefixChecker.prototype.getPrefix = function () {
+            return this._prefix;
+        };
+        return PrefixChecker;
     })();
-    Q.FlipService = FlipService;
+    Q.PrefixChecker = PrefixChecker;
 })(Q || (Q = {}));

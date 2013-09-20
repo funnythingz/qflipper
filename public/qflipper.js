@@ -340,34 +340,50 @@ var Q;
         function SimpleFlip($el, options) {
             _super.call(this, $el, options);
 
-            this.setTouchEvent();
+            var simpleTouchEventer = new Q.SimpleTouchEventer(this.$el);
+            simpleTouchEventer.attachEvent();
         }
-        SimpleFlip.prototype.setTouchEvent = function () {
-            var startPosition;
-            var distancePosition;
-
-            this.$el.on('touchstart', function (event) {
-                console.log(event.type);
-                startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
-                console.log(startPosition.getX());
-                console.log(startPosition.getY());
-            });
-            this.$el.on('touchmove', function (event) {
-                console.log(event.type);
-                distancePosition = new Q.Position(startPosition.getX() - event.originalEvent.touches[0].clientX, startPosition.getY() - event.originalEvent.touches[0].clientY);
-                console.log(distancePosition.getX());
-                console.log(distancePosition.getY());
-            });
-            this.$el.on('touchend', function (event) {
-                console.log(event.type);
-            });
-            this.$el.on('touchcancel', function (event) {
-                console.log(event.type);
-            });
-        };
         return SimpleFlip;
     })(Q.Flip);
     Q.SimpleFlip = SimpleFlip;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var SimpleTouchEventer = (function () {
+        function SimpleTouchEventer($el) {
+            this.$el = $el;
+        }
+        SimpleTouchEventer.prototype.attachEvent = function () {
+            this.$el.on('touchstart', this.touchstart);
+            this.$el.on('touchmove', this.touchmove);
+            this.$el.on('touchend', this.touchend);
+            this.$el.on('touchcancel', this.touchcansel);
+        };
+
+        SimpleTouchEventer.prototype.touchstart = function (event) {
+            console.log(event.type);
+            this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+            console.log(this.startPosition.getX());
+            console.log(this.startPosition.getY());
+        };
+
+        SimpleTouchEventer.prototype.touchmove = function (event) {
+            console.log(event.type);
+            this.distancePosition = new Q.Position(this.startPosition.getX() - event.originalEvent.touches[0].clientX, this.startPosition.getY() - event.originalEvent.touches[0].clientY);
+            console.log(this.distancePosition.getX());
+            console.log(this.distancePosition.getY());
+        };
+
+        SimpleTouchEventer.prototype.touchend = function (event) {
+            console.log(event.type);
+        };
+
+        SimpleTouchEventer.prototype.touchcansel = function (event) {
+            console.log(event.type);
+        };
+        return SimpleTouchEventer;
+    })();
+    Q.SimpleTouchEventer = SimpleTouchEventer;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

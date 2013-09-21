@@ -6,15 +6,18 @@
     <title>Qflipper by funnythingz</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascripts/respond.js"></script>
+    <script src="javascripts/jquery-2.0.3.min.js"></script>
+    <script src="javascripts/qflipper.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
+    <link rel="stylesheet" href="stylesheets/qflipper.css" media="all" type="text/css">
 
   </head>
   <body>
@@ -43,8 +46,65 @@
 
 <p>jQueryでフリックするやつをTypeScriptでつくってる</p>
 
-<h2>
-<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
+<h2><a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<section class="view-wrapper">
+<div class="view" id="qflipperView" style="margin-bottom: 1em;">
+  <div id="qflipper" class="qflipper">
+    <div class="item">
+      <p class="sentence">0</p>
+    </div>
+    <div class="item">
+      <p class="sentence">1</p>
+    </div>
+    <div class="item">
+      <p class="sentence">2</p>
+    </div>
+    <div class="item">
+      <p class="sentence">3</p>
+    </div>
+    <div class="item">
+      <p class="sentence">4</p>
+    </div>
+  </div>
+</div>
+<div style="margin-bottom: 1em; text-align: right;">
+  <button id="moveToPrev">prev</button>
+  <button id="moveToNext">next</button>
+</div>
+<div style="margin-bottom: 1em; text-align: right;">
+  <input type="text" id="input" size="4" value="0" style="text-align: right;">
+  <button id="moveToPoint">point</button>
+</div>
+<div style="margin-bottom: 1em; text-align: right;">
+  <button id="refresh">refresh</button>
+</div>
+</section>
+
+<script>(function(){
+  var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
+
+  $('#moveToNext').on('click', function(){
+    qflipper.toNext();
+  });
+
+  $('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+  });
+
+  $('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+  });
+
+  $('#refresh').on('click', function(){
+    qflipper.refresh();
+  });
+
+})();</script>
+
+
+
+<h2><a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
 
 <blockquote>
 <p>HTML</p>

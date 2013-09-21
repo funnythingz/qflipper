@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Qflipper by funnythingz</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/funnythingz/qflipper">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/funnythingz/qflipper/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/funnythingz/qflipper/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Qflipper</h1>
+          <p>jQueryでフリックするやつをTypeScriptでつくってる</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/funnythingz">funnythingz</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="qflipperjs" class="anchor" href="#qflipperjs"><span class="octicon octicon-link"></span></a>qflipper.js</h1>
+
+<p>jQueryでフリックするやつをTypeScriptでつくってる</p>
+
+<h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
+
+<blockquote>
+<p>HTML</p>
+</blockquote>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;html&gt;&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"qflipper.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"qflick.css"</span> <span class="na">media=</span><span class="s">"all"</span> <span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
+
+<span class="nt">&lt;section&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"qflipperView"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"qflipper"</span> <span class="na">class=</span><span class="s">"qflipper"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>3<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToPrev"</span><span class="nt">&gt;</span>prev<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToNext"</span><span class="nt">&gt;</span>next<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"input"</span> <span class="na">value=</span><span class="s">"0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToPoint"</span><span class="nt">&gt;</span>point<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"refresh"</span><span class="nt">&gt;</span>refresh<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+
+<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
+</pre></div>
+
+<blockquote>
+<p>CSS</p>
+</blockquote>
+
+<div class="highlight highlight-css"><pre><span class="nt">a</span> <span class="p">{</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">tap</span><span class="o">-</span><span class="n">highlight</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nc">.qflipperView</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
+  <span class="k">margin-left</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.qflipper</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="nc">.item</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<blockquote>
+<p>JavaScript</p>
+</blockquote>
+
+<div class="highlight highlight-JS"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">qflipper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">Flipper</span><span class="p">();</span>
+  <span class="nx">qflipper</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'#qflipper'</span><span class="p">,</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">'simple'</span><span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToNext'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">toNext</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToPrev'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">toPrev</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToPoint'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#input'</span><span class="p">).</span><span class="nx">val</span><span class="p">()));</span>
+  <span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#refresh'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>© funnythingz</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>

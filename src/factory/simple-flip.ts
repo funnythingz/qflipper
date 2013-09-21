@@ -20,13 +20,10 @@ module Q {
 
         private touchstart() {
             this.$el.on('touchstart',  (event: any) => {
-                console.log(event.type);
                 this.startPosition = new Position(
                     event.originalEvent.touches[0].clientX,
                     event.originalEvent.touches[0].clientY
                 );
-                console.log(this.startPosition.getX());
-                console.log(this.startPosition.getY());
             });
         }
 
@@ -36,7 +33,6 @@ module Q {
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
-                console.log(event.type);
 
                 if(!this.animationFlag.checkStatus()) {
                     this.distancePosition = new Position(
@@ -64,14 +60,12 @@ module Q {
 
         private touchend() {
             this.$el.on('touchend', (event: any) => {
-                console.log(event.type);
                 this.animationFlag.disabled();
             });
         }
 
         private touchcancel() {
             this.$el.on('touchcancel', (event: any) => {
-                console.log(event.type);
             });
         }
 

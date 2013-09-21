@@ -372,10 +372,7 @@ var Q;
         SimpleFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
-                console.log(event.type);
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
-                console.log(_this.startPosition.getX());
-                console.log(_this.startPosition.getY());
             });
         };
 
@@ -386,7 +383,6 @@ var Q;
 
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
-                console.log(event.type);
 
                 if (!_this.animationFlag.checkStatus()) {
                     _this.distancePosition = new Q.Position(_this.startPosition.getX() - event.originalEvent.touches[0].clientX, _this.startPosition.getY() - event.originalEvent.touches[0].clientY);
@@ -411,14 +407,12 @@ var Q;
         SimpleFlip.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
-                console.log(event.type);
                 _this.animationFlag.disabled();
             });
         };
 
         SimpleFlip.prototype.touchcancel = function () {
             this.$el.on('touchcancel', function (event) {
-                console.log(event.type);
             });
         };
         return SimpleFlip;

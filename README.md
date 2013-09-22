@@ -1,7 +1,7 @@
 qflipper.js
 =====
 
-jQueryでフリックするやつをTypeScriptでつくってる
+jQueryでフリックするやつをTypeScriptでつくってみた
 
 ## Get Started
 
@@ -17,8 +17,8 @@ jQueryでフリックするやつをTypeScriptでつくってる
   <script src="script.js"></script>
 </head><body>
 
-<section>
-  <div class="qflipperView">
+<section class="view-wrapper">
+  <div id="qflipperView" class="view">
     <div id="qflipper" class="qflipper">
       <div class="item">
         <p class="sentence">1</p>
@@ -53,13 +53,17 @@ jQueryでフリックするやつをTypeScriptでつくってる
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-.qflipperView {
+.view-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+.view {
   width: 320px;
   margin-right: auto;
   margin-left: auto;
 }
 .qflipper {
+  @include clearfix;
 }
 .item {
   width: 320px;
@@ -72,7 +76,7 @@ a {
 ```JS
 $(function(){
   var qflipper = new Q.Flipper();
-  qflipper.start('#qflipper', {type: 'simple'});
+  qflipper.start('#qflipper');
 
   $('#moveToNext').on('click', function(){
     qflipper.toNext();

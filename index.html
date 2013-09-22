@@ -4,20 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Qflipper by funnythingz</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
+
+    <script src="js/respond.js"></script>
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/qflipper.min.js"></script>
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
+    <link rel="stylesheet" href="css/ie.css">
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
+    <link rel="stylesheet" href="css/qflipper.css" media="all" type="text/css">
 
   </head>
   <body>
+
       <div id="header">
         <nav>
           <li class="fork"><a href="https://github.com/funnythingz/qflipper">View On GitHub</a></li>
@@ -29,7 +35,7 @@
 
     <div class="wrapper">
 
-      <section>
+      <section class="contents">
         <div id="title">
           <h1>Qflipper</h1>
           <p>jQueryでフリックするやつをTypeScriptでつくってる</p>
@@ -38,10 +44,75 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <h1>
-<a name="qflipperjs" class="anchor" href="#qflipperjs"><span class="octicon octicon-link"></span></a>qflipper.js</h1>
+        <h1><a name="qflipperjs" class="anchor" href="#qflipperjs"><span class="octicon octicon-link"></span></a>qflipper.js</h1>
 
 <p>jQueryでフリックするやつをTypeScriptでつくってみた</p>
+
+<h2><a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<section class="view-wrapper">
+<div class="view unit" id="qflipperView">
+  <div id="qflipper" class="qflipper">
+    <div class="item">
+      <p class="sentence">0</p>
+    </div>
+    <div class="item">
+      <p class="sentence">1</p>
+    </div>
+    <div class="item">
+      <p class="sentence">2</p>
+    </div>
+    <div class="item">
+      <p class="sentence">3</p>
+    </div>
+    <div class="item">
+      <p class="sentence">4</p>
+    </div>
+  </div>
+</div>
+<div class="unit right">
+  <button id="moveToPrev">prev</button>
+  <button id="moveToNext">next</button>
+</div>
+<div class="unit right">
+  <input type="text" id="input" size="4" value="0">
+  <button id="moveToPoint">point</button>
+</div>
+<div class="unit right">
+  <button id="refresh">refresh</button>
+</div>
+</section>
+
+<style>
+  .unit {
+    margin-bottom: 1em;
+  }
+  .right {
+    text-align: right;
+  }
+</style>
+
+<script>(function(){
+  var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
+
+  $('#moveToNext').on('click', function(){
+    qflipper.toNext();
+  });
+
+  $('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+  });
+
+  $('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+  });
+
+  $('#refresh').on('click', function(){
+    qflipper.refresh();
+  });
+
+  })();</script>
+
 
 <h2>
 <a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>

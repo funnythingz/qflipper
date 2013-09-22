@@ -4,20 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Qflipper by funnythingz</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/pygment_trac.css">
-    <script src="js/respond.js"></script>
-    <script src="js/jquery-2.0.3.min.js"></script>
-    <script src="js/qflipper.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!--[if lt IE 8]>
-    <link rel="stylesheet" href="css/ie.css">
+    <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
-    <link rel="stylesheet" href="css/qflipper.css" media="all" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   </head>
   <body>
@@ -32,7 +29,7 @@
 
     <div class="wrapper">
 
-      <section class="contents">
+      <section>
         <div id="title">
           <h1>Qflipper</h1>
           <p>jQueryでフリックするやつをTypeScriptでつくってる</p>
@@ -44,67 +41,10 @@
         <h1>
 <a name="qflipperjs" class="anchor" href="#qflipperjs"><span class="octicon octicon-link"></span></a>qflipper.js</h1>
 
-<p>jQueryでフリックするやつをTypeScriptでつくってる</p>
+<p>jQueryでフリックするやつをTypeScriptでつくってみた</p>
 
-<h2><a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
-
-<section class="view-wrapper">
-<div class="view" id="qflipperView" style="margin-bottom: 1em;">
-  <div id="qflipper" class="qflipper">
-    <div class="item">
-      <p class="sentence">0</p>
-    </div>
-    <div class="item">
-      <p class="sentence">1</p>
-    </div>
-    <div class="item">
-      <p class="sentence">2</p>
-    </div>
-    <div class="item">
-      <p class="sentence">3</p>
-    </div>
-    <div class="item">
-      <p class="sentence">4</p>
-    </div>
-  </div>
-</div>
-<div style="margin-bottom: 1em; text-align: right;">
-  <button id="moveToPrev">prev</button>
-  <button id="moveToNext">next</button>
-</div>
-<div style="margin-bottom: 1em; text-align: right;">
-  <input type="text" id="input" size="4" value="0" style="text-align: right;">
-  <button id="moveToPoint">point</button>
-</div>
-<div style="margin-bottom: 1em; text-align: right;">
-  <button id="refresh">refresh</button>
-</div>
-</section>
-
-<script>(function(){
-  var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
-
-  $('#moveToNext').on('click', function(){
-    qflipper.toNext();
-  });
-
-  $('#moveToPrev').on('click', function(){
-    qflipper.toPrev();
-  });
-
-  $('#moveToPoint').on('click', function(){
-    qflipper.moveToPoint(parseInt($('#input').val()));
-  });
-
-  $('#refresh').on('click', function(){
-    qflipper.refresh();
-  });
-
-})();</script>
-
-
-
-<h2><a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
+<h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
 
 <blockquote>
 <p>HTML</p>
@@ -119,8 +59,8 @@
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;&lt;body&gt;</span>
 
-<span class="nt">&lt;section&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"qflipperView"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"view-wrapper"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"qflipperView"</span> <span class="na">class=</span><span class="s">"view"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"qflipper"</span> <span class="na">class=</span><span class="s">"qflipper"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/p&gt;</span>
@@ -156,13 +96,17 @@
 <div class="highlight highlight-css"><pre><span class="nt">a</span> <span class="p">{</span>
   <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">tap</span><span class="o">-</span><span class="n">highlight</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
 <span class="p">}</span>
-
-<span class="nc">.qflipperView</span> <span class="p">{</span>
+<span class="nc">.view-wrapper</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.view</span> <span class="p">{</span>
   <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
   <span class="k">margin-right</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
   <span class="k">margin-left</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.qflipper</span> <span class="p">{</span>
+  <span class="o">@</span><span class="n">include</span> <span class="n">clearfix</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.item</span> <span class="p">{</span>
   <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
@@ -176,7 +120,7 @@
 
 <div class="highlight highlight-JS"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
   <span class="kd">var</span> <span class="nx">qflipper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">Flipper</span><span class="p">();</span>
-  <span class="nx">qflipper</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'#qflipper'</span><span class="p">,</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">'simple'</span><span class="p">});</span>
+  <span class="nx">qflipper</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'#qflipper'</span><span class="p">);</span>
 
   <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToNext'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">qflipper</span><span class="p">.</span><span class="nx">toNext</span><span class="p">();</span>

@@ -28,30 +28,16 @@ module Q {
         }
 
         private touchmove() {
-            var self: SimpleFlip = this;
             this.animationFlag.disabled();
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
 
                 if(!this.animationFlag.checkStatus()) {
-                    this.distancePosition = new Position(
-                        this.startPosition.getX() - event.originalEvent.touches[0].clientX,
-                        this.startPosition.getY() - event.originalEvent.touches[0].clientY
-                    );
-
-                    if(Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
-                        event.preventDefault();
-                        this.animationFlag.enabled();
-                    }
+                    this.traseDistance(event);
 
                     if(this.animationFlag.checkStatus()) {
-                        if(this.distancePosition.getX() > 0) {
-                            this.toNext();
-                        }
-                        if(this.distancePosition.getX() < 0) {
-                            this.toPrev();
-                        }
+                        this.startAnimation();
                     }
                 }
 
@@ -65,8 +51,28 @@ module Q {
         }
 
         private touchcancel() {
-            this.$el.on('touchcancel', (event: any) => {
-            });
+            this.$el.on('touchcancel', (event: any) => {});
+        }
+
+        private traseDistance(touchmoveEvent: any) {
+            this.distancePosition = new Position(
+                this.startPosition.getX() - touchmoveEvent.originalEvent.touches[0].clientX,
+                this.startPosition.getY() - touchmoveEvent.originalEvent.touches[0].clientY
+            );
+
+            if(Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
+                event.preventDefault();
+                this.animationFlag.enabled();
+            }
+        }
+
+        private startAnimation() {
+            if(this.distancePosition.getX() > 0) {
+                this.toNext();
+            }
+            if(this.distancePosition.getX() < 0) {
+                this.toPrev();
+            }
         }
 
 

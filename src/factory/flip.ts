@@ -2,7 +2,7 @@ module Q {
     
     export class Flip {
 
-        private point: Point;
+        private point = new Point();
         private itemSize: ItemSize;
         private animater: Animater;
 
@@ -10,7 +10,6 @@ module Q {
             public $el: JQuery,
             public options: Options
         ) {
-            this.point = new Point();
             this.resetPoint();
 
             this.itemSize = new ItemSize(this.$el, this.options);

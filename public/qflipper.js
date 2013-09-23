@@ -374,27 +374,16 @@ var Q;
 
         SimpleFlip.prototype.touchmove = function () {
             var _this = this;
-            var self = this;
             this.animationFlag.disabled();
 
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
 
                 if (!_this.animationFlag.checkStatus()) {
-                    _this.distancePosition = new Q.Position(_this.startPosition.getX() - event.originalEvent.touches[0].clientX, _this.startPosition.getY() - event.originalEvent.touches[0].clientY);
-
-                    if (Math.abs(_this.distancePosition.getY()) < 10 && Math.abs(_this.distancePosition.getX()) > 10) {
-                        event.preventDefault();
-                        _this.animationFlag.enabled();
-                    }
+                    _this.traseDistance(event);
 
                     if (_this.animationFlag.checkStatus()) {
-                        if (_this.distancePosition.getX() > 0) {
-                            _this.toNext();
-                        }
-                        if (_this.distancePosition.getX() < 0) {
-                            _this.toPrev();
-                        }
+                        _this.startAnimation();
                     }
                 }
             });
@@ -410,6 +399,24 @@ var Q;
         SimpleFlip.prototype.touchcancel = function () {
             this.$el.on('touchcancel', function (event) {
             });
+        };
+
+        SimpleFlip.prototype.traseDistance = function (touchmoveEvent) {
+            this.distancePosition = new Q.Position(this.startPosition.getX() - touchmoveEvent.originalEvent.touches[0].clientX, this.startPosition.getY() - touchmoveEvent.originalEvent.touches[0].clientY);
+
+            if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
+                event.preventDefault();
+                this.animationFlag.enabled();
+            }
+        };
+
+        SimpleFlip.prototype.startAnimation = function () {
+            if (this.distancePosition.getX() > 0) {
+                this.toNext();
+            }
+            if (this.distancePosition.getX() < 0) {
+                this.toPrev();
+            }
         };
         return SimpleFlip;
     })(Q.Flip);

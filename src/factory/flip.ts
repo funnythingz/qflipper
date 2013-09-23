@@ -21,14 +21,12 @@ module Q {
 
         refresh() {
             this.resetPoint();
-            console.log(this.point.getNow());
             this.transAnimation();
         }
 
         toNext() {
             if(this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
-                console.log(this.point.getNow());
                 this.transAnimation();
             }
         }
@@ -36,7 +34,6 @@ module Q {
         toPrev() {
             if(this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
-                console.log(this.point.getNow());
                 this.transAnimation();
             }
         }
@@ -48,7 +45,6 @@ module Q {
             if (point >= this.itemSize.getTotalLength()) {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
-            console.log(this.point.getNow());
             this.transAnimation();
         }
 

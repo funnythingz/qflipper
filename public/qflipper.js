@@ -245,14 +245,12 @@ var Q;
         }
         Flip.prototype.refresh = function () {
             this.resetPoint();
-            console.log(this.point.getNow());
             this.transAnimation();
         };
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point.setPoint(this.point.getNow() + 1);
-                console.log(this.point.getNow());
                 this.transAnimation();
             }
         };
@@ -260,7 +258,6 @@ var Q;
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
                 this.point.setPoint(this.point.getNow() - 1);
-                console.log(this.point.getNow());
                 this.transAnimation();
             }
         };
@@ -272,7 +269,6 @@ var Q;
             if (point >= this.itemSize.getTotalLength()) {
                 this.point.setPoint(this.itemSize.getTotalLength() - 1);
             }
-            console.log(this.point.getNow());
             this.transAnimation();
         };
 

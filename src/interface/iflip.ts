@@ -4,6 +4,8 @@ module Q {
         toNext();
         toPrev();
         moveToPoint(point: number);
+        hasNext(): boolean;
+        hasPrev(): boolean;
     }
 
 }

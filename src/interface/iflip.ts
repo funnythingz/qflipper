@@ -6,6 +6,8 @@ module Q {
         moveToPoint(point: number);
         hasNext(): boolean;
         hasPrev(): boolean;
+        getPoint(): number;
+        getMaxPoint(): number;
     }
 
 }

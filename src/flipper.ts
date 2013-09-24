@@ -41,6 +41,14 @@ module Q {
             return this.flipService.hasPrev();
         }
 
+        getPoint(): number {
+            return this.flipService.getPoint();
+        }
+
+        getMaxPoint(): number {
+            return this.flipService.getMaxPoint();
+        }
+
     }
 
 }

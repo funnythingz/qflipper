@@ -36,3 +36,19 @@ a {
 .unit {
   margin: 0 0 1em;
 }
+.lamp-area {
+  text-align: center;
+
+  > .lamp {
+    display: inline-block;
+    vertical-align: top;
+    width: 10px; height: 10px;
+    @include border-radius(10px);
+    border: solid 1px #f7f8f9;
+    background-color: #f1f2f3;
+
+    &.current {
+      background-color: #167acb;
+    }
+  }
+}

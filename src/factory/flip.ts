@@ -25,40 +25,48 @@ module Q {
 
         toNext() {
             if(this.hasNext()) {
-                this.point.setPoint(this.point.getNow() + 1);
+                this.point.setPoint(this.getPoint() + 1);
                 this.transAnimation();
             }
         }
 
         toPrev() {
             if(this.hasPrev()) {
-                this.point.setPoint(this.point.getNow() - 1);
+                this.point.setPoint(this.getPoint() - 1);
                 this.transAnimation();
             }
         }
 
         moveToPoint(point: number) {
-            if(point < this.itemSize.getTotalLength()) {
+            if(point < this.getMaxPoint()) {
                 this.point.setPoint(point);
             }
-            if (point >= this.itemSize.getTotalLength()) {
-                this.point.setPoint(this.itemSize.getTotalLength() - 1);
+            if (point >= this.getMaxPoint()) {
+                this.point.setPoint(this.getMaxPoint() - 1);
             }
             this.transAnimation();
         }
 
         hasNext(): boolean {
-            if(this.point.getNow() < this.itemSize.getTotalLength() - 1) {
+            if(this.getPoint() < this.getMaxPoint() - 1) {
                 return true;
             }
             return false;
         }
 
         hasPrev(): boolean {
-            if(0 < this.point.getNow() && this.point.getNow() <= this.itemSize.getTotalLength() - 1) {
+            if(0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1) {
                 return true;
             }
             return false;
+        }
+
+        getPoint(): number {
+            return this.point.getNow();
+        }
+
+        getMaxPoint(): number {
+            return this.itemSize.getTotalLength();
         }
 
         private resetPoint() {
@@ -70,11 +78,11 @@ module Q {
         }
 
         private transAnimation() {
-            this.animater.transAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
+            this.animater.transAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
         }
 
         private noTransAnimation() {
-            this.animater.noTransAnimation(- (this.point.getNow() * this.itemSize.getSoloWidth()));
+            this.animater.noTransAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
         }
 
     }

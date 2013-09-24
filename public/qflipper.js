@@ -250,40 +250,48 @@ var Q;
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
-                this.point.setPoint(this.point.getNow() + 1);
+                this.point.setPoint(this.getPoint() + 1);
                 this.transAnimation();
             }
         };
 
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
-                this.point.setPoint(this.point.getNow() - 1);
+                this.point.setPoint(this.getPoint() - 1);
                 this.transAnimation();
             }
         };
 
         Flip.prototype.moveToPoint = function (point) {
-            if (point < this.itemSize.getTotalLength()) {
+            if (point < this.getMaxPoint()) {
                 this.point.setPoint(point);
             }
-            if (point >= this.itemSize.getTotalLength()) {
-                this.point.setPoint(this.itemSize.getTotalLength() - 1);
+            if (point >= this.getMaxPoint()) {
+                this.point.setPoint(this.getMaxPoint() - 1);
             }
             this.transAnimation();
         };
 
         Flip.prototype.hasNext = function () {
-            if (this.point.getNow() < this.itemSize.getTotalLength() - 1) {
+            if (this.getPoint() < this.getMaxPoint() - 1) {
                 return true;
             }
             return false;
         };
 
         Flip.prototype.hasPrev = function () {
-            if (0 < this.point.getNow() && this.point.getNow() <= this.itemSize.getTotalLength() - 1) {
+            if (0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1) {
                 return true;
             }
             return false;
+        };
+
+        Flip.prototype.getPoint = function () {
+            return this.point.getNow();
+        };
+
+        Flip.prototype.getMaxPoint = function () {
+            return this.itemSize.getTotalLength();
         };
 
         Flip.prototype.resetPoint = function () {
@@ -295,11 +303,11 @@ var Q;
         };
 
         Flip.prototype.transAnimation = function () {
-            this.animater.transAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
+            this.animater.transAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
         };
 
         Flip.prototype.noTransAnimation = function () {
-            this.animater.noTransAnimation(-(this.point.getNow() * this.itemSize.getSoloWidth()));
+            this.animater.noTransAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
         };
         return Flip;
     })();
@@ -478,6 +486,14 @@ var Q;
 
         Flipper.prototype.hasPrev = function () {
             return this.flipService.hasPrev();
+        };
+
+        Flipper.prototype.getPoint = function () {
+            return this.flipService.getPoint();
+        };
+
+        Flipper.prototype.getMaxPoint = function () {
+            return this.flipService.getMaxPoint();
         };
         return Flipper;
     })();

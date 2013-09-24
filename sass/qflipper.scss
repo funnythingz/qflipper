@@ -46,6 +46,11 @@ a {
     @include border-radius(10px);
     border: solid 1px #f7f8f9;
     background-color: #f1f2f3;
+    margin-right: 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &.current {
       background-color: #167acb;

@@ -12,6 +12,10 @@ module Q {
         ) {
             super($el, options);
 
+            this.appendTouchEvents();
+        }
+
+        private appendTouchEvents() {
             this.touchstart();
             this.touchmove();
             this.touchend();
@@ -19,7 +23,7 @@ module Q {
         }
 
         private touchstart() {
-            this.$el.on('touchstart',  (event: any) => {
+            this.$el.on('touchstart', (event: any) => {
                 this.startPosition = new Position(
                     event.originalEvent.touches[0].clientX,
                     event.originalEvent.touches[0].clientY

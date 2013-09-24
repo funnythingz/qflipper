@@ -360,11 +360,15 @@ var Q;
             _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
 
+            this.appendTouchEvents();
+        }
+        SimpleFlip.prototype.appendTouchEvents = function () {
             this.touchstart();
             this.touchmove();
             this.touchend();
             this.touchcancel();
-        }
+        };
+
         SimpleFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {

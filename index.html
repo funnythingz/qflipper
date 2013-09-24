@@ -6,7 +6,6 @@
     <title>Qflipper by funnythingz</title>
 
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script src="js/respond.js"></script>
     <script src="js/jquery-2.0.3.min.js"></script>
@@ -46,26 +45,34 @@
 
 <h2><a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
 
-<section class="view-wrapper">
-<div class="view unit" id="qflipperView">
-  <div id="qflipper" class="qflipper">
-    <div class="item">
-      <p class="sentence">0</p>
+<div class="unit">
+  <section class="view-wrapper">
+    <div class="view" id="qflipperView">
+      <div id="qflipper" class="qflipper">
+        <div class="item">
+          <p class="sentence">0</p>
+        </div>
+        <div class="item">
+          <p class="sentence">1</p>
+        </div>
+        <div class="item">
+          <p class="sentence">2</p>
+        </div>
+        <div class="item">
+          <p class="sentence">3</p>
+        </div>
+        <div class="item">
+          <p class="sentence">4</p>
+        </div>
+      </div>
     </div>
-    <div class="item">
-      <p class="sentence">1</p>
-    </div>
-    <div class="item">
-      <p class="sentence">2</p>
-    </div>
-    <div class="item">
-      <p class="sentence">3</p>
-    </div>
-    <div class="item">
-      <p class="sentence">4</p>
-    </div>
-  </div>
+  </section>
 </div>
+
+<div class="unit">
+  <div class="lamp-area" id="lampArea"></div>
+</div>
+
 <div class="unit right">
   <button id="moveToPrev">prev</button>
   <button id="moveToNext">next</button>
@@ -77,34 +84,47 @@
 <div class="unit right">
   <button id="refresh">refresh</button>
 </div>
-</section>
-
-<style>
-  .unit {
-    margin-bottom: 1em;
-  }
-  .right {
-    text-align: right;
-  }
-</style>
 
 <script>(function(){
   var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
 
+  var setLamp = function() {
+    var _result = '';
+    for(var i = 0; i < qflipper.getMaxPoint(); i++) {
+      if(i === qflipper.getPoint()) {
+        _result += '<div class="lamp current"></div>';
+      } else {
+        _result += '<div class="lamp"></div>';
+      }
+    }
+    $('#lampArea').html(_result);
+  }
+
+  var changeLamp = function() {
+    $('.lamp', $('#lampArea')).removeClass('current');
+    $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
+  }
+
+  setLamp();
+
   $('#moveToNext').on('click', function(){
     qflipper.toNext();
+    changeLamp();
   });
 
   $('#moveToPrev').on('click', function(){
     qflipper.toPrev();
+    changeLamp();
   });
 
   $('#moveToPoint').on('click', function(){
     qflipper.moveToPoint(parseInt($('#input').val()));
+    changeLamp();
   });
 
   $('#refresh').on('click', function(){
     qflipper.refresh();
+    changeLamp();
   });
 
 })();</script>
@@ -115,102 +135,115 @@
 <blockquote>
 <p>HTML</p>
 </blockquote>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;html&gt;&lt;head&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"qflipper.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-
-  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"qflick.css"</span> <span class="na">media=</span><span class="s">"all"</span> <span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/head&gt;&lt;body&gt;</span>
-
-<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"view-wrapper"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"qflipperView"</span> <span class="na">class=</span><span class="s">"view"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"qflipper"</span> <span class="na">class=</span><span class="s">"qflipper"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/p&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/p&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"sentence"</span><span class="nt">&gt;</span>3<span class="nt">&lt;/p&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToPrev"</span><span class="nt">&gt;</span>prev<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToNext"</span><span class="nt">&gt;</span>next<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"input"</span> <span class="na">value=</span><span class="s">"0"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"moveToPoint"</span><span class="nt">&gt;</span>point<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div&gt;</span>
-    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"refresh"</span><span class="nt">&gt;</span>refresh<span class="nt">&lt;/button&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/section&gt;</span>
-
-<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
-</pre></div>
+<script src="https://gist.github.com/funnythingz/6681905.js"></script>
 
 <blockquote>
 <p>CSS</p>
 </blockquote>
-
-<div class="highlight highlight-css"><pre><span class="nt">a</span> <span class="p">{</span>
-  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">tap</span><span class="o">-</span><span class="n">highlight</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nc">.view-wrapper</span> <span class="p">{</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
-  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.view</span> <span class="p">{</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
-  <span class="k">margin-left</span><span class="o">:</span> <span class="k">auto</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.qflipper</span> <span class="p">{</span>
-  <span class="o">@</span><span class="n">include</span> <span class="n">clearfix</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.item</span> <span class="p">{</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">320px</span><span class="p">;</span>
-  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+<script src="https://gist.github.com/funnythingz/6681996.js"></script>
 
 <blockquote>
 <p>JavaScript</p>
 </blockquote>
-
-<div class="highlight highlight-JS"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-  <span class="kd">var</span> <span class="nx">qflipper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">Flipper</span><span class="p">();</span>
-  <span class="nx">qflipper</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'#qflipper'</span><span class="p">);</span>
-
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToNext'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">toNext</span><span class="p">();</span>
-  <span class="p">});</span>
-
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToPrev'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">toPrev</span><span class="p">();</span>
-  <span class="p">});</span>
-
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#moveToPoint'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">moveToPoint</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#input'</span><span class="p">).</span><span class="nx">val</span><span class="p">()));</span>
-  <span class="p">});</span>
-
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#refresh'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">qflipper</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
-  <span class="p">});</span>
-<span class="p">});</span>
-</pre></div>
+<script src="https://gist.github.com/funnythingz/6681986.js"></script>
 
 <p>&copy; funnythingz</p>
       </section>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+<style>
+.gist .gist-file .gist-data {
+  background-color: transparent;
+}
+.gist .gist-file {
+  margin: 0 0 2em;
+}
+.gist table {
+  margin: 0;
+}
+.gist .gist-file .gist-data .line-numbers,
+.gist .gist-file .gist-meta {
+  background-color: transparent;
+  text-shadow: none;
+}
+.gist .gist-file .gist-meta {
+  background-image: none;
+}
+.gist .gist-file .gist-meta a {
+  color: #aaa;
+}
+
+.gist-syntax .c { color: #999999; font-style: italic } /* Comment */
+.gist-syntax .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.gist-syntax .g { color: #d0d0d0 } /* Generic */
+.gist-syntax .k { color: #6ab825; font-weight: normal } /* Keyword */
+.gist-syntax .l { color: #d0d0d0 } /* Literal */
+.gist-syntax .n { color: #d0d0d0 } /* Name */
+.gist-syntax .o { color: #d0d0d0 } /* Operator */
+.gist-syntax .x { color: #d0d0d0 } /* Other */
+.gist-syntax .p { color: #d0d0d0 } /* Punctuation */
+.gist-syntax .cm { color: #999999; font-style: italic } /* Comment.Multiline */
+.gist-syntax .cp { color: #cd2828; font-weight: normal } /* Comment.Preproc */
+.gist-syntax .c1 { color: #999999; font-style: italic } /* Comment.Single */
+.gist-syntax .cs { color: #e50808; font-weight: normal; background-color: #520000 } /* Comment.Special */
+.gist-syntax .gd { color: #d22323 } /* Generic.Deleted */
+.gist-syntax .ge { color: #d0d0d0; font-style: italic } /* Generic.Emph */
+.gist-syntax .gr { color: #d22323 } /* Generic.Error */
+.gist-syntax .gh { color: #ffffff; font-weight: normal } /* Generic.Heading */
+.gist-syntax .gi { color: #589819 } /* Generic.Inserted */
+.gist-syntax .go { color: #cccccc } /* Generic.Output */
+.gist-syntax .gp { color: #aaaaaa } /* Generic.Prompt */
+.gist-syntax .gs { color: #d0d0d0; font-weight: normal } /* Generic.Strong */
+.gist-syntax .gu { color: #ffffff; text-decoration: underline } /* Generic.Subheading */
+.gist-syntax .gt { color: #d22323 } /* Generic.Traceback */
+.gist-syntax .kc { color: #6ab825; font-weight: normal } /* Keyword.Constant */
+.gist-syntax .kd { color: #6ab825; font-weight: normal } /* Keyword.Declaration */
+.gist-syntax .kn { color: #6ab825; font-weight: normal } /* Keyword.Namespace */
+.gist-syntax .kp { color: #6ab825 } /* Keyword.Pseudo */
+.gist-syntax .kr { color: #6ab825; font-weight: normal } /* Keyword.Reserved */
+.gist-syntax .kt { color: #6ab825; font-weight: normal } /* Keyword.Type */
+.gist-syntax .ld { color: #d0d0d0 } /* Literal.Date */
+.gist-syntax .m { color: #3677a9 } /* Literal.Number */
+.gist-syntax .s { color: #9dd5f1 } /* Literal.String */
+.gist-syntax .na { color: #bbbbbb } /* Name.Attribute */
+.gist-syntax .nb { color: #24909d } /* Name.Builtin */
+.gist-syntax .nc { color: #447fcf; text-decoration: none } /* Name.Class */
+.gist-syntax .no { color: #40ffff } /* Name.Constant */
+.gist-syntax .nd { color: #ffa500 } /* Name.Decorator */
+.gist-syntax .ni { color: #d0d0d0 } /* Name.Entity */
+.gist-syntax .ne { color: #bbbbbb } /* Name.Exception */
+.gist-syntax .nf { color: #447fcf } /* Name.Function */
+.gist-syntax .nl { color: #d0d0d0 } /* Name.Label */
+.gist-syntax .nn { color: #447fcf; text-decoration: underline } /* Name.Namespace */
+.gist-syntax .nx { color: #d0d0d0 } /* Name.Other */
+.gist-syntax .py { color: #d0d0d0 } /* Name.Property */
+.gist-syntax .nt { color: #6ab825;} /* Name.Tag */
+.gist-syntax .nv { color: #40ffff } /* Name.Variable */
+.gist-syntax .ow { color: #6ab825; font-weight: normal } /* Operator.Word */
+.gist-syntax .w { color: #666666 } /* Text.Whitespace */
+.gist-syntax .mf { color: #3677a9 } /* Literal.Number.Float */
+.gist-syntax .mh { color: #3677a9 } /* Literal.Number.Hex */
+.gist-syntax .mi { color: #3677a9 } /* Literal.Number.Integer */
+.gist-syntax .mo { color: #3677a9 } /* Literal.Number.Oct */
+.gist-syntax .sb { color: #9dd5f1 } /* Literal.String.Backtick */
+.gist-syntax .sc { color: #9dd5f1 } /* Literal.String.Char */
+.gist-syntax .sd { color: #9dd5f1 } /* Literal.String.Doc */
+.gist-syntax .s2 { color: #9dd5f1 } /* Literal.String.Double */
+.gist-syntax .se { color: #9dd5f1 } /* Literal.String.Escape */
+.gist-syntax .sh { color: #9dd5f1 } /* Literal.String.Heredoc */
+.gist-syntax .si { color: #9dd5f1 } /* Literal.String.Interpol */
+.gist-syntax .sx { color: #ffa500 } /* Literal.String.Other */
+.gist-syntax .sr { color: #9dd5f1 } /* Literal.String.Regex */
+.gist-syntax .s1 { color: #9dd5f1 } /* Literal.String.Single */
+.gist-syntax .ss { color: #9dd5f1 } /* Literal.String.Symbol */
+.gist-syntax .bp { color: #24909d } /* Name.Builtin.Pseudo */
+.gist-syntax .vc { color: #40ffff } /* Name.Variable.Class */
+.gist-syntax .vg { color: #40ffff } /* Name.Variable.Global */
+.gist-syntax .vi { color: #40ffff } /* Name.Variable.Instance */
+.gist-syntax .il { color: #3677a9 } /* Literal.Number.Integer.Long */
+.gist-syntax .line { color: #d0d0d0 }
+</style>
   </body>
 </html>

@@ -72,7 +72,6 @@
 <div class="unit">
   <div class="lamp-area" id="lampArea"></div>
 </div>
-
 <div class="unit right">
   <button id="moveToPrev">prev</button>
   <button id="moveToNext">next</button>
@@ -85,7 +84,9 @@
   <button id="refresh">refresh</button>
 </div>
 
-<script>(function(){
+<script>
+$(function(){
+
   var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
 
   var setLamp = function() {
@@ -100,12 +101,16 @@
     $('#lampArea').html(_result);
   }
 
+  setLamp();
+
   var changeLamp = function() {
     $('.lamp', $('#lampArea')).removeClass('current');
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
-  setLamp();
+  $('#qflipper').on('flipend', function() {
+    changeLamp();
+  });
 
   $('#moveToNext').on('click', function(){
     qflipper.toNext();
@@ -127,7 +132,8 @@
     changeLamp();
   });
 
-})();</script>
+});
+</script>
 
 
 <h2><a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>

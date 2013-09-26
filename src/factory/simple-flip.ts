@@ -12,10 +12,10 @@ module Q {
         ) {
             super($el, options);
 
-            this.appendTouchEvents();
+            this.bindTouchEvents();
         }
 
-        private appendTouchEvents() {
+        private bindTouchEvents() {
             this.touchstart();
             this.touchmove();
             this.touchend();
@@ -42,6 +42,7 @@ module Q {
 
                     if(this.animationFlag.checkStatus()) {
                         this.startAnimation();
+                        this.triggerEvent('flipend');
                     }
                 }
 

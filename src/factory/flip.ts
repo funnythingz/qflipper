@@ -69,6 +69,12 @@ module Q {
             return this.itemSize.getTotalLength();
         }
 
+        triggerEvent(type: string) {
+            return this.$el.trigger(
+                $.Event(type)
+            );
+        }
+
         private resetPoint() {
             this.point.setPoint(0);
         }
@@ -84,7 +90,7 @@ module Q {
         private noTransAnimation() {
             this.animater.noTransAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
         }
-
+        
     }
 
 }

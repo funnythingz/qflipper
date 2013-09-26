@@ -294,6 +294,10 @@ var Q;
             return this.itemSize.getTotalLength();
         };
 
+        Flip.prototype.triggerEvent = function (type) {
+            return this.$el.trigger($.Event(type));
+        };
+
         Flip.prototype.resetPoint = function () {
             this.point.setPoint(0);
         };
@@ -368,9 +372,9 @@ var Q;
             _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
 
-            this.appendTouchEvents();
+            this.bindTouchEvents();
         }
-        SimpleFlip.prototype.appendTouchEvents = function () {
+        SimpleFlip.prototype.bindTouchEvents = function () {
             this.touchstart();
             this.touchmove();
             this.touchend();
@@ -396,6 +400,7 @@ var Q;
 
                     if (_this.animationFlag.checkStatus()) {
                         _this.startAnimation();
+                        _this.triggerEvent('flipend');
                     }
                 }
             });

@@ -71,6 +71,10 @@
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
+  $('#qflipper').on('flipend', function() {
+    changeLamp();
+  });
+
   $('#moveToNext').on('click', function(){
     qflipper.toNext();
     changeLamp();

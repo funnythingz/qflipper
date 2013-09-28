@@ -2,9 +2,9 @@ module Q {
     
     export class Flip implements IFlipper {
 
-        private point = new Point();
-        private itemSize: ItemSize;
-        private animater: Animater;
+        point = new Point();
+        itemSize: ItemSize;
+        animater: Animater;
 
         constructor(
             public $el: JQuery,
@@ -26,15 +26,15 @@ module Q {
         toNext() {
             if(this.hasNext()) {
                 this.point.setPoint(this.getPoint() + 1);
-                this.transAnimation();
             }
+            this.transAnimation();
         }
 
         toPrev() {
             if(this.hasPrev()) {
                 this.point.setPoint(this.getPoint() - 1);
-                this.transAnimation();
             }
+            this.transAnimation();
         }
 
         moveToPoint(point: number) {
@@ -79,10 +79,6 @@ module Q {
 
         private transAnimation() {
             this.animater.transAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
-        }
-
-        private noTransAnimation() {
-            this.animater.noTransAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
         }
         
     }

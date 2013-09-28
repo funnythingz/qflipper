@@ -251,15 +251,15 @@ var Q;
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point.setPoint(this.getPoint() + 1);
-                this.transAnimation();
             }
+            this.transAnimation();
         };
 
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
                 this.point.setPoint(this.getPoint() - 1);
-                this.transAnimation();
             }
+            this.transAnimation();
         };
 
         Flip.prototype.moveToPoint = function (point) {
@@ -305,10 +305,6 @@ var Q;
         Flip.prototype.transAnimation = function () {
             this.animater.transAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
         };
-
-        Flip.prototype.noTransAnimation = function () {
-            this.animater.noTransAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
-        };
         return Flip;
     })();
     Q.Flip = Flip;
@@ -325,7 +321,88 @@ var Q;
         __extends(RichFlipFactory, _super);
         function RichFlipFactory($el, options) {
             _super.call(this, $el, options);
+            this.animationFlag = new Q.AnimationFlag();
+
+            this.bindTouchEvents();
         }
+        RichFlipFactory.prototype.bindTouchEvents = function () {
+            this.touchstart();
+            this.touchmove();
+            this.touchend();
+            this.touchcancel();
+        };
+
+        RichFlipFactory.prototype.touchstart = function () {
+            var _this = this;
+            this.$el.on('touchstart', function (event) {
+                _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+            });
+        };
+
+        RichFlipFactory.prototype.touchmove = function () {
+            var _this = this;
+            this.animationFlag.disabled();
+
+            this.$el.on('touchmove', function (event) {
+                event.stopPropagation();
+
+                if (!_this.animationFlag.checkStatus()) {
+                    _this.traseDistance(event);
+                }
+
+                if (_this.animationFlag.checkStatus()) {
+                    var moveDistance = _this.startPosition.getX() - event.originalEvent.touches[0].clientX;
+                    _this.snapFitAnimation(moveDistance);
+                    _this.delegateDistancePosition(event);
+                }
+            });
+        };
+
+        RichFlipFactory.prototype.touchend = function () {
+            var _this = this;
+            this.$el.on('touchend', function (event) {
+                if (_this.animationFlag.checkStatus()) {
+                    _this.startAnimation();
+                    _this.triggerEvent('flipend');
+                }
+                _this.animationFlag.disabled();
+            });
+        };
+
+        RichFlipFactory.prototype.touchcancel = function () {
+            this.$el.on('touchcancel', function (event) {
+            });
+        };
+
+        RichFlipFactory.prototype.traseDistance = function (touchmoveEvent) {
+            this.delegateDistancePosition(touchmoveEvent);
+            if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
+                event.preventDefault();
+                this.animationFlag.enabled();
+            }
+        };
+
+        RichFlipFactory.prototype.delegateDistancePosition = function (event) {
+            this.distancePosition = new Q.Position(this.startPosition.getX() - event.originalEvent.touches[0].clientX, this.startPosition.getY() - event.originalEvent.touches[0].clientY);
+        };
+
+        RichFlipFactory.prototype.startAnimation = function () {
+            if (this.distancePosition.getX() > 0) {
+                this.toNext();
+            }
+            if (this.distancePosition.getX() < 0) {
+                this.toPrev();
+            }
+        };
+
+        RichFlipFactory.prototype.snapFitAnimation = function (moveDistance) {
+            if (typeof moveDistance === "undefined") { moveDistance = 0; }
+            this.animater.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
+        };
+
+        RichFlipFactory.prototype.triggerEvent = function (type) {
+            return this.$el.trigger($.Event(type));
+        };
         return RichFlipFactory;
     })(Q.Flip);
     Q.RichFlipFactory = RichFlipFactory;

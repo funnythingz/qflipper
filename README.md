@@ -345,7 +345,7 @@ get all items length.
 
 ```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
-console.log(qflipper.getPoint());
+console.log(qflipper.getMaxPoint());
 ```
 
 ## License

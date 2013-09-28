@@ -233,14 +233,12 @@ new Q.Flipper('#qflipper', options);
 
 default animation type is `simple`.
 
-> Simple Animation
-
 ```JavaScript
 {
   type: 'simple'
 }
 ```
-> Rich Animation
+cool animation type is `rich`.
 
 ```JavaScript
 {

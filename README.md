@@ -1,7 +1,7 @@
 qflipper.js
 =====
 
-jQueryでフリックするやつをTypeScriptでつくってみた
+qflipper.js is flick framework made of TypeScript &amp; jQuery for SmartPhone.
 
 ## Get Started
 

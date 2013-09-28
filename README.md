@@ -255,6 +255,7 @@ trigger className `.view` &amp; `.item`  can rename of options.
   view: '.view',
   item: '.item'
 }
+```
 
 > example
 

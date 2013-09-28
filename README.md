@@ -24,6 +24,8 @@ jQueryでフリックするやつをTypeScriptでつくってみた
 
 > Body of HTML Layout
 
+trigger className is `.view` &amp; `.item`.
+
 ```HTML
 <section class="view-wrapper">
   <div class="view">
@@ -246,6 +248,23 @@ default animation type is `simple`.
 }
 ```
 
+trigger className `.view` &amp; `.item`  can rename of options.
+
+```JavaScript
+{
+  view: '.view',
+  item: '.item'
+}
+
+> example
+
+```JavaScript
+new Q.Flipper('#qflipper', {
+  type: 'rich',
+  view: '.viewHoge',
+  item: '.itemFuga'
+});
+```
 
 ## License
 

@@ -7,7 +7,7 @@ jQueryでフリックするやつをTypeScriptでつくってみた
 
 ### base HTML and CSS
 
-> HTML Layout
+HTML Layout.
 
 ```HTML
 <html><head>
@@ -22,7 +22,7 @@ jQueryでフリックするやつをTypeScriptでつくってみた
 </body></html>
 ```
 
-> Body of HTML Layout
+Body of HTML Layout.
 
 trigger className is `.view` &amp; `.item`.
 
@@ -50,7 +50,7 @@ trigger className is `.view` &amp; `.item`.
 </section>
 ```
 
-> SCSS or CSS
+SCSS or CSS
 
 ```scss
 @import "compass/utilities/general/clearfix"
@@ -76,9 +76,9 @@ a {
 }
 ```
 
-### Simple Initilize
+### JavaScript Initilize
 
-> JavaScript
+type is Simple.
 
 ```JavaScript
 $(function() {
@@ -86,9 +86,7 @@ $(function() {
 });
 ```
 
-### Rich Initilize
-
-> JavaScript
+type is Rich.
 
 ```JavaScript
 $(function() {
@@ -98,7 +96,7 @@ $(function() {
 
 ## Lamp & buttons
 
-> Body of HTML Layout
+Body of HTML Layout.
 
 ```html
 <div class="unit">
@@ -142,7 +140,7 @@ $(function() {
 </div>
 ```
 
-> add SCSS or CSS
+add SCSS or CSS.
 
 ```scss
 .right {
@@ -174,9 +172,7 @@ $(function() {
 }
 ```
 
-### Initilize
-
-> JavaScript
+JavaScript
 
 ```JavaScript
 $(function() {

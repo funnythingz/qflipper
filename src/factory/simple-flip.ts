@@ -80,6 +80,11 @@ module Q {
             }
         }
 
+        private triggerEvent(type: string) {
+            return this.$el.trigger(
+                $.Event(type)
+            );
+        }
 
     }
 

@@ -2,7 +2,7 @@ module Q {
     
     export class RichFlipFactory {
 
-        createRichFlip($el: JQuery, options: Options) {
+        createFlip($el: JQuery, options: Options): Flip {
             return new RichFlip($el, options);
         }
 

@@ -2,7 +2,7 @@ module Q {
     
     export class SimpleFlipFactory {
 
-        createSimpleFlip($el: JQuery, options: Options) {
+        createFlip($el: JQuery, options: Options): Flip {
             return new SimpleFlip($el, options);
         }
 

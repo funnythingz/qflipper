@@ -1,8 +1,8 @@
 /// <reference path="../definitions/jquery.d.ts" />
 
-/// <reference path="interface/iflip.ts" />
+/// <reference path="interface/iflipper.ts" />
 /// <reference path="flipper.ts" />
-/// <reference path="flip-service.ts" />
+/// <reference path="flip-creator.ts" />
 /// <reference path="prefix-checker.ts" />
 /// <reference path="animater.ts" />
 /// <reference path="factory/simple-flip-factory.ts" />

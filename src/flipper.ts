@@ -4,7 +4,7 @@ module Q {
     
     export class Flipper implements IFlipper {
 
-        private flipService: any;
+        private flip: Flip;
 
         constructor(id: string, args: any) {
             var options = new Options();
@@ -13,40 +13,42 @@ module Q {
             options.createItem((args.item)? args.item: '.item');
             options.createLamp((args.lamp)? args.lamp: '.lamp');
 
-            this.flipService = new FlipService($(id), options);
+            var flipCreator = new FlipCreator();
+            this.flip = flipCreator.createFlipFactory($(id), options);
+
             this.refresh();
         }
 
         refresh() {
-            this.flipService.refresh();
+            this.flip.refresh();
         }
 
         toNext() {
-            this.flipService.toNext();
+            this.flip.toNext();
         }
 
         toPrev() {
-            this.flipService.toPrev();
+            this.flip.toPrev();
         }
 
         moveToPoint(point: number) {
-            this.flipService.moveToPoint(point);
+            this.flip.moveToPoint(point);
         }
 
         hasNext(): boolean {
-            return this.flipService.hasNext();
+            return this.flip.hasNext();
         }
 
         hasPrev(): boolean {
-            return this.flipService.hasPrev();
+            return this.flip.hasPrev();
         }
 
         getPoint(): number {
-            return this.flipService.getPoint();
+            return this.flip.getPoint();
         }
 
         getMaxPoint(): number {
-            return this.flipService.getMaxPoint();
+            return this.flip.getMaxPoint();
         }
 
     }

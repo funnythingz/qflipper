@@ -1,6 +1,6 @@
 module Q {
     
-    export class Flip {
+    export class Flip implements IFlipper {
 
         private point = new Point();
         private itemSize: ItemSize;
@@ -67,12 +67,6 @@ module Q {
 
         getMaxPoint(): number {
             return this.itemSize.getTotalLength();
-        }
-
-        triggerEvent(type: string) {
-            return this.$el.trigger(
-                $.Event(type)
-            );
         }
 
         private resetPoint() {

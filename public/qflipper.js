@@ -294,10 +294,6 @@ var Q;
             return this.itemSize.getTotalLength();
         };
 
-        Flip.prototype.triggerEvent = function (type) {
-            return this.$el.trigger($.Event(type));
-        };
-
         Flip.prototype.resetPoint = function () {
             this.point.setPoint(0);
         };
@@ -322,7 +318,7 @@ var Q;
     var RichFlipFactory = (function () {
         function RichFlipFactory() {
         }
-        RichFlipFactory.prototype.createRichFlip = function ($el, options) {
+        RichFlipFactory.prototype.createFlip = function ($el, options) {
             return new Q.RichFlip($el, options);
         };
         return RichFlipFactory;
@@ -351,7 +347,7 @@ var Q;
     var SimpleFlipFactory = (function () {
         function SimpleFlipFactory() {
         }
-        SimpleFlipFactory.prototype.createSimpleFlip = function ($el, options) {
+        SimpleFlipFactory.prototype.createFlip = function ($el, options) {
             return new Q.SimpleFlip($el, options);
         };
         return SimpleFlipFactory;
@@ -435,26 +431,32 @@ var Q;
                 this.toPrev();
             }
         };
+
+        SimpleFlip.prototype.triggerEvent = function (type) {
+            return this.$el.trigger($.Event(type));
+        };
         return SimpleFlip;
     })(Q.Flip);
     Q.SimpleFlip = SimpleFlip;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var FlipService = (function () {
-        function FlipService($el, options) {
+    var FlipCreator = (function () {
+        function FlipCreator() {
+        }
+        FlipCreator.prototype.createFlipFactory = function ($el, options) {
             if (options.type.getType() === Q.FlipTypeEnum.Simple) {
                 var simpleFlipFactory = new Q.SimpleFlipFactory();
-                return simpleFlipFactory.createSimpleFlip($el, options);
+                return simpleFlipFactory.createFlip($el, options);
             }
             if (options.type.getType() === Q.FlipTypeEnum.Rich) {
                 var richFlipFactory = new Q.RichFlipFactory();
-                return richFlipFactory.createRichFlip($el, options);
+                return richFlipFactory.createFlip($el, options);
             }
-        }
-        return FlipService;
+        };
+        return FlipCreator;
     })();
-    Q.FlipService = FlipService;
+    Q.FlipCreator = FlipCreator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -466,39 +468,41 @@ var Q;
             options.createItem((args.item) ? args.item : '.item');
             options.createLamp((args.lamp) ? args.lamp : '.lamp');
 
-            this.flipService = new Q.FlipService($(id), options);
+            var flipCreator = new Q.FlipCreator();
+            this.flip = flipCreator.createFlipFactory($(id), options);
+
             this.refresh();
         }
         Flipper.prototype.refresh = function () {
-            this.flipService.refresh();
+            this.flip.refresh();
         };
 
         Flipper.prototype.toNext = function () {
-            this.flipService.toNext();
+            this.flip.toNext();
         };
 
         Flipper.prototype.toPrev = function () {
-            this.flipService.toPrev();
+            this.flip.toPrev();
         };
 
         Flipper.prototype.moveToPoint = function (point) {
-            this.flipService.moveToPoint(point);
+            this.flip.moveToPoint(point);
         };
 
         Flipper.prototype.hasNext = function () {
-            return this.flipService.hasNext();
+            return this.flip.hasNext();
         };
 
         Flipper.prototype.hasPrev = function () {
-            return this.flipService.hasPrev();
+            return this.flip.hasPrev();
         };
 
         Flipper.prototype.getPoint = function () {
-            return this.flipService.getPoint();
+            return this.flip.getPoint();
         };
 
         Flipper.prototype.getMaxPoint = function () {
-            return this.flipService.getMaxPoint();
+            return this.flip.getMaxPoint();
         };
         return Flipper;
     })();

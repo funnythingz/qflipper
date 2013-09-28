@@ -14,7 +14,7 @@ module Q {
             options.createLamp((args.lamp)? args.lamp: '.lamp');
 
             var flipCreator = new FlipCreator();
-            this.flip = flipCreator.createFlipFactory($(id), options);
+            this.flip = flipCreator.createFlip($(id), options);
 
             this.refresh();
         }

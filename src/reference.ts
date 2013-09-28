@@ -17,6 +17,5 @@
 /// <reference path="data/position.ts" />
 /// <reference path="data/options/options.ts" />
 /// <reference path="data/options/item.ts" />
-/// <reference path="data/options/lamp.ts" />
 /// <reference path="data/options/type.ts" />
 /// <reference path="data/options/view.ts" />

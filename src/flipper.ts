@@ -11,7 +11,6 @@ module Q {
             options.createType((args.type)? args.type: 'simple');
             options.createView((args.view)? args.view: '.view');
             options.createItem((args.item)? args.item: '.item');
-            options.createLamp((args.lamp)? args.lamp: '.lamp');
 
             var flipCreator = new FlipCreator();
             this.flip = flipCreator.createFlip($(id), options);

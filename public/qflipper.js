@@ -97,19 +97,6 @@
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var Lamp = (function () {
-        function Lamp(name) {
-            this.name = name;
-        }
-        Lamp.prototype.getName = function () {
-            return this.name;
-        };
-        return Lamp;
-    })();
-    Q.Lamp = Lamp;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
     var Options = (function () {
         function Options() {
         }
@@ -123,10 +110,6 @@
 
         Options.prototype.createItem = function (item) {
             this.item = new Q.Item(item);
-        };
-
-        Options.prototype.createLamp = function (lamp) {
-            this.lamp = new Q.Lamp(lamp);
         };
         return Options;
     })();
@@ -524,7 +507,6 @@ var Q;
             options.createType((args.type) ? args.type : 'simple');
             options.createView((args.view) ? args.view : '.view');
             options.createItem((args.item) ? args.item : '.item');
-            options.createLamp((args.lamp) ? args.lamp : '.lamp');
 
             var flipCreator = new Q.FlipCreator();
             this.flip = flipCreator.createFlip($(id), options);

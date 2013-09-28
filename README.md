@@ -261,6 +261,93 @@ new Q.Flipper('#qflipper', {
 });
 ```
 
+## Method
+
+### toNext()
+
+move to the next item.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+$('#moveToNext').on('click', function(){
+    qflipper.toNext();
+});
+qlipper.toNext();
+```
+
+### toPrev()
+
+move to the previous item.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+$('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+});
+```
+
+### moveToPoint(point: number)
+
+move to an item of the specified numerical value.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+$('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+});
+```
+
+### refresh()
+
+move to the first item.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+$('#refresh').on('click', function(){
+    qflipper.refresh();
+});
+```
+
+### hasNext(): boolean
+
+proceed to the next item and returns true if there are entries in the following.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+if(qflipper.hasNext()) {
+  // ...
+}
+```
+
+### hasPrev(): boolean
+
+proceed to the previous item and returns true if there are entries in the following.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+if(qflipper.hasPrev()) {
+  // ...
+}
+```
+
+### getPoint(): number
+
+get the current position of the item.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+console.log(qflipper.getPoint());
+```
+
+### getMaxPoint(): number
+
+get all items length.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+console.log(qflipper.getPoint());
+```
+
 ## License
 
 qflipper.js is released under the MIT license. See [LICENSE.md](https://github.com/funnythingz/qflipper/blob/master/LICENSE.md).

@@ -5,7 +5,7 @@ jQueryでフリックするやつをTypeScriptでつくってみた
 
 ## Get Started
 
-### Simple
+### base HTML and CSS
 
 > HTML Layout
 
@@ -22,7 +22,7 @@ jQueryでフリックするやつをTypeScriptでつくってみた
 </body></html>
 ```
 
-> HTML Body
+> Body of HTML Layout
 
 ```HTML
 <section class="view-wrapper">
@@ -47,9 +47,12 @@ jQueryでフリックするやつをTypeScriptでつくってみた
   </div>
 </section>
 ```
-> qflipper.css
 
-```css
+> SCSS or CSS
+
+```scss
+@import "compass/utilities/general/clearfix"
+
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -71,6 +74,8 @@ a {
 }
 ```
 
+### Simple Initilize
+
 > JavaScript
 
 ```JavaScript
@@ -79,9 +84,19 @@ $(function() {
 });
 ```
 
-### Lamp & buttons
+### Rich Initilize
 
-> HTML Body
+> JavaScript
+
+```JavaScript
+$(function() {
+  new Q.Flipper('#qflipper', {type: 'rich'});
+});
+```
+
+## Lamp & buttons
+
+> Body of HTML Layout
 
 ```html
 <div class="unit">
@@ -125,12 +140,45 @@ $(function() {
 </div>
 ```
 
+> add SCSS or CSS
+
+```scss
+.right {
+  text-align: right;
+}
+.unit {
+  margin: 0 0 1em;
+}
+.lamp-area {
+  text-align: center;
+
+  > .lamp {
+    display: inline-block;
+    vertical-align: top;
+    width: 10px; height: 10px;
+    @include border-radius(10px);
+    border: solid 1px #f7f8f9;
+    background-color: #f1f2f3;
+    margin-right: 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.current {
+      background-color: #167acb;
+    }
+  }
+}
+```
+
+### Initilize
 
 > JavaScript
 
-```JS
+```JavaScript
 $(function() {
-  var qflipper = new Q.Flipper('#qflipper', {view: '#qflipperView'});
+  var qflipper = new Q.Flipper('#qflipper');
  
   var setLamp = function() {
     var _result = '';
@@ -173,8 +221,34 @@ $(function() {
 });
 ```
 
+## Options
+
+options to second argument.
+
+```JavaScript
+new Q.Flipper('#qflipper', options);
+```
+
+default animation type is `simple`.
+
+> Simple Animation
+
+```JavaScript
+{
+  type: 'simple'
+}
+```
+> Rich Animation
+
+```JavaScript
+{
+  type: 'rich'
+}
+```
 
 
+## License
 
+qflipper.js is released under the MIT license. See [LICENSE.md](https://github.com/funnythingz/qflipper/blob/master/LICENSE.md).
 
 &copy; funnythingz

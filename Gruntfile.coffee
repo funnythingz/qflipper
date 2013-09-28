@@ -11,6 +11,14 @@ module.exports = (grunt)->
         src: ['src/**/*.js']
         dest: 'public/qflipper.js'
 
+      license:
+        src: ['license/mit.js', 'public/qflipper.js']
+        dest: 'public/qflipper.js'
+
+      licenseMin:
+        src: ['license/mit.min.js', 'public/qflipper.min.js']
+        dest: 'public/qflipper.min.js'
+
       options:
         separator: ';'
 
@@ -26,7 +34,7 @@ module.exports = (grunt)->
     watch:
       ts:
         files: ['src/**/*.ts']
-        tasks: ['typescript', 'concat', 'uglify', 'clean']
+        tasks: ['typescript', 'concat', 'uglify', 'concat', 'clean']
         options:
           atBegin: true
 
@@ -55,5 +63,5 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-connect')
   grunt.loadNpmTasks('grunt-contrib-clean')
 
-  grunt.registerTask('default', ['typescript', 'concat', 'uglify', 'clean', 'compass'])
+  grunt.registerTask('default', ['typescript', 'concat', 'uglify', 'concat', 'clean', 'compass'])
   grunt.registerTask('server', ['connect'])

@@ -84,71 +84,6 @@
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
-    var Item = (function () {
-        function Item(name) {
-            this.name = name;
-        }
-        Item.prototype.getName = function () {
-            return this.name;
-        };
-        return Item;
-    })();
-    Q.Item = Item;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Options = (function () {
-        function Options() {
-        }
-        Options.prototype.createType = function (type) {
-            this.type = new Q.Type(type);
-        };
-
-        Options.prototype.createView = function (view) {
-            this.view = new Q.View(view);
-        };
-
-        Options.prototype.createItem = function (item) {
-            this.item = new Q.Item(item);
-        };
-        return Options;
-    })();
-    Q.Options = Options;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Type = (function () {
-        function Type(type) {
-            if (typeof type === "undefined") { type = (type) ? type : 'simple'; }
-            if (type === 'simple') {
-                this.type = Q.FlipTypeEnum.Simple;
-            }
-            if (type === 'rich') {
-                this.type = Q.FlipTypeEnum.Rich;
-            }
-        }
-        Type.prototype.getType = function () {
-            return this.type;
-        };
-        return Type;
-    })();
-    Q.Type = Type;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var View = (function () {
-        function View(name) {
-            this.name = name;
-        }
-        View.prototype.getName = function () {
-            return this.name;
-        };
-        return View;
-    })();
-    Q.View = View;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
     var Point = (function () {
         function Point() {
         }
@@ -547,6 +482,71 @@ var Q;
         return Flipper;
     })();
     Q.Flipper = Flipper;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Item = (function () {
+        function Item(name) {
+            this.name = name;
+        }
+        Item.prototype.getName = function () {
+            return this.name;
+        };
+        return Item;
+    })();
+    Q.Item = Item;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Options = (function () {
+        function Options() {
+        }
+        Options.prototype.createType = function (type) {
+            this.type = new Q.Type(type);
+        };
+
+        Options.prototype.createView = function (view) {
+            this.view = new Q.View(view);
+        };
+
+        Options.prototype.createItem = function (item) {
+            this.item = new Q.Item(item);
+        };
+        return Options;
+    })();
+    Q.Options = Options;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Type = (function () {
+        function Type(type) {
+            if (typeof type === "undefined") { type = (type) ? type : 'simple'; }
+            if (type === 'simple') {
+                this.type = Q.FlipTypeEnum.Simple;
+            }
+            if (type === 'rich') {
+                this.type = Q.FlipTypeEnum.Rich;
+            }
+        }
+        Type.prototype.getType = function () {
+            return this.type;
+        };
+        return Type;
+    })();
+    Q.Type = Type;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var View = (function () {
+        function View(name) {
+            this.name = name;
+        }
+        View.prototype.getName = function () {
+            return this.name;
+        };
+        return View;
+    })();
+    Q.View = View;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

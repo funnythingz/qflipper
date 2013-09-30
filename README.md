@@ -78,7 +78,7 @@ a {
 
 ### JavaScript Initilize
 
-type is Simple.
+type is `simple`.
 
 ```JavaScript
 $(function() {
@@ -86,7 +86,7 @@ $(function() {
 });
 ```
 
-type is Rich.
+type is `rich`.
 
 ```JavaScript
 $(function() {

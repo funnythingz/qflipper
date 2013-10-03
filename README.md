@@ -358,7 +358,7 @@ console.log(qflipper.getMaxPoint());
 
 When the flip is over.
 
-```JavaScrpt
+```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
 $('#qflipper').on('flipend', function() {
   // ...

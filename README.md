@@ -190,12 +190,16 @@ $(function() {
     $('#lampArea').html(_lamp_list_html);
   }
  
+  setLamp();
+ 
   var changeLamp = function() {
     $('.lamp', $('#lampArea')).removeClass('current');
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
- 
-  setLamp();
+
+  $('#qflipper').on('flipend', function() {
+    changeLamp();
+  });
  
   $('#moveToNext').on('click', function(){
     qflipper.toNext();
@@ -346,6 +350,19 @@ get all items length.
 ```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
 console.log(qflipper.getMaxPoint());
+```
+
+## Events
+
+### flipend
+
+When the flip is over.
+
+```JavaScrpt
+var qflipper = new Q.Flipper('#qflipper');
+$('#qflipper').on('flipend', function() {
+  // ...
+});
 ```
 
 ## License

@@ -3,7 +3,7 @@ module Q {
     export class Animator {
 
         private transitionWithPrefix: TransitionWithPrefixDecorator;
-        private transformWithPrefix: TransformWithPrefixDecorator;
+        private transformWithPrefix:  TransformWithPrefixDecorator;
 
         constructor(
             private $el: JQuery

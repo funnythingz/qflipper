@@ -32,28 +32,25 @@
     var Animator = (function () {
         function Animator($el) {
             this.$el = $el;
-            var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
-            this.transformPrefix = transformPrefixChecker.getPrefix();
-
-            var transitionPrefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
-            this.transitionPrefix = transitionPrefixChecker.getPrefix();
+            this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(new Q.TransitionCss3Propaty(), this.$el);
+            this.transformWithPrefix = new Q.TransformWithPrefixDecorator(new Q.TransformCss3Propaty(), this.$el);
         }
         Animator.prototype.transAnimation = function (movePosition) {
             this.setTransition();
-            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), 'translate3d(' + movePosition + 'px, 0, 0)');
         };
 
         Animator.prototype.noTransAnimation = function (movePosition) {
             this.unsetTransition();
-            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), 'translate3d(' + movePosition + 'px, 0, 0)');
         };
 
         Animator.prototype.setTransition = function () {
-            this.$el.css('-' + this.transitionPrefix + '-transition', '-' + this.transformPrefix + '-transform .3s ease-in-out');
+            this.$el.css(this.transitionWithPrefix.getCss3PropatyName(), this.transformWithPrefix.getCss3PropatyNameWithEffect());
         };
 
         Animator.prototype.unsetTransition = function () {
-            this.$el.css('-' + this.transitionPrefix + '-transition', 'none');
+            this.$el.css(this.transitionWithPrefix.getCss3PropatyName(), 'none');
         };
         return Animator;
     })();
@@ -115,6 +112,66 @@
         return Position;
     })();
     Q.Position = Position;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransformCss3Propaty = (function () {
+        function TransformCss3Propaty() {
+            this.css3PropatyName = 'transform';
+        }
+        TransformCss3Propaty.prototype.getCss3PropatyName = function () {
+            return this.css3PropatyName;
+        };
+        return TransformCss3Propaty;
+    })();
+    Q.TransformCss3Propaty = TransformCss3Propaty;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransformWithPrefixDecorator = (function () {
+        function TransformWithPrefixDecorator(css3PropatyName, $el) {
+            this.css3PropatyName = css3PropatyName;
+            this.$el = $el;
+            this.prefixChecker = new Q.PrefixChecker(this.$el, Q.TransformEnum);
+        }
+        TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
+            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
+        };
+
+        TransformWithPrefixDecorator.prototype.getCss3PropatyNameWithEffect = function () {
+            return this.getCss3PropatyName() + ' .3s ease-in-out';
+        };
+        return TransformWithPrefixDecorator;
+    })();
+    Q.TransformWithPrefixDecorator = TransformWithPrefixDecorator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransitionCss3Propaty = (function () {
+        function TransitionCss3Propaty() {
+            this.css3PropatyName = 'transition';
+        }
+        TransitionCss3Propaty.prototype.getCss3PropatyName = function () {
+            return this.css3PropatyName;
+        };
+        return TransitionCss3Propaty;
+    })();
+    Q.TransitionCss3Propaty = TransitionCss3Propaty;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransitionWithPrefixDecorator = (function () {
+        function TransitionWithPrefixDecorator(css3PropatyName, $el) {
+            this.css3PropatyName = css3PropatyName;
+            this.$el = $el;
+            this.prefixChecker = new Q.PrefixChecker(this.$el, Q.TransitionEnum);
+        }
+        TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
+            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
+        };
+        return TransitionWithPrefixDecorator;
+    })();
+    Q.TransitionWithPrefixDecorator = TransitionWithPrefixDecorator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

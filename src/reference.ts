@@ -1,10 +1,15 @@
 /// <reference path="../definitions/jquery.d.ts" />
 
-/// <reference path="interface/iflipper.ts" />
+/// <reference path="iflipper.ts" />
 /// <reference path="flipper.ts" />
 /// <reference path="flip-creator.ts" />
 /// <reference path="prefix-checker.ts" />
 /// <reference path="animator.ts" />
+/// <reference path="decorator/css3/icss3propaty.ts" />
+/// <reference path="decorator/css3/transform-css3-propaty.ts" />
+/// <reference path="decorator/css3/transform-with-prefix-decorator.ts" />
+/// <reference path="decorator/css3/transition-css3-propaty.ts" />
+/// <reference path="decorator/css3/transition-with-prefix-decorator.ts" />
 /// <reference path="factory/flip.ts" />
 /// <reference path="factory/simple-flip-factory.ts" />
 /// <reference path="factory/rich-flip-factory.ts" />

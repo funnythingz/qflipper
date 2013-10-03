@@ -4,7 +4,7 @@ module Q {
 
         point = new Point();
         itemSize: ItemSize;
-        animater: Animater;
+        animator: Animator;
 
         constructor(
             public $el: JQuery,
@@ -13,7 +13,7 @@ module Q {
             this.resetPoint();
 
             this.itemSize = new ItemSize(this.$el, this.options);
-            this.animater = new Animater(this.$el);
+            this.animator = new Animator(this.$el);
 
             this.setFlipView();
         }
@@ -78,7 +78,7 @@ module Q {
         }
 
         private transAnimation() {
-            this.animater.transAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
+            this.animator.transAnimation(- (this.getPoint() * this.itemSize.getSoloWidth()));
         }
         
     }

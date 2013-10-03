@@ -1,6 +1,6 @@
 module Q {
     
-    export class Animater {
+    export class Animator {
 
         private transformPrefix: string;
         private transitionPrefix: string;

@@ -89,7 +89,7 @@ module Q {
         }
 
         private snapFitAnimation(moveDistance: number = 0) {
-            this.animater.noTransAnimation(- ((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
+            this.animator.noTransAnimation(- ((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         }
 
         private triggerEvent(type: string) {

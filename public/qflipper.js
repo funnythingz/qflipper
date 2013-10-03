@@ -7,38 +7,6 @@
 */
 ;var Q;
 (function (Q) {
-    var Animater = (function () {
-        function Animater($el) {
-            this.$el = $el;
-            var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
-            this.transformPrefix = transformPrefixChecker.getPrefix();
-
-            var transitionPrefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
-            this.transitionPrefix = transitionPrefixChecker.getPrefix();
-        }
-        Animater.prototype.transAnimation = function (movePosition) {
-            this.setTransition();
-            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
-        };
-
-        Animater.prototype.noTransAnimation = function (movePosition) {
-            this.unsetTransition();
-            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
-        };
-
-        Animater.prototype.setTransition = function () {
-            this.$el.css('-' + this.transitionPrefix + '-transition', '-' + this.transformPrefix + '-transform .3s ease-in-out');
-        };
-
-        Animater.prototype.unsetTransition = function () {
-            this.$el.css('-' + this.transitionPrefix + '-transition', 'none');
-        };
-        return Animater;
-    })();
-    Q.Animater = Animater;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
     var AnimationFlag = (function () {
         function AnimationFlag(flag) {
             if (typeof flag === "undefined") { flag = false; }
@@ -58,6 +26,38 @@
         return AnimationFlag;
     })();
     Q.AnimationFlag = AnimationFlag;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var Animator = (function () {
+        function Animator($el) {
+            this.$el = $el;
+            var transformPrefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
+            this.transformPrefix = transformPrefixChecker.getPrefix();
+
+            var transitionPrefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
+            this.transitionPrefix = transitionPrefixChecker.getPrefix();
+        }
+        Animator.prototype.transAnimation = function (movePosition) {
+            this.setTransition();
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+        };
+
+        Animator.prototype.noTransAnimation = function (movePosition) {
+            this.unsetTransition();
+            this.$el.css('-' + this.transformPrefix + '-transform', 'translate3d(' + movePosition + 'px, 0, 0)');
+        };
+
+        Animator.prototype.setTransition = function () {
+            this.$el.css('-' + this.transitionPrefix + '-transition', '-' + this.transformPrefix + '-transform .3s ease-in-out');
+        };
+
+        Animator.prototype.unsetTransition = function () {
+            this.$el.css('-' + this.transitionPrefix + '-transition', 'none');
+        };
+        return Animator;
+    })();
+    Q.Animator = Animator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -164,7 +164,7 @@
             this.resetPoint();
 
             this.itemSize = new Q.ItemSize(this.$el, this.options);
-            this.animater = new Q.Animater(this.$el);
+            this.animator = new Q.Animator(this.$el);
 
             this.setFlipView();
         }
@@ -228,7 +228,7 @@
         };
 
         Flip.prototype.transAnimation = function () {
-            this.animater.transAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
+            this.animator.transAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
         };
         return Flip;
     })();
@@ -322,7 +322,7 @@ var Q;
 
         RichFlipFactory.prototype.snapFitAnimation = function (moveDistance) {
             if (typeof moveDistance === "undefined") { moveDistance = 0; }
-            this.animater.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
+            this.animator.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         };
 
         RichFlipFactory.prototype.triggerEvent = function (type) {

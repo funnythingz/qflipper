@@ -179,15 +179,15 @@ $(function() {
   var qflipper = new Q.Flipper('#qflipper');
  
   var setLamp = function() {
-    var _result = '';
+    var _lamp_list_html = '';
     for(var i = 0; i < qflipper.getMaxPoint(); i++) {
       if(i === qflipper.getPoint()) {
-        _result += '<div class="lamp current"></div>';
+        _lamp_list_html += '<div class="lamp current"></div>';
       } else {
-        _result += '<div class="lamp"></div>';
+        _lamp_list_html += '<div class="lamp"></div>';
       }
     }
-    $('#lampArea').html(_result);
+    $('#lampArea').html(_lamp_list_html);
   }
  
   var changeLamp = function() {

@@ -31,18 +31,24 @@
 (function (Q) {
     var Animator = (function () {
         function Animator() {
-            this.$el = Q.FLIP_ELEMENT.getElement();
             this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(new Q.TransitionCss3Propaty());
             this.transformWithPrefix = new Q.TransformWithPrefixDecorator(new Q.TransformCss3Propaty());
+            this.$el = Q.FLIP_ELEMENT.getElement();
         }
         Animator.prototype.transAnimation = function (movePosition) {
             this.setTransition();
-            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), 'translate3d(' + movePosition + 'px, 0, 0)');
+
+            var translateX3d = new Q.TranslateX3d(movePosition);
+
+            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), translateX3d.getMovePosition());
         };
 
         Animator.prototype.noTransAnimation = function (movePosition) {
             this.unsetTransition();
-            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), 'translate3d(' + movePosition + 'px, 0, 0)');
+
+            var translateX3d = new Q.TranslateX3d(movePosition);
+
+            this.$el.css(this.transformWithPrefix.getCss3PropatyName(), translateX3d.getMovePosition());
         };
 
         Animator.prototype.setTransition = function () {
@@ -55,6 +61,20 @@
         return Animator;
     })();
     Q.Animator = Animator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TranslateX3d = (function () {
+        function TranslateX3d(movePosition) {
+            this.movePosition = movePosition;
+        }
+        TranslateX3d.prototype.getMovePosition = function () {
+            var stringMovePosition = this.movePosition.toString();
+            return 'translate3d(' + stringMovePosition + 'px, 0, 0)';
+        };
+        return TranslateX3d;
+    })();
+    Q.TranslateX3d = TranslateX3d;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

@@ -2,29 +2,30 @@ module Q {
     
     export class Animator {
 
-        private transitionWithPrefix: TransitionWithPrefixDecorator;
-        private transformWithPrefix:  TransformWithPrefixDecorator;
+        private transitionWithPrefix = new TransitionWithPrefixDecorator(new TransitionCss3Propaty());
+        private transformWithPrefix = new TransformWithPrefixDecorator(new TransformCss3Propaty());
 
         private $el: JQuery = FLIP_ELEMENT.getElement();
 
-        constructor() {
-            this.transitionWithPrefix = new TransitionWithPrefixDecorator(new TransitionCss3Propaty());
-            this.transformWithPrefix = new TransformWithPrefixDecorator(new TransformCss3Propaty());
-        }
-
         transAnimation(movePosition: number) {
             this.setTransition();
+
+            var translateX3d = new TranslateX3d(movePosition);
+
             this.$el.css(
                 this.transformWithPrefix.getCss3PropatyName(),
-                'translate3d(' + movePosition + 'px, 0, 0)'
+                translateX3d.getMovePosition()
             );
         }
 
         noTransAnimation(movePosition: number) {
             this.unsetTransition();
+
+            var translateX3d = new TranslateX3d(movePosition);
+
             this.$el.css(
                 this.transformWithPrefix.getCss3PropatyName(),
-                'translate3d(' + movePosition + 'px, 0, 0)'
+                translateX3d.getMovePosition()
             );
         }
 

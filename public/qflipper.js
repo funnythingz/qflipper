@@ -117,10 +117,9 @@
 (function (Q) {
     var TransformCss3Propaty = (function () {
         function TransformCss3Propaty() {
-            this.css3PropatyName = 'transform';
         }
         TransformCss3Propaty.prototype.getCss3PropatyName = function () {
-            return this.css3PropatyName;
+            return 'transform';
         };
         return TransformCss3Propaty;
     })();
@@ -149,10 +148,9 @@
 (function (Q) {
     var TransitionCss3Propaty = (function () {
         function TransitionCss3Propaty() {
-            this.css3PropatyName = 'transition';
         }
         TransitionCss3Propaty.prototype.getCss3PropatyName = function () {
-            return this.css3PropatyName;
+            return 'transition';
         };
         return TransitionCss3Propaty;
     })();

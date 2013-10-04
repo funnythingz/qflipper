@@ -3,6 +3,7 @@
 /// <reference path="iflipper.ts" />
 /// <reference path="flipper.ts" />
 /// <reference path="flip-creator.ts" />
+/// <reference path="flip-element-singleton.ts" />
 /// <reference path="prefix-checker.ts" />
 /// <reference path="animator.ts" />
 /// <reference path="decorator/css3/icss3propaty.ts" />

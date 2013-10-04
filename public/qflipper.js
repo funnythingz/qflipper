@@ -30,10 +30,10 @@
 ;var Q;
 (function (Q) {
     var Animator = (function () {
-        function Animator($el) {
-            this.$el = $el;
-            this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(new Q.TransitionCss3Propaty(), this.$el);
-            this.transformWithPrefix = new Q.TransformWithPrefixDecorator(new Q.TransformCss3Propaty(), this.$el);
+        function Animator() {
+            this.$el = Q.FLIP_ELEMENT.getElement();
+            this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(new Q.TransitionCss3Propaty());
+            this.transformWithPrefix = new Q.TransformWithPrefixDecorator(new Q.TransformCss3Propaty());
         }
         Animator.prototype.transAnimation = function (movePosition) {
             this.setTransition();
@@ -59,9 +59,9 @@
 ;var Q;
 (function (Q) {
     var ItemSize = (function () {
-        function ItemSize($el, options) {
+        function ItemSize(options) {
             this.soloWidth = $(options.view.getName()).width();
-            this.totalLength = $(options.item.getName(), $el).length;
+            this.totalLength = $(options.item.getName()).length;
             this.totalWidth = this.soloWidth * this.totalLength;
         }
         ItemSize.prototype.getSoloWidth = function () {
@@ -128,10 +128,9 @@
 ;var Q;
 (function (Q) {
     var TransformWithPrefixDecorator = (function () {
-        function TransformWithPrefixDecorator(css3PropatyName, $el) {
+        function TransformWithPrefixDecorator(css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.$el = $el;
-            this.prefixChecker = new Q.PrefixChecker(this.$el, Q.TransformEnum);
+            this.prefixChecker = new Q.PrefixChecker(Q.TransformEnum);
         }
         TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -159,10 +158,9 @@
 ;var Q;
 (function (Q) {
     var TransitionWithPrefixDecorator = (function () {
-        function TransitionWithPrefixDecorator(css3PropatyName, $el) {
+        function TransitionWithPrefixDecorator(css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.$el = $el;
-            this.prefixChecker = new Q.PrefixChecker(this.$el, Q.TransitionEnum);
+            this.prefixChecker = new Q.PrefixChecker(Q.TransitionEnum);
         }
         TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -212,14 +210,14 @@
 ;var Q;
 (function (Q) {
     var Flip = (function () {
-        function Flip($el, options) {
-            this.$el = $el;
+        function Flip(options) {
             this.options = options;
             this.point = new Q.Point();
+            this.$el = Q.FLIP_ELEMENT.getElement();
             this.resetPoint();
 
-            this.itemSize = new Q.ItemSize(this.$el, this.options);
-            this.animator = new Q.Animator(this.$el);
+            this.itemSize = new Q.ItemSize(this.options);
+            this.animator = new Q.Animator();
 
             this.setFlipView();
         }
@@ -299,8 +297,8 @@ var Q;
 (function (Q) {
     var RichFlipFactory = (function (_super) {
         __extends(RichFlipFactory, _super);
-        function RichFlipFactory($el, options) {
-            _super.call(this, $el, options);
+        function RichFlipFactory(options) {
+            _super.call(this, options);
             this.animationFlag = new Q.AnimationFlag();
 
             this.bindTouchEvents();
@@ -397,8 +395,8 @@ var Q;
 (function (Q) {
     var SimpleFlipFactory = (function (_super) {
         __extends(SimpleFlipFactory, _super);
-        function SimpleFlipFactory($el, options) {
-            _super.call(this, $el, options);
+        function SimpleFlipFactory(options) {
+            _super.call(this, options);
             this.animationFlag = new Q.AnimationFlag();
 
             this.bindTouchEvents();
@@ -477,17 +475,47 @@ var Q;
     var FlipCreator = (function () {
         function FlipCreator() {
         }
-        FlipCreator.prototype.createFlip = function ($el, options) {
+        FlipCreator.prototype.createFlip = function (options) {
             if (options.type.getType() === Q.FlipTypeEnum.Simple) {
-                return new Q.SimpleFlipFactory($el, options);
+                return new Q.SimpleFlipFactory(options);
             }
             if (options.type.getType() === Q.FlipTypeEnum.Rich) {
-                return new Q.RichFlipFactory($el, options);
+                return new Q.RichFlipFactory(options);
             }
         };
         return FlipCreator;
     })();
     Q.FlipCreator = FlipCreator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var FlipElementSingleton = (function () {
+        function FlipElementSingleton() {
+            if (FlipElementSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            FlipElementSingleton._instance = this;
+        }
+        FlipElementSingleton.getInstance = function () {
+            if (FlipElementSingleton._instance === null) {
+                FlipElementSingleton._instance = new FlipElementSingleton();
+            }
+            return FlipElementSingleton._instance;
+        };
+
+        FlipElementSingleton.prototype.setElement = function ($el) {
+            this.$el = $el;
+        };
+
+        FlipElementSingleton.prototype.getElement = function () {
+            return this.$el;
+        };
+        FlipElementSingleton._instance = null;
+        return FlipElementSingleton;
+    })();
+    Q.FlipElementSingleton = FlipElementSingleton;
+
+    Q.FLIP_ELEMENT = FlipElementSingleton.getInstance();
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -498,8 +526,10 @@ var Q;
             options.createView((args.view) ? args.view : '.view');
             options.createItem((args.item) ? args.item : '.item');
 
+            Q.FLIP_ELEMENT.setElement($(id));
+
             var flipCreator = new Q.FlipCreator();
-            this.flip = flipCreator.createFlip($(id), options);
+            this.flip = flipCreator.createFlip(options);
 
             this.refresh();
         }
@@ -606,13 +636,14 @@ var Q;
 ;var Q;
 (function (Q) {
     var PrefixChecker = (function () {
-        function PrefixChecker($el, checkList) {
+        function PrefixChecker(checkList) {
             this.prefixEnum = Q.PrefixEnum;
             var _prefix;
             var _self = this;
+            var _$el = Q.FLIP_ELEMENT.getElement();
 
             $.each(checkList, function (val, key) {
-                if (parseInt(key, 10) >= 0 && $el.css(val) !== undefined) {
+                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
                     _prefix = _self.prefixEnum[key];
                 }
             });

@@ -5,11 +5,11 @@ module Q {
         private transitionWithPrefix: TransitionWithPrefixDecorator;
         private transformWithPrefix:  TransformWithPrefixDecorator;
 
-        constructor(
-            private $el: JQuery
-        ) {
-            this.transitionWithPrefix = new TransitionWithPrefixDecorator(new TransitionCss3Propaty(), this.$el);
-            this.transformWithPrefix = new TransformWithPrefixDecorator(new TransformCss3Propaty(), this.$el);
+        private $el: JQuery = FLIP_ELEMENT.getElement();
+
+        constructor() {
+            this.transitionWithPrefix = new TransitionWithPrefixDecorator(new TransitionCss3Propaty());
+            this.transformWithPrefix = new TransformWithPrefixDecorator(new TransformCss3Propaty());
         }
 
         transAnimation(movePosition: number) {

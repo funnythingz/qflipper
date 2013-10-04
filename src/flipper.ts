@@ -12,8 +12,10 @@ module Q {
             options.createView((args.view)? args.view: '.view');
             options.createItem((args.item)? args.item: '.item');
 
+            FLIP_ELEMENT.setElement($(id));
+
             var flipCreator = new FlipCreator();
-            this.flip = flipCreator.createFlip($(id), options);
+            this.flip = flipCreator.createFlip(options);
 
             this.refresh();
         }

@@ -6,14 +6,15 @@ module Q {
         itemSize: ItemSize;
         animator: Animator;
 
+        $el: JQuery = FLIP_ELEMENT.getElement();
+
         constructor(
-            public $el: JQuery,
             public options: Options
         ) {
             this.resetPoint();
 
-            this.itemSize = new ItemSize(this.$el, this.options);
-            this.animator = new Animator(this.$el);
+            this.itemSize = new ItemSize(this.options);
+            this.animator = new Animator();
 
             this.setFlipView();
         }

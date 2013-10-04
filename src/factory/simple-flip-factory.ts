@@ -7,10 +7,9 @@ module Q {
         private animationFlag = new AnimationFlag();
 
         constructor(
-            $el: JQuery,
             options: Options
         ) {
-            super($el, options);
+            super(options);
 
             this.bindTouchEvents();
         }

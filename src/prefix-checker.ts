@@ -5,12 +5,13 @@ module Q {
         private prefixEnum = PrefixEnum;
         private _prefix: string;
 
-        constructor($el: JQuery, checkList: any) {
+        constructor(checkList: any) {
             var _prefix: string;
             var _self = this;
+            var _$el: JQuery = FLIP_ELEMENT.getElement();
 
             $.each(checkList, (val, key) => {
-                if(parseInt(key, 10) >= 0 && $el.css(val) !== undefined) {
+                if(parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
                     _prefix = _self.prefixEnum[key];
                 }
             });

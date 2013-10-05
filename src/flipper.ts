@@ -52,6 +52,10 @@ module Q {
             return this.flip.getMaxPoint();
         }
 
+        flipElement(): JQuery {
+            return FLIP_ELEMENT.getElement();
+        }
+
     }
 
 }

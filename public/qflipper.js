@@ -64,6 +64,62 @@
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var TransformCss3Propaty = (function () {
+        function TransformCss3Propaty() {
+        }
+        TransformCss3Propaty.prototype.getCss3PropatyName = function () {
+            return 'transform';
+        };
+        return TransformCss3Propaty;
+    })();
+    Q.TransformCss3Propaty = TransformCss3Propaty;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransformWithPrefixDecorator = (function () {
+        function TransformWithPrefixDecorator(css3PropatyName) {
+            this.css3PropatyName = css3PropatyName;
+            this.prefixChecker = new Q.PrefixChecker(Q.TransformEnum);
+        }
+        TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
+            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
+        };
+
+        TransformWithPrefixDecorator.prototype.getCss3PropatyNameWithEffect = function () {
+            return this.getCss3PropatyName() + ' .3s ease-in-out';
+        };
+        return TransformWithPrefixDecorator;
+    })();
+    Q.TransformWithPrefixDecorator = TransformWithPrefixDecorator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransitionCss3Propaty = (function () {
+        function TransitionCss3Propaty() {
+        }
+        TransitionCss3Propaty.prototype.getCss3PropatyName = function () {
+            return 'transition';
+        };
+        return TransitionCss3Propaty;
+    })();
+    Q.TransitionCss3Propaty = TransitionCss3Propaty;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TransitionWithPrefixDecorator = (function () {
+        function TransitionWithPrefixDecorator(css3PropatyName) {
+            this.css3PropatyName = css3PropatyName;
+            this.prefixChecker = new Q.PrefixChecker(Q.TransitionEnum);
+        }
+        TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
+            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
+        };
+        return TransitionWithPrefixDecorator;
+    })();
+    Q.TransitionWithPrefixDecorator = TransitionWithPrefixDecorator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var TranslateX3d = (function () {
         function TranslateX3d(movePosition) {
             this.movePosition = movePosition;
@@ -132,62 +188,6 @@
         return Position;
     })();
     Q.Position = Position;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var TransformCss3Propaty = (function () {
-        function TransformCss3Propaty() {
-        }
-        TransformCss3Propaty.prototype.getCss3PropatyName = function () {
-            return 'transform';
-        };
-        return TransformCss3Propaty;
-    })();
-    Q.TransformCss3Propaty = TransformCss3Propaty;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var TransformWithPrefixDecorator = (function () {
-        function TransformWithPrefixDecorator(css3PropatyName) {
-            this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker(Q.TransformEnum);
-        }
-        TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
-            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
-        };
-
-        TransformWithPrefixDecorator.prototype.getCss3PropatyNameWithEffect = function () {
-            return this.getCss3PropatyName() + ' .3s ease-in-out';
-        };
-        return TransformWithPrefixDecorator;
-    })();
-    Q.TransformWithPrefixDecorator = TransformWithPrefixDecorator;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var TransitionCss3Propaty = (function () {
-        function TransitionCss3Propaty() {
-        }
-        TransitionCss3Propaty.prototype.getCss3PropatyName = function () {
-            return 'transition';
-        };
-        return TransitionCss3Propaty;
-    })();
-    Q.TransitionCss3Propaty = TransitionCss3Propaty;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var TransitionWithPrefixDecorator = (function () {
-        function TransitionWithPrefixDecorator(css3PropatyName) {
-            this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker(Q.TransitionEnum);
-        }
-        TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
-            return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
-        };
-        return TransitionWithPrefixDecorator;
-    })();
-    Q.TransitionWithPrefixDecorator = TransitionWithPrefixDecorator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -583,6 +583,10 @@ var Q;
 
         Flipper.prototype.getMaxPoint = function () {
             return this.flip.getMaxPoint();
+        };
+
+        Flipper.prototype.flipElement = function () {
+            return Q.FLIP_ELEMENT.getElement();
         };
         return Flipper;
     })();

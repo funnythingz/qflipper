@@ -131,10 +131,12 @@ Body of HTML Layout.
   <button id="moveToPrev">prev</button>
   <button id="moveToNext">next</button>
 </div>
+
 <div class="unit right">
   <input type="text" id="input" size="4" value="0">
   <button id="moveToPoint">point</button>
 </div>
+
 <div class="unit right">
   <button id="refresh">refresh</button>
 </div>
@@ -197,7 +199,7 @@ $(function() {
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
-  $('#qflipper').on('flipend', function() {
+  qflipper.flipElement().on('flipend', function() {
     changeLamp();
   });
  
@@ -352,6 +354,17 @@ var qflipper = new Q.Flipper('#qflipper');
 console.log(qflipper.getMaxPoint());
 ```
 
+### flipElement(): JQuery
+
+ex: returns `$('#qflipper')` JQuery object.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+qflipper.flipElement().on('flipend', function() {
+  // ...
+});
+```
+
 ## Events
 
 ### flipend
@@ -360,7 +373,7 @@ When the flip is over.
 
 ```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
-$('#qflipper').on('flipend', function() {
+qflipper.flipElement().on('flipend', function() {
   // ...
 });
 ```

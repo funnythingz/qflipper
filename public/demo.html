@@ -40,10 +40,12 @@
   <button id="moveToPrev">prev</button>
   <button id="moveToNext">next</button>
 </div>
+
 <div class="unit right">
   <input type="text" id="input" value="0" size="4" class="right">
   <button id="moveToPoint">point</button>
 </div>
+
 <div class="unit right">
   <button id="refresh">refresh</button>
 </div>
@@ -71,7 +73,7 @@
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
-  $('#qflipper').on('flipend', function() {
+  qflipper.flipElement().on('flipend', function() {
     changeLamp();
   });
 

@@ -51,10 +51,67 @@
 <h2><a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
 
 <article>
-  <p>Flip type is `rich` with Lamp &amp; buttons.</p>
+  <p>Flip type is `simple`</p>
   <div class="unit">
     <div class="view-wrapper">
       <div class="view">
+        <div id="qflipperTypeSimple" class="qflipper">
+          <div class="item">
+            <p class="sentence">0</p>
+          </div>
+          <div class="item">
+            <p class="sentence">1</p>
+          </div>
+          <div class="item">
+            <p class="sentence">2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(function(){
+    var qflipperTypeSimple = new Q.Flipper('#qflipperTypeSimple');
+  });
+  </script>
+</article>
+
+<article>
+  <p>Flip type is `rich`</p>
+  <div class="unit">
+    <div class="view-wrapper">
+      <div class="view" id="qflipperRichView">
+        <div id="qflipperTypeRich" class="qflipper">
+          <div class="item">
+            <p class="sentence">0</p>
+          </div>
+          <div class="item">
+            <p class="sentence">1</p>
+          </div>
+          <div class="item">
+            <p class="sentence">2</p>
+          </div>
+          <div class="item">
+            <p class="sentence">3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(function(){
+    var qflipperTypeRich = new Q.Flipper('#qflipperTypeRich', {type: 'rich', view: '#qflipperRichView'});
+  });
+  </script>
+</article>
+
+<article>
+  <p>Flip type is `rich` with Lamp &amp; buttons.</p>
+  <div class="unit">
+    <div class="view-wrapper">
+      <div class="view" id="qflipperView">
         <div id="qflipper" class="qflipper">
           <div class="item">
             <p class="sentence">0</p>
@@ -97,7 +154,7 @@
   <script>
   $(function(){
 
-    var qflipper = new Q.Flipper('#qflipper', {type: 'rich'});
+    var qflipper = new Q.Flipper('#qflipper', {type: 'rich', view: '#qflipperView'});
 
     var setLamp = function() {
       var _lamp_list_html = '';
@@ -142,72 +199,6 @@
       changeLamp();
     });
 
-  });
-  </script>
-</article>
-
-<article>
-  <p>Flip type is `simple`</p>
-  <div class="unit">
-    <div class="view-wrapper">
-      <div class="view">
-        <div id="qflipperTypeSimple" class="qflipper">
-          <div class="item">
-            <p class="sentence">0</p>
-          </div>
-          <div class="item">
-            <p class="sentence">1</p>
-          </div>
-          <div class="item">
-            <p class="sentence">2</p>
-          </div>
-          <div class="item">
-            <p class="sentence">3</p>
-          </div>
-          <div class="item">
-            <p class="sentence">4</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  $(function(){
-    var qflipperTypeSimple = new Q.Flipper('#qflipperTypeSimple', {type: 'simple'});
-  });
-  </script>
-</article>
-
-<article>
-  <p>Flip type is `rich`</p>
-  <div class="unit">
-    <div class="view-wrapper">
-      <div class="view">
-        <div id="qflipperTypeRich" class="qflipper">
-          <div class="item">
-            <p class="sentence">0</p>
-          </div>
-          <div class="item">
-            <p class="sentence">1</p>
-          </div>
-          <div class="item">
-            <p class="sentence">2</p>
-          </div>
-          <div class="item">
-            <p class="sentence">3</p>
-          </div>
-          <div class="item">
-            <p class="sentence">4</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  $(function(){
-    var qflipperTypeRich = new Q.Flipper('#qflipperTypeRich', {type: 'rich'});
   });
   </script>
 </article>

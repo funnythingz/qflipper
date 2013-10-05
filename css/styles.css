@@ -608,10 +608,10 @@ strong {
   max-width: 650px;
   margin: 0 auto;
   position: relative;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
-.contents img {
+section img {
   max-width: 100%;
 }
 
@@ -780,43 +780,43 @@ dt {
   font-size: 11px;
 }
 
-.contents {
+section {
   max-width: 650px;
-  padding: 30px 0px 0px;
+  padding: 30px 0px 50px 0px;
   margin: 20px 0;
   margin-top: 70px;
 }
-.contents #title {
+section #title {
   border: 0;
   outline: none;
   margin: 0 0 50px 0;
   padding: 0 0 5px 0;
 }
-.contents #title h1 {
+section #title h1 {
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 40px;
   text-align: center;
   line-height: 36px;
 }
-.contents #title p {
+section #title p {
   color: #d7cfbe;
   font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;
   text-align: center;
 }
-.contents #title .credits {
+section #title .credits {
   font-size: 11px;
   font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #696969;
   margin-top: -10px;
 }
-.contents #title .credits.left {
+section #title .credits.left {
   float: left;
 }
-.contents #title .credits.right {
+section #title .credits.right {
   float: right;
 }
 
@@ -841,7 +841,7 @@ dt {
     margin-top: -20px;
   }
 
-  .contents {
+  section {
     margin-top: 40px;
   }
 

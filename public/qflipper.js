@@ -136,8 +136,10 @@
 (function (Q) {
     var ItemSize = (function () {
         function ItemSize(options) {
+            var $el = Q.FLIP_ELEMENT.getElement();
+
             this.soloWidth = $(options.view.getName()).width();
-            this.totalLength = $(options.item.getName()).length;
+            this.totalLength = $(options.item.getName(), $el).length;
             this.totalWidth = this.soloWidth * this.totalLength;
         }
         ItemSize.prototype.getSoloWidth = function () {
@@ -158,13 +160,10 @@
 ;var Q;
 (function (Q) {
     var Point = (function () {
-        function Point() {
-        }
-        Point.prototype.setPoint = function (point) {
+        function Point(point) {
             this.point = point;
-        };
-
-        Point.prototype.getNow = function () {
+        }
+        Point.prototype.getPoint = function () {
             return this.point;
         };
         return Point;
@@ -232,7 +231,6 @@
     var Flip = (function () {
         function Flip(options) {
             this.options = options;
-            this.point = new Q.Point();
             this.$el = Q.FLIP_ELEMENT.getElement();
             this.resetPoint();
 
@@ -248,24 +246,24 @@
 
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
-                this.point.setPoint(this.getPoint() + 1);
+                this.point = new Q.Point(this.getPoint() + 1);
             }
             this.transAnimation();
         };
 
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
-                this.point.setPoint(this.getPoint() - 1);
+                this.point = new Q.Point(this.getPoint() - 1);
             }
             this.transAnimation();
         };
 
         Flip.prototype.moveToPoint = function (point) {
             if (point < this.getMaxPoint()) {
-                this.point.setPoint(point);
+                this.point = new Q.Point(point);
             }
             if (point >= this.getMaxPoint()) {
-                this.point.setPoint(this.getMaxPoint() - 1);
+                this.point = new Q.Point(this.getMaxPoint() - 1);
             }
             this.transAnimation();
         };
@@ -285,7 +283,7 @@
         };
 
         Flip.prototype.getPoint = function () {
-            return this.point.getNow();
+            return this.point.getPoint();
         };
 
         Flip.prototype.getMaxPoint = function () {
@@ -293,7 +291,7 @@
         };
 
         Flip.prototype.resetPoint = function () {
-            this.point.setPoint(0);
+            this.point = new Q.Point(0);
         };
 
         Flip.prototype.setFlipView = function () {
@@ -541,7 +539,13 @@ var Q;
 (function (Q) {
     var Flipper = (function () {
         function Flipper(id, args) {
+            if (typeof args === "undefined") { args = {
+                type: 'simple',
+                view: '.view',
+                item: '.item'
+            }; }
             var options = new Q.Options();
+
             options.createType((args.type) ? args.type : 'simple');
             options.createView((args.view) ? args.view : '.view');
             options.createItem((args.item) ? args.item : '.item');
@@ -629,7 +633,7 @@ var Q;
 (function (Q) {
     var Type = (function () {
         function Type(type) {
-            if (typeof type === "undefined") { type = (type) ? type : 'simple'; }
+            if (typeof type === "undefined") { type = 'simple'; }
             if (type === 'simple') {
                 this.type = Q.FlipTypeEnum.Simple;
             }

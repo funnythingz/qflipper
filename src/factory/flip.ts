@@ -2,7 +2,7 @@ module Q {
     
     export class Flip implements IFlipper {
 
-        point = new Point();
+        point: Point;
         itemSize: ItemSize;
         animator: Animator;
 
@@ -26,24 +26,24 @@ module Q {
 
         toNext() {
             if(this.hasNext()) {
-                this.point.setPoint(this.getPoint() + 1);
+                this.point = new Point(this.getPoint() + 1);
             }
             this.transAnimation();
         }
 
         toPrev() {
             if(this.hasPrev()) {
-                this.point.setPoint(this.getPoint() - 1);
+                this.point = new Point(this.getPoint() - 1);
             }
             this.transAnimation();
         }
 
         moveToPoint(point: number) {
             if(point < this.getMaxPoint()) {
-                this.point.setPoint(point);
+                this.point = new Point(point);
             }
             if (point >= this.getMaxPoint()) {
-                this.point.setPoint(this.getMaxPoint() - 1);
+                this.point = new Point(this.getMaxPoint() - 1);
             }
             this.transAnimation();
         }
@@ -63,7 +63,7 @@ module Q {
         }
 
         getPoint(): number {
-            return this.point.getNow();
+            return this.point.getPoint();
         }
 
         getMaxPoint(): number {
@@ -71,7 +71,7 @@ module Q {
         }
 
         private resetPoint() {
-            this.point.setPoint(0);
+            this.point = new Point(0);
         }
 
         private setFlipView() {

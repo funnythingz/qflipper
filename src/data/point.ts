@@ -2,13 +2,9 @@ module Q {
 
     export class Point {
 
-        private point: number;
+        constructor(private point: number) {}
 
-        setPoint(point: number) {
-            this.point = point;
-        }
-
-        getNow(): number {
+        getPoint(): number {
             return this.point;
         }
 

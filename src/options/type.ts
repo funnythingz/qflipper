@@ -4,7 +4,7 @@ module Q {
 
         private type: FlipTypeEnum;
 
-        constructor(type: string = (type)? type: 'simple') {
+        constructor(type: string = 'simple') {
             if(type === 'simple') {
                 this.type = FlipTypeEnum.Simple;
             }

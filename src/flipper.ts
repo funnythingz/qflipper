@@ -6,8 +6,16 @@ module Q {
 
         private flip: Flip;
 
-        constructor(id: string, args: any) {
+        constructor(
+            id: string,
+            args: any = {
+                type: 'simple',
+                view: '.view',
+                item: '.item'
+            }
+        ) {
             var options = new Options();
+
             options.createType((args.type)? args.type: 'simple');
             options.createView((args.view)? args.view: '.view');
             options.createItem((args.item)? args.item: '.item');

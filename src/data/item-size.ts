@@ -7,8 +7,10 @@ module Q {
         private totalLength: number;
 
         constructor(options: Options) {
+            var $el = FLIP_ELEMENT.getElement();
+
             this.soloWidth = $(options.view.getName()).width();
-            this.totalLength = $(options.item.getName()).length;
+            this.totalLength = $(options.item.getName(), $el).length;
             this.totalWidth = this.soloWidth * this.totalLength;
         }
 

@@ -278,7 +278,6 @@ var qflipper = new Q.Flipper('#qflipper');
 $('#moveToNext').on('click', function(){
     qflipper.toNext();
 });
-qlipper.toNext();
 ```
 
 ### toPrev()

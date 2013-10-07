@@ -1,10 +1,33 @@
 /**
 * qflipper.js
-* @version 1.0
+* @version 1.1
 * @author: Hiroki Oiwa;
 * @url: http://funnythingz.github.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
 */
+;var Q;
+(function (Q) {
+    var $NameChecker = (function () {
+        function $NameChecker() {
+        }
+        $NameChecker.prototype.get$Name = function () {
+            if (typeof jQuery === 'function') {
+                return $NameEnum.jQuery;
+            }
+            if (typeof Zepto === 'function') {
+                return $NameEnum.Zepto;
+            }
+        };
+        return $NameChecker;
+    })();
+    Q.$NameChecker = $NameChecker;
+
+    (function ($NameEnum) {
+        $NameEnum[$NameEnum["jQuery"] = 0] = "jQuery";
+        $NameEnum[$NameEnum["Zepto"] = 1] = "Zepto";
+    })(Q.$NameEnum || (Q.$NameEnum = {}));
+    var $NameEnum = Q.$NameEnum;
+})(Q || (Q = {}));
 ;var Q;
 (function (Q) {
     var AnimationFlag = (function () {
@@ -209,20 +232,20 @@
 ;var Q;
 (function (Q) {
     (function (TransformEnum) {
-        TransformEnum[TransformEnum["WebkitTransform"] = 0] = "WebkitTransform";
-        TransformEnum[TransformEnum["MozTransform"] = 1] = "MozTransform";
-        TransformEnum[TransformEnum["OTransform"] = 2] = "OTransform";
-        TransformEnum[TransformEnum["msTransform"] = 3] = "msTransform";
+        TransformEnum[TransformEnum['-webkit-transform'] = 0] = '-webkit-transform';
+        TransformEnum[TransformEnum['-moz-transform'] = 1] = '-moz-transform';
+        TransformEnum[TransformEnum['-o-transform'] = 2] = '-o-transform';
+        TransformEnum[TransformEnum['-ms-transform'] = 3] = '-ms-transform';
     })(Q.TransformEnum || (Q.TransformEnum = {}));
     var TransformEnum = Q.TransformEnum;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
     (function (TransitionEnum) {
-        TransitionEnum[TransitionEnum["WebkitTransitionProperty"] = 0] = "WebkitTransitionProperty";
-        TransitionEnum[TransitionEnum["MozTransitionProperty"] = 1] = "MozTransitionProperty";
-        TransitionEnum[TransitionEnum["OTransitionProperty"] = 2] = "OTransitionProperty";
-        TransitionEnum[TransitionEnum["msTransitionProperty"] = 3] = "msTransitionProperty";
+        TransitionEnum[TransitionEnum['-webkit-transition'] = 0] = '-webkit-transition';
+        TransitionEnum[TransitionEnum['-moz-transition'] = 1] = '-moz-transition';
+        TransitionEnum[TransitionEnum['-o-transition'] = 2] = '-o-transition';
+        TransitionEnum[TransitionEnum['-ms-transition'] = 3] = '-ms-transition';
     })(Q.TransitionEnum || (Q.TransitionEnum = {}));
     var TransitionEnum = Q.TransitionEnum;
 })(Q || (Q = {}));
@@ -669,10 +692,20 @@ var Q;
             var _prefix;
             var _self = this;
             var _$el = Q.FLIP_ELEMENT.getElement();
+            var $nameChecker = new Q.$NameChecker();
+            var $name = $nameChecker.get$Name();
 
             $.each(checkList, function (val, key) {
-                if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                    _prefix = _self.prefixEnum[key];
+                if ($name === Q.$NameEnum.jQuery) {
+                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                        _prefix = _self.prefixEnum[key];
+                    }
+                }
+
+                if ($name === Q.$NameEnum.Zepto) {
+                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
+                        _prefix = _self.prefixEnum[key];
+                    }
                 }
             });
 

@@ -1,0 +1,102 @@
+<!Doctype html><html><head><meta charset="utf-8"><title>demo - qflipper.js</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0, maximum-scale=10">
+<link rel="stylesheet" href="css/qflipper.css" media="all" type="text/css">
+<script src="zepto-kai.min.js"></script>
+<script src="qflipper.js"></script>
+</head><body>
+
+<h1>qflipper - demo</h1>
+<p>simple</p>
+
+<div class="unit">
+  <section class="view-wrapper">
+    <div class="view" id="qflipperView">
+      <div id="qflipper" class="qflipper">
+        <div class="item">
+          <p class="sentence">0</p>
+        </div>
+        <div class="item">
+          <p class="sentence">1</p>
+        </div>
+        <div class="item">
+          <p class="sentence">2</p>
+        </div>
+        <div class="item">
+          <p class="sentence">3</p>
+        </div>
+        <div class="item">
+          <p class="sentence">4</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="unit">
+  <div class="lamp-area" id="lampArea"></div>
+</div>
+
+<div class="unit right">
+  <button id="moveToPrev">prev</button>
+  <button id="moveToNext">next</button>
+</div>
+
+<div class="unit right">
+  <input type="text" id="input" value="0" size="4" class="right">
+  <button id="moveToPoint">point</button>
+</div>
+
+<div class="unit right">
+  <button id="refresh">refresh</button>
+</div>
+
+<script>
+
+  var qflipper = new Q.Flipper('#qflipper');
+
+  var setLamp = function() {
+    var lamp_list_html = '';
+    for(var i = 0; i < qflipper.getMaxPoint(); i++) {
+      if(i === qflipper.getPoint()) {
+        lamp_list_html += '<div class="lamp current"></div>';
+      } else {
+        lamp_list_html += '<div class="lamp"></div>';
+      }
+    }
+    $('#lampArea').html(lamp_list_html);
+  }
+
+  setLamp();
+
+  var changeLamp = function() {
+    $('.lamp', $('#lampArea')).removeClass('current');
+    $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
+  }
+
+  qflipper.flipElement().on('flipend', function() {
+    changeLamp();
+  });
+
+  $('#moveToNext').on('click', function(){
+    qflipper.toNext();
+    changeLamp();
+  });
+
+  $('#moveToPrev').on('click', function(){
+    qflipper.toPrev();
+    changeLamp();
+  });
+
+  $('#moveToPoint').on('click', function(){
+    qflipper.moveToPoint(parseInt($('#input').val()));
+    changeLamp();
+  });
+
+  $('#refresh').on('click', function(){
+    qflipper.refresh();
+    changeLamp();
+  });
+
+</script>
+
+</body></html>

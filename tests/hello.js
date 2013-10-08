@@ -1,4 +1,4 @@
-chai.should();
+var expect = chai.expect;
 
 describe("Hello test", function () {
     it("should be test.say() equal `hello`", function () {
@@ -8,6 +8,6 @@ describe("Hello test", function () {
             }
         };
 
-        test.say().should.be.equal('hello');
+        expect(test.say()).be.equal('hello');
     });
 });

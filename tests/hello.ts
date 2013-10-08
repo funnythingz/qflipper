@@ -1,7 +1,7 @@
 /// <reference path="../definitions/mocha.d.ts" />
 /// <reference path="../definitions/chai.d.ts" />
 
-chai.should();
+var expect = chai.expect;
 
 describe("Hello test", function() {
 
@@ -12,7 +12,7 @@ describe("Hello test", function() {
             }
         }
 
-        test.say().should.be.equal('hello');
+        expect(test.say()).be.equal('hello');
     });
 
 });

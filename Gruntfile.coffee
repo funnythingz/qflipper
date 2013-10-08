@@ -24,7 +24,7 @@ module.exports = (grunt)->
 
     typescript:
       base:
-        src: ['src/**/*.ts']
+        src: ['src/**/*.ts', 'tests/**/*.ts']
 
     compass:
       dist:

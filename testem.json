@@ -1,4 +1,4 @@
 {
-  "framework" : "jasmine",
+  "framework" : "mocha+chai",
   "src_files" : ["tests/**/*.js"]
 }

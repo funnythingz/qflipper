@@ -1,11 +1,13 @@
+chai.should();
+
 describe("Hello test", function () {
-    it("test.say() equals `hello`", function () {
+    it("should be test.say() equal `hello`", function () {
         var test = {
             say: function () {
                 return 'hello';
             }
         };
 
-        expect(test.say()).toEqual('hello');
+        test.say().should.be.equal('hello');
     });
 });

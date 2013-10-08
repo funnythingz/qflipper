@@ -18,6 +18,7 @@
 /// <reference path="factory/flip.ts" />
 /// <reference path="factory/simple-flip-factory.ts" />
 /// <reference path="factory/rich-flip-factory.ts" />
+/// <reference path="factory/trigger-event-creator.ts" />
 /// <reference path="enum/transform-enum.ts" />
 /// <reference path="enum/transition-enum.ts" />
 /// <reference path="enum/prefix-enum.ts" />

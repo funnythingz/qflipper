@@ -451,8 +451,12 @@ var Q;
 
         SimpleFlipFactory.prototype.touchstart = function () {
             var _this = this;
+            var flipstartEventCreator = new Q.TriggerEventCreator();
+
             this.$el.on('touchstart', function (event) {
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+
+                flipstartEventCreator.createEvent('flipstart');
             });
         };
 
@@ -460,15 +464,21 @@ var Q;
             var _this = this;
             this.animationFlag.disabled();
 
+            var flipmoveEventCreator = new Q.TriggerEventCreator();
+            var flipendEventCreator = new Q.TriggerEventCreator();
+
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
 
                 if (!_this.animationFlag.checkStatus()) {
                     _this.traseDistance(event);
 
+                    flipmoveEventCreator.createEvent('flipmove');
+
                     if (_this.animationFlag.checkStatus()) {
                         _this.startAnimation();
-                        _this.triggerEvent('flipend');
+
+                        flipendEventCreator.createEvent('flipend');
                     }
                 }
             });
@@ -503,13 +513,22 @@ var Q;
                 this.toPrev();
             }
         };
-
-        SimpleFlipFactory.prototype.triggerEvent = function (type) {
-            return this.$el.trigger($.Event(type));
-        };
         return SimpleFlipFactory;
     })(Q.Flip);
     Q.SimpleFlipFactory = SimpleFlipFactory;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var TriggerEventCreator = (function () {
+        function TriggerEventCreator() {
+        }
+        TriggerEventCreator.prototype.createEvent = function (type) {
+            var $el = Q.FLIP_ELEMENT.getElement();
+            return $el.trigger($.Event(type));
+        };
+        return TriggerEventCreator;
+    })();
+    Q.TriggerEventCreator = TriggerEventCreator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

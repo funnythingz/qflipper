@@ -1,6 +1,6 @@
 module Q {
 
-    // TODO: zeptoに対応するためにハイフン区切りにした
+    // FIXME: zeptoに対応するためにハイフン区切りにした
     // ほんとはこうしたい
     /*
     export enum TransformEnum {

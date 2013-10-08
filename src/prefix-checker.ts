@@ -14,7 +14,7 @@ module Q {
 
             $.each(checkList, (val, key) => {
 
-                // TODO: jQueryとzeptoで`.css()`の挙動が違うっぽい
+                // FIXME: jQueryとzeptoで`.css()`の挙動が違うっぽい
                 // jQuery: _$el.css(val) !== undefined
                 // zepto:  _$el.css(val) !== null
                 // あとzeptoだと`WebkitTransitionPropaty`みたいなのがとれないっぽい

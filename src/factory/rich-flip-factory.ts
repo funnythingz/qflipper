@@ -23,15 +23,21 @@ module Q {
 
         private touchstart() {
             this.$el.on('touchstart', (event: any) => {
+                var flipstartEventCreator = new TriggerEventCreator();
+
                 this.startPosition = new Position(
                     event.originalEvent.touches[0].clientX,
                     event.originalEvent.touches[0].clientY
                 );
+
+                flipstartEventCreator.createEvent('flipstart');
             });
         }
 
         private touchmove() {
             this.animationFlag.disabled();
+
+            var flipmoveEventCreator = new TriggerEventCreator();
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
@@ -46,14 +52,17 @@ module Q {
                     this.delegateDistancePosition(event);
                 }
 
+                flipmoveEventCreator.createEvent('flipmove');
             });
         }
 
         private touchend() {
             this.$el.on('touchend', (event: any) => {
+                var flipendEventCreator =  new TriggerEventCreator();
+
                 if(this.animationFlag.checkStatus()) {
                     this.startAnimation();
-                    this.triggerEvent('flipend');
+                    flipendEventCreator.createEvent('flipend');
                 }
                 this.animationFlag.disabled();
             });
@@ -89,12 +98,6 @@ module Q {
 
         private snapFitAnimation(moveDistance: number = 0) {
             this.animator.noTransAnimation(- ((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
-        }
-
-        private triggerEvent(type: string) {
-            return this.$el.trigger(
-                $.Event(type)
-            );
         }
 
     }

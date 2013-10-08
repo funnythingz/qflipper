@@ -354,13 +354,19 @@ var Q;
         RichFlipFactory.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
+                var flipstartEventCreator = new Q.TriggerEventCreator();
+
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+
+                flipstartEventCreator.createEvent('flipstart');
             });
         };
 
         RichFlipFactory.prototype.touchmove = function () {
             var _this = this;
             this.animationFlag.disabled();
+
+            var flipmoveEventCreator = new Q.TriggerEventCreator();
 
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
@@ -374,15 +380,19 @@ var Q;
                     _this.snapFitAnimation(moveDistance);
                     _this.delegateDistancePosition(event);
                 }
+
+                flipmoveEventCreator.createEvent('flipmove');
             });
         };
 
         RichFlipFactory.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
+                var flipendEventCreator = new Q.TriggerEventCreator();
+
                 if (_this.animationFlag.checkStatus()) {
                     _this.startAnimation();
-                    _this.triggerEvent('flipend');
+                    flipendEventCreator.createEvent('flipend');
                 }
                 _this.animationFlag.disabled();
             });
@@ -418,10 +428,6 @@ var Q;
             if (typeof moveDistance === "undefined") { moveDistance = 0; }
             this.animator.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         };
-
-        RichFlipFactory.prototype.triggerEvent = function (type) {
-            return this.$el.trigger($.Event(type));
-        };
         return RichFlipFactory;
     })(Q.Flip);
     Q.RichFlipFactory = RichFlipFactory;
@@ -451,9 +457,9 @@ var Q;
 
         SimpleFlipFactory.prototype.touchstart = function () {
             var _this = this;
-            var flipstartEventCreator = new Q.TriggerEventCreator();
-
             this.$el.on('touchstart', function (event) {
+                var flipstartEventCreator = new Q.TriggerEventCreator();
+
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
 
                 flipstartEventCreator.createEvent('flipstart');

@@ -22,9 +22,9 @@ module Q {
         }
 
         private touchstart() {
-            var flipstartEventCreator = new TriggerEventCreator();
-
             this.$el.on('touchstart', (event: any) => {
+                var flipstartEventCreator = new TriggerEventCreator();
+
                 this.startPosition = new Position(
                     event.originalEvent.touches[0].clientX,
                     event.originalEvent.touches[0].clientY

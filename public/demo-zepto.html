@@ -75,6 +75,15 @@
 
   qflipper.flipElement().on('flipend', function() {
     changeLamp();
+    console.log('flipend');
+  });
+
+  qflipper.flipElement().on('flipstart', function() {
+    console.log('flipstart');
+  });
+
+  qflipper.flipElement().on('flipmove', function() {
+    console.log('flipmove');
   });
 
   $('#moveToNext').on('click', function(){

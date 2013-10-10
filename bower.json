@@ -1,6 +1,7 @@
 {
   "name": "qflipper",
   "version": "1.2",
+  "main": "qflipper.js",
   "ignore": [
     "definitions",
     "license",

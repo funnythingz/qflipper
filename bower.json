@@ -2,18 +2,18 @@
   "name": "qflipper",
   "version": "1.2.0",
   "dependencies": {
-    "qflipper": "git://github.com/funnythingz/qflipper.git#>=1.2.0"
+    "qflipper": "git://github.com/funnythingz/qflipper.git"
   },
   "main": [
     "public/qflipper.js",
     "public/qflipper.min.js"
   ],
   "ignore": [
-    "definitions",
-    "license",
-    "sass",
-    "src",
-    "tests",
+    "definitions/",
+    "license/",
+    "sass/",
+    "src/",
+    "tests/",
     "Gruntfile.coffee",
     "config.rb",
     "bower.json",
@@ -21,7 +21,7 @@
     "README.md",
     "package,json",
     "testem.json",
-    "public/css",
+    "public/css/",
     "public/demo-zepto.html",
     "public/demo.html",
     "public/jquery-2.0.3.min.js",

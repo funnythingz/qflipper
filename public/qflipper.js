@@ -1,6 +1,6 @@
 /**
 * qflipper.js
-* @version 1.1
+* @version 1.2
 * @author: Hiroki Oiwa;
 * @url: http://funnythingz.github.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -458,11 +458,11 @@ var Q;
         SimpleFlipFactory.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
-                var flipstartEventCreator = new Q.TriggerEventCreator();
+                var fpstarttouchEventCreator = new Q.TriggerEventCreator();
 
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
 
-                flipstartEventCreator.createEvent('flipstart');
+                fpstarttouchEventCreator.createEvent('fptouchstart');
             });
         };
 
@@ -470,8 +470,8 @@ var Q;
             var _this = this;
             this.animationFlag.disabled();
 
-            var flipmoveEventCreator = new Q.TriggerEventCreator();
-            var flipendEventCreator = new Q.TriggerEventCreator();
+            var fptouchmoveEventCreator = new Q.TriggerEventCreator();
+            var fptouchendEventCreator = new Q.TriggerEventCreator();
 
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
@@ -479,12 +479,12 @@ var Q;
                 if (!_this.animationFlag.checkStatus()) {
                     _this.traseDistance(event);
 
-                    flipmoveEventCreator.createEvent('flipmove');
+                    fptouchmoveEventCreator.createEvent('fptouchmove');
 
                     if (_this.animationFlag.checkStatus()) {
                         _this.startAnimation();
 
-                        flipendEventCreator.createEvent('flipend');
+                        fptouchendEventCreator.createEvent('fptouchend');
                     }
                 }
             });

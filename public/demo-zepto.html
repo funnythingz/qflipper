@@ -73,9 +73,9 @@
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
-  qflipper.flipElement().on('flipend', function() {
+  qflipper.flipElement().on('fptouchend', function() {
     changeLamp();
-    console.log('flipend');
+    console.log('fptouchend');
   });
 
   qflipper.flipElement().on('flipstart', function() {

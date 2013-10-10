@@ -199,7 +199,7 @@ $(function() {
     $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
   }
 
-  qflipper.flipElement().on('flipend', function() {
+  qflipper.flipElement().on('fptouchend', function() {
     changeLamp();
   });
  
@@ -359,20 +359,42 @@ ex: returns `$('#qflipper')` JQuery object.
 
 ```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
-qflipper.flipElement().on('flipend', function() {
+qflipper.flipElement().on('fptouchend', function() {
   // ...
 });
 ```
 
 ## Events
 
-### flipend
+### qftouchstart
+
+When the flip element touch is start.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+qflipper.flipElement().on('qftouchstart', function() {
+  // ...
+});
+```
+
+### qftouchmove
+
+When the flip element touch is move.
+
+```JavaScript
+var qflipper = new Q.Flipper('#qflipper');
+qflipper.flipElement().on('qftouchmove', function() {
+  // ...
+});
+```
+
+### qftouchend
 
 When the flip is over.
 
 ```JavaScript
 var qflipper = new Q.Flipper('#qflipper');
-qflipper.flipElement().on('flipend', function() {
+qflipper.flipElement().on('qftouchend', function() {
   // ...
 });
 ```

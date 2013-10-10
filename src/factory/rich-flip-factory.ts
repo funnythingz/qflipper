@@ -23,21 +23,21 @@ module Q {
 
         private touchstart() {
             this.$el.on('touchstart', (event: any) => {
-                var flipstartEventCreator = new TriggerEventCreator();
+                var fptouchstartEventCreator = new TriggerEventCreator();
 
                 this.startPosition = new Position(
                     event.originalEvent.touches[0].clientX,
                     event.originalEvent.touches[0].clientY
                 );
 
-                flipstartEventCreator.createEvent('flipstart');
+                fptouchstartEventCreator.createEvent('fptouchstart');
             });
         }
 
         private touchmove() {
             this.animationFlag.disabled();
 
-            var flipmoveEventCreator = new TriggerEventCreator();
+            var fptouchmoveEventCreator = new TriggerEventCreator();
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
@@ -52,17 +52,17 @@ module Q {
                     this.delegateDistancePosition(event);
                 }
 
-                flipmoveEventCreator.createEvent('flipmove');
+                fptouchmoveEventCreator.createEvent('fptouchmove');
             });
         }
 
         private touchend() {
             this.$el.on('touchend', (event: any) => {
-                var flipendEventCreator =  new TriggerEventCreator();
+                var fptouchendEventCreator =  new TriggerEventCreator();
 
                 if(this.animationFlag.checkStatus()) {
                     this.startAnimation();
-                    flipendEventCreator.createEvent('flipend');
+                    fptouchendEventCreator.createEvent('fptouchend');
                 }
                 this.animationFlag.disabled();
             });

@@ -354,11 +354,11 @@ var Q;
         RichFlipFactory.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
-                var flipstartEventCreator = new Q.TriggerEventCreator();
+                var fptouchstartEventCreator = new Q.TriggerEventCreator();
 
                 _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
 
-                flipstartEventCreator.createEvent('flipstart');
+                fptouchstartEventCreator.createEvent('fptouchstart');
             });
         };
 
@@ -366,7 +366,7 @@ var Q;
             var _this = this;
             this.animationFlag.disabled();
 
-            var flipmoveEventCreator = new Q.TriggerEventCreator();
+            var fptouchmoveEventCreator = new Q.TriggerEventCreator();
 
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
@@ -381,18 +381,18 @@ var Q;
                     _this.delegateDistancePosition(event);
                 }
 
-                flipmoveEventCreator.createEvent('flipmove');
+                fptouchmoveEventCreator.createEvent('fptouchmove');
             });
         };
 
         RichFlipFactory.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
-                var flipendEventCreator = new Q.TriggerEventCreator();
+                var fptouchendEventCreator = new Q.TriggerEventCreator();
 
                 if (_this.animationFlag.checkStatus()) {
                     _this.startAnimation();
-                    flipendEventCreator.createEvent('flipend');
+                    fptouchendEventCreator.createEvent('fptouchend');
                 }
                 _this.animationFlag.disabled();
             });

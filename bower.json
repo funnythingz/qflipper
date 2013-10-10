@@ -1,7 +1,13 @@
 {
   "name": "qflipper",
-  "version": "1.2",
-  "main": "qflipper.js",
+  "version": "1.2.0",
+  "dependencies": {
+    "qflipper": "git://github.com/funnythingz/qflipper.git#>=1.2.0"
+  },
+  "main": [
+    "public/qflipper.js",
+    "public/qflipper.min.js"
+  ],
   "ignore": [
     "definitions",
     "license",

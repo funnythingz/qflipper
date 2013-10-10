@@ -175,7 +175,8 @@
       $('.lamp', $('#lampArea')).eq(qflipper.getPoint()).addClass('current');
     }
 
-    qflipper.flipElement().on('flipend', function() {
+    qflipper.flipElement().on('fptouchend', function() {
+      console.log(1);
       changeLamp();
     });
 
@@ -320,7 +321,19 @@
 <a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h2>
 
 <h3>
-<a name="flipend" class="anchor" href="#flipend"><span class="octicon octicon-link"></span></a>flipend</h3>
+<a name="fptouchstart" class="anchor" href="#fptouchstart"><span class="octicon octicon-link"></span></a>fptouchstart</h3>
+
+<p>When the flip element touch is start.</p>
+<script src="https://gist.github.com/funnythingz/6911466.js"></script>
+
+<h3>
+<a name="fptouchmove" class="anchor" href="#fptouchmove"><span class="octicon octicon-link"></span></a>fptouchmove</h3>
+
+<p>When the flip element touch is move.</p>
+<script src="https://gist.github.com/funnythingz/6911464.js"></script>
+
+<h3>
+<a name="fptouchend" class="anchor" href="#fptouchend"><span class="octicon octicon-link"></span></a>fptouchend</h3>
 
 <p>When the flip is over.</p>
 <script src="https://gist.github.com/funnythingz/6835485.js"></script>

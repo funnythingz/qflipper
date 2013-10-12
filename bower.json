@@ -21,11 +21,6 @@
     "README.md",
     "package,json",
     "testem.json",
-    "public/css/",
-    "public/demo-zepto.html",
-    "public/demo.html",
-    "public/jquery-2.0.3.min.js",
-    "public/zepto-kai.min.js",
-    "public/zepto.min.js"
+    "public/css/"
   ]
 }

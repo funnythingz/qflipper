@@ -20,6 +20,7 @@
     "src/",
     "tests/",
     "Gruntfile.coffee",
+    "package.json",
     "config.rb",
     "bower.json",
     "LICENSE.md", 

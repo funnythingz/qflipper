@@ -1,14 +1,19 @@
 {
   "name": "qflipper",
   "version": "1.2.0",
-  "dependencies": {
-    "qflipper": "git://github.com/funnythingz/qflipper.git#>=1.2.0"
-  },
+  "authors": [
+    "funnythingz"
+  ],
   "main": [
     "public/qflipper.js",
     "public/qflipper.min.js"
   ],
+  "license": "MIT",
+  "homepage": "http://funnythingz.github.io/qflipper/",
   "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
     "definitions/",
     "license/",
     "sass/",
@@ -21,6 +26,11 @@
     "README.md",
     "package,json",
     "testem.json",
-    "public/css/"
+    "public/css/",
+    "public/demo-zepto.html",
+    "public/demo.html",
+    "public/jquery-2.0.3.min.js",
+    "public/zepto-kai.min.js",
+    "public/zepto.min.js"
   ]
 }

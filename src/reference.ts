@@ -30,3 +30,5 @@
 /// <reference path="options/item.ts" />
 /// <reference path="options/type.ts" />
 /// <reference path="options/view.ts" />
+/// <reference path="position-creator.ts" />
+/// <reference path="distance-position-creator.ts" />

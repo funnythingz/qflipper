@@ -5,6 +5,7 @@ module Q {
         private startPosition: Position;
         private distancePosition: Position;
         private animationFlag = new AnimationFlag();
+        private $nameChecker = new $NameChecker();
 
         constructor(
             options: Options
@@ -24,11 +25,10 @@ module Q {
         private touchstart() {
             this.$el.on('touchstart', (event: any) => {
                 var fpstarttouchEventCreator = new TriggerEventCreator();
+                var $name = this.$nameChecker.get$Name();
 
-                this.startPosition = new Position(
-                    event.originalEvent.touches[0].clientX,
-                    event.originalEvent.touches[0].clientY
-                );
+                var startPositionCreator = new PositionCreator();
+                this.startPosition = startPositionCreator.createPosition(event);
 
                 fpstarttouchEventCreator.createEvent('fptouchstart');
             });
@@ -69,10 +69,11 @@ module Q {
         }
 
         private traseDistance(touchmoveEvent: any) {
-            this.distancePosition = new Position(
-                this.startPosition.getX() - touchmoveEvent.originalEvent.touches[0].clientX,
-                this.startPosition.getY() - touchmoveEvent.originalEvent.touches[0].clientY
-            );
+            var touchmovePositionCreator = new PositionCreator();
+            var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
+
+            var distancePositionCreator = new DistancePositionCreator(touchmovePosition);
+            this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
 
             if(Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
                 event.preventDefault();

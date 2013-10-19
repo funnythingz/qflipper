@@ -213,6 +213,19 @@
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var DistancePositionCreator = (function () {
+        function DistancePositionCreator(touchmovePosition) {
+            this.touchmovePosition = touchmovePosition;
+        }
+        DistancePositionCreator.prototype.createPosition = function (startPosition) {
+            return new Q.Position(startPosition.getX() - this.touchmovePosition.getX(), startPosition.getY() - this.touchmovePosition.getY());
+        };
+        return DistancePositionCreator;
+    })();
+    Q.DistancePositionCreator = DistancePositionCreator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     (function (FlipTypeEnum) {
         FlipTypeEnum[FlipTypeEnum["Simple"] = 0] = "Simple";
         FlipTypeEnum[FlipTypeEnum["Rich"] = 1] = "Rich";
@@ -356,7 +369,8 @@ var Q;
             this.$el.on('touchstart', function (event) {
                 var fptouchstartEventCreator = new Q.TriggerEventCreator();
 
-                _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+                var startPositionCreator = new Q.PositionCreator();
+                _this.startPosition = startPositionCreator.createPosition(event);
 
                 fptouchstartEventCreator.createEvent('fptouchstart');
             });
@@ -376,7 +390,8 @@ var Q;
                 }
 
                 if (_this.animationFlag.checkStatus()) {
-                    var moveDistance = _this.startPosition.getX() - event.originalEvent.touches[0].clientX;
+                    var moveDistanceHelper = new Q.MoveDistanceHelper(_this.startPosition.getX(), event);
+                    var moveDistance = moveDistanceHelper.getMoveDistance();
                     _this.snapFitAnimation(moveDistance);
                     _this.delegateDistancePosition(event);
                 }
@@ -411,8 +426,12 @@ var Q;
             }
         };
 
-        RichFlipFactory.prototype.delegateDistancePosition = function (event) {
-            this.distancePosition = new Q.Position(this.startPosition.getX() - event.originalEvent.touches[0].clientX, this.startPosition.getY() - event.originalEvent.touches[0].clientY);
+        RichFlipFactory.prototype.delegateDistancePosition = function (touchmoveEvent) {
+            var touchmovePositionCreator = new Q.PositionCreator();
+            var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
+
+            var distancePositionCreator = new Q.DistancePositionCreator(touchmovePosition);
+            this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
         };
 
         RichFlipFactory.prototype.startAnimation = function () {
@@ -445,6 +464,7 @@ var Q;
         function SimpleFlipFactory(options) {
             _super.call(this, options);
             this.animationFlag = new Q.AnimationFlag();
+            this.$nameChecker = new Q.$NameChecker();
 
             this.bindTouchEvents();
         }
@@ -459,8 +479,10 @@ var Q;
             var _this = this;
             this.$el.on('touchstart', function (event) {
                 var fpstarttouchEventCreator = new Q.TriggerEventCreator();
+                var $name = _this.$nameChecker.get$Name();
 
-                _this.startPosition = new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+                var startPositionCreator = new Q.PositionCreator();
+                _this.startPosition = startPositionCreator.createPosition(event);
 
                 fpstarttouchEventCreator.createEvent('fptouchstart');
             });
@@ -503,7 +525,11 @@ var Q;
         };
 
         SimpleFlipFactory.prototype.traseDistance = function (touchmoveEvent) {
-            this.distancePosition = new Q.Position(this.startPosition.getX() - touchmoveEvent.originalEvent.touches[0].clientX, this.startPosition.getY() - touchmoveEvent.originalEvent.touches[0].clientY);
+            var touchmovePositionCreator = new Q.PositionCreator();
+            var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
+
+            var distancePositionCreator = new Q.DistancePositionCreator(touchmovePosition);
+            this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
 
             if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
                 event.preventDefault();
@@ -646,6 +672,29 @@ var Q;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var MoveDistanceHelper = (function () {
+        function MoveDistanceHelper(startPositionX, touchmoveEvent) {
+            this.startPositionX = startPositionX;
+            this.touchmoveEvent = touchmoveEvent;
+        }
+        MoveDistanceHelper.prototype.getMoveDistance = function () {
+            var $nameChecker = new Q.$NameChecker();
+            var $name = $nameChecker.get$Name();
+
+            if ($name === Q.$NameEnum.jQuery) {
+                return this.startPositionX - this.touchmoveEvent.originalEvent.touches[0].clientX;
+            }
+
+            if ($name === Q.$NameEnum.Zepto) {
+                return this.startPositionX - this.touchmoveEvent.changedTouches[0].clientX;
+            }
+        };
+        return MoveDistanceHelper;
+    })();
+    Q.MoveDistanceHelper = MoveDistanceHelper;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var Item = (function () {
         function Item(name) {
             this.name = name;
@@ -708,6 +757,27 @@ var Q;
         return View;
     })();
     Q.View = View;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var PositionCreator = (function () {
+        function PositionCreator() {
+        }
+        PositionCreator.prototype.createPosition = function (event) {
+            var $nameChecker = new Q.$NameChecker();
+            var $name = $nameChecker.get$Name();
+
+            if ($name === Q.$NameEnum.jQuery) {
+                return new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+            }
+
+            if ($name === Q.$NameEnum.Zepto) {
+                return new Q.Position(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+            }
+        };
+        return PositionCreator;
+    })();
+    Q.PositionCreator = PositionCreator;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

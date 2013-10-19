@@ -16,6 +16,9 @@ directory where you installed `qflipper` is here.
 ```sh
 bower_components
 └── qflipper
+    ├── demo-zepto.html
+    ├── demo.html
+    ├── qflipper.css
     ├── qflipper.d.ts
     ├── qflipper.js
     └── qflipper.min.js

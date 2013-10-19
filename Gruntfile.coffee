@@ -4,20 +4,20 @@ module.exports = (grunt)->
 
     uglify:
       typesc:
-        files: 'public/qflipper.min.js': ['public/qflipper.js']
+        files: 'qflipper.min.js': ['qflipper.js']
 
     concat:
       qflipper:
         src: ['src/**/*.js']
-        dest: 'public/qflipper.js'
+        dest: 'qflipper.js'
 
       license:
-        src: ['license/mit.js', 'public/qflipper.js']
-        dest: 'public/qflipper.js'
+        src: ['license/mit.js', 'qflipper.js']
+        dest: 'qflipper.js'
 
       licenseMin:
-        src: ['license/mit.min.js', 'public/qflipper.min.js']
-        dest: 'public/qflipper.min.js'
+        src: ['license/mit.min.js', 'qflipper.min.js']
+        dest: 'qflipper.min.js'
 
       options:
         separator: ';'
@@ -50,7 +50,7 @@ module.exports = (grunt)->
       server:
         options:
           port: 8000
-          base: 'public'
+          base: './'
           keepalive: true
 
   })

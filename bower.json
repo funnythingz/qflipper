@@ -30,6 +30,6 @@
     "LICENSE.md", 
     "README.md",
     "package,json",
-    "testem.json",
+    "testem.json"
   ]
 }

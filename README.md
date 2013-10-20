@@ -8,7 +8,7 @@ qflipper.js is flick framework made of TypeScript &amp; jQuery for SmartPhone.
 via `bower`
 
 ```sh
-bower install qflipper
+% bower install qflipper
 ```
 
 directory where you installed `qflipper` is here.

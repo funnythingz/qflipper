@@ -1,4 +1,6 @@
 {
   "framework" : "mocha+chai",
-  "src_files" : ["tests/**/*.js"]
+  "src_files" : [
+    "tests/**/*.js"
+  ]
 }

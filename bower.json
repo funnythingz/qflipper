@@ -7,7 +7,10 @@
   "main": [
     "qflipper.js",
     "qflipper.min.js",
-    "qflipper.d.ts"
+    "qflipper.d.ts",
+    "qflipper.css",
+    "demo-zepto.html",
+    "demo.html"
   ],
   "license": "MIT",
   "homepage": "http://funnythingz.github.io/qflipper/",
@@ -27,9 +30,6 @@
     "LICENSE.md", 
     "README.md",
     "package,json",
-    "testem.json",
-    "qflipper.css",
-    "demo-zepto.html",
-    "demo.html"
+    "testem.json"
   ]
 }

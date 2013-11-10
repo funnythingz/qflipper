@@ -22,6 +22,7 @@ declare module Q {
         getPoint(): number;
         getMaxPoint(): number;
         flipElement(): JQuery;
+
     }
 
 }

@@ -1,10 +1,11 @@
 module Q {
     
-    export class RichFlipFactory extends Flip {
+    export class SimpleFlip extends Flip {
 
         private startPosition: Position;
         private distancePosition: Position;
         private animationFlag = new AnimationFlag();
+        private $nameChecker = new $NameChecker();
 
         constructor(
             options: Options
@@ -23,12 +24,13 @@ module Q {
 
         private touchstart() {
             this.$el.on('touchstart', (event: any) => {
-                var fptouchstartEventCreator = new TriggerEventCreator();
+                var fpstarttouchEventCreator = new TriggerEventCreator();
+                var $name = this.$nameChecker.get$Name();
 
                 var startPositionCreator = new PositionCreator();
                 this.startPosition = startPositionCreator.createPosition(event);
 
-                fptouchstartEventCreator.createEvent('fptouchstart');
+                fpstarttouchEventCreator.createEvent('fptouchstart');
             });
         }
 
@@ -36,33 +38,28 @@ module Q {
             this.animationFlag.disabled();
 
             var fptouchmoveEventCreator = new TriggerEventCreator();
+            var fptouchendEventCreator =  new TriggerEventCreator();
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
 
                 if(!this.animationFlag.checkStatus()) {
                     this.traseDistance(event);
+
+                    fptouchmoveEventCreator.createEvent('fptouchmove');
+
+                    if(this.animationFlag.checkStatus()) {
+                        this.startAnimation();
+
+                        fptouchendEventCreator.createEvent('fptouchend');
+                    }
                 }
 
-                if(this.animationFlag.checkStatus()) {
-                    var moveDistanceHelper = new MoveDistanceHelper(this.startPosition.getX(), event)
-                    var moveDistance = moveDistanceHelper.getMoveDistance();
-                    this.snapFitAnimation(moveDistance);
-                    this.delegateDistancePosition(event);
-                }
-
-                fptouchmoveEventCreator.createEvent('fptouchmove');
             });
         }
 
         private touchend() {
             this.$el.on('touchend', (event: any) => {
-                var fptouchendEventCreator =  new TriggerEventCreator();
-
-                if(this.animationFlag.checkStatus()) {
-                    this.startAnimation();
-                    fptouchendEventCreator.createEvent('fptouchend');
-                }
                 this.animationFlag.disabled();
             });
         }
@@ -72,19 +69,16 @@ module Q {
         }
 
         private traseDistance(touchmoveEvent: any) {
-            this.delegateDistancePosition(touchmoveEvent);
-            if(Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
-                event.preventDefault();
-                this.animationFlag.enabled();
-            }
-        }
-
-        private delegateDistancePosition(touchmoveEvent: any) {
             var touchmovePositionCreator = new PositionCreator();
             var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
 
             var distancePositionCreator = new DistancePositionCreator(touchmovePosition);
             this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
+
+            if(Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
+                event.preventDefault();
+                this.animationFlag.enabled();
+            }
         }
 
         private startAnimation() {
@@ -94,10 +88,6 @@ module Q {
             if(this.distancePosition.getX() < 0) {
                 this.toPrev();
             }
-        }
-
-        private snapFitAnimation(moveDistance: number = 0) {
-            this.animator.noTransAnimation(- ((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         }
 
     }

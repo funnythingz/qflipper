@@ -5,10 +5,10 @@ module Q {
         createFlip(options: Options): Flip {
 
             if(options.type.getType() === FlipTypeEnum.Simple) {
-                return new SimpleFlipFactory(options);
+                return new SimpleFlip(options);
             }
             if(options.type.getType() === FlipTypeEnum.Rich) {
-                return new RichFlipFactory(options);
+                return new RichFlip(options);
             }
 
         }

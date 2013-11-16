@@ -1,6 +1,6 @@
 /**
 * qflipper.js
-* @version 1.3
+* @version 1.3.1
 * @author: Hiroki Oiwa;
 * @url: http://funnythingz.github.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -264,6 +264,53 @@
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
+    var FlipCreator = (function () {
+        function FlipCreator() {
+        }
+        FlipCreator.prototype.createFlip = function (options) {
+            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
+                return new Q.SimpleFlip(options);
+            }
+            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
+                return new Q.RichFlip(options);
+            }
+        };
+        return FlipCreator;
+    })();
+    Q.FlipCreator = FlipCreator;
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
+    var FlipElementSingleton = (function () {
+        function FlipElementSingleton() {
+            if (FlipElementSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            FlipElementSingleton._instance = this;
+        }
+        FlipElementSingleton.getInstance = function () {
+            if (FlipElementSingleton._instance === null) {
+                FlipElementSingleton._instance = new FlipElementSingleton();
+            }
+            return FlipElementSingleton._instance;
+        };
+
+        FlipElementSingleton.prototype.setElement = function ($el) {
+            this.$el = $el;
+        };
+
+        FlipElementSingleton.prototype.getElement = function () {
+            return this.$el;
+        };
+        FlipElementSingleton._instance = null;
+        return FlipElementSingleton;
+    })();
+    Q.FlipElementSingleton = FlipElementSingleton;
+
+    Q.FLIP_ELEMENT = FlipElementSingleton.getInstance();
+})(Q || (Q = {}));
+;var Q;
+(function (Q) {
     var Flip = (function () {
         function Flip(options) {
             this.options = options;
@@ -349,22 +396,22 @@
 };
 var Q;
 (function (Q) {
-    var RichFlipFactory = (function (_super) {
-        __extends(RichFlipFactory, _super);
-        function RichFlipFactory(options) {
+    var RichFlip = (function (_super) {
+        __extends(RichFlip, _super);
+        function RichFlip(options) {
             _super.call(this, options);
             this.animationFlag = new Q.AnimationFlag();
 
             this.bindTouchEvents();
         }
-        RichFlipFactory.prototype.bindTouchEvents = function () {
+        RichFlip.prototype.bindTouchEvents = function () {
             this.touchstart();
             this.touchmove();
             this.touchend();
             this.touchcancel();
         };
 
-        RichFlipFactory.prototype.touchstart = function () {
+        RichFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
                 var fptouchstartEventCreator = new Q.TriggerEventCreator();
@@ -376,7 +423,7 @@ var Q;
             });
         };
 
-        RichFlipFactory.prototype.touchmove = function () {
+        RichFlip.prototype.touchmove = function () {
             var _this = this;
             this.animationFlag.disabled();
 
@@ -400,7 +447,7 @@ var Q;
             });
         };
 
-        RichFlipFactory.prototype.touchend = function () {
+        RichFlip.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
                 var fptouchendEventCreator = new Q.TriggerEventCreator();
@@ -413,12 +460,12 @@ var Q;
             });
         };
 
-        RichFlipFactory.prototype.touchcancel = function () {
+        RichFlip.prototype.touchcancel = function () {
             this.$el.on('touchcancel', function (event) {
             });
         };
 
-        RichFlipFactory.prototype.traseDistance = function (touchmoveEvent) {
+        RichFlip.prototype.traseDistance = function (touchmoveEvent) {
             this.delegateDistancePosition(touchmoveEvent);
             if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
                 event.preventDefault();
@@ -426,7 +473,7 @@ var Q;
             }
         };
 
-        RichFlipFactory.prototype.delegateDistancePosition = function (touchmoveEvent) {
+        RichFlip.prototype.delegateDistancePosition = function (touchmoveEvent) {
             var touchmovePositionCreator = new Q.PositionCreator();
             var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
 
@@ -434,7 +481,7 @@ var Q;
             this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
         };
 
-        RichFlipFactory.prototype.startAnimation = function () {
+        RichFlip.prototype.startAnimation = function () {
             if (this.distancePosition.getX() > 0) {
                 this.toNext();
             }
@@ -443,13 +490,13 @@ var Q;
             }
         };
 
-        RichFlipFactory.prototype.snapFitAnimation = function (moveDistance) {
+        RichFlip.prototype.snapFitAnimation = function (moveDistance) {
             if (typeof moveDistance === "undefined") { moveDistance = 0; }
             this.animator.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         };
-        return RichFlipFactory;
+        return RichFlip;
     })(Q.Flip);
-    Q.RichFlipFactory = RichFlipFactory;
+    Q.RichFlip = RichFlip;
 })(Q || (Q = {}));
 ;var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -459,23 +506,23 @@ var Q;
 };
 var Q;
 (function (Q) {
-    var SimpleFlipFactory = (function (_super) {
-        __extends(SimpleFlipFactory, _super);
-        function SimpleFlipFactory(options) {
+    var SimpleFlip = (function (_super) {
+        __extends(SimpleFlip, _super);
+        function SimpleFlip(options) {
             _super.call(this, options);
             this.animationFlag = new Q.AnimationFlag();
             this.$nameChecker = new Q.$NameChecker();
 
             this.bindTouchEvents();
         }
-        SimpleFlipFactory.prototype.bindTouchEvents = function () {
+        SimpleFlip.prototype.bindTouchEvents = function () {
             this.touchstart();
             this.touchmove();
             this.touchend();
             this.touchcancel();
         };
 
-        SimpleFlipFactory.prototype.touchstart = function () {
+        SimpleFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
                 var fpstarttouchEventCreator = new Q.TriggerEventCreator();
@@ -488,7 +535,7 @@ var Q;
             });
         };
 
-        SimpleFlipFactory.prototype.touchmove = function () {
+        SimpleFlip.prototype.touchmove = function () {
             var _this = this;
             this.animationFlag.disabled();
 
@@ -512,19 +559,19 @@ var Q;
             });
         };
 
-        SimpleFlipFactory.prototype.touchend = function () {
+        SimpleFlip.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
                 _this.animationFlag.disabled();
             });
         };
 
-        SimpleFlipFactory.prototype.touchcancel = function () {
+        SimpleFlip.prototype.touchcancel = function () {
             this.$el.on('touchcancel', function (event) {
             });
         };
 
-        SimpleFlipFactory.prototype.traseDistance = function (touchmoveEvent) {
+        SimpleFlip.prototype.traseDistance = function (touchmoveEvent) {
             var touchmovePositionCreator = new Q.PositionCreator();
             var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
 
@@ -537,7 +584,7 @@ var Q;
             }
         };
 
-        SimpleFlipFactory.prototype.startAnimation = function () {
+        SimpleFlip.prototype.startAnimation = function () {
             if (this.distancePosition.getX() > 0) {
                 this.toNext();
             }
@@ -545,9 +592,9 @@ var Q;
                 this.toPrev();
             }
         };
-        return SimpleFlipFactory;
+        return SimpleFlip;
     })(Q.Flip);
-    Q.SimpleFlipFactory = SimpleFlipFactory;
+    Q.SimpleFlip = SimpleFlip;
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {
@@ -561,53 +608,6 @@ var Q;
         return TriggerEventCreator;
     })();
     Q.TriggerEventCreator = TriggerEventCreator;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var FlipCreator = (function () {
-        function FlipCreator() {
-        }
-        FlipCreator.prototype.createFlip = function (options) {
-            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
-                return new Q.SimpleFlipFactory(options);
-            }
-            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
-                return new Q.RichFlipFactory(options);
-            }
-        };
-        return FlipCreator;
-    })();
-    Q.FlipCreator = FlipCreator;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var FlipElementSingleton = (function () {
-        function FlipElementSingleton() {
-            if (FlipElementSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            FlipElementSingleton._instance = this;
-        }
-        FlipElementSingleton.getInstance = function () {
-            if (FlipElementSingleton._instance === null) {
-                FlipElementSingleton._instance = new FlipElementSingleton();
-            }
-            return FlipElementSingleton._instance;
-        };
-
-        FlipElementSingleton.prototype.setElement = function ($el) {
-            this.$el = $el;
-        };
-
-        FlipElementSingleton.prototype.getElement = function () {
-            return this.$el;
-        };
-        FlipElementSingleton._instance = null;
-        return FlipElementSingleton;
-    })();
-    Q.FlipElementSingleton = FlipElementSingleton;
-
-    Q.FLIP_ELEMENT = FlipElementSingleton.getInstance();
 })(Q || (Q = {}));
 ;var Q;
 (function (Q) {

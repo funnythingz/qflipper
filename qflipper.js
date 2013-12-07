@@ -1,6 +1,6 @@
 /**
 * qflipper.js
-* @version 1.3.1
+* @version 1.3.2
 * @author: Hiroki Oiwa;
 * @url: http://funnythingz.github.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -12,10 +12,10 @@
         }
         $NameChecker.prototype.get$Name = function () {
             if (typeof jQuery === 'function') {
-                return $NameEnum.jQuery;
+                return 0 /* jQuery */;
             }
             if (typeof Zepto === 'function') {
-                return $NameEnum.Zepto;
+                return 1 /* Zepto */;
             }
         };
         return $NameChecker;
@@ -85,7 +85,7 @@
     })();
     Q.Animator = Animator;
 })(Q || (Q = {}));
-;var Q;
+;;var Q;
 (function (Q) {
     var TransformCss3Propaty = (function () {
         function TransformCss3Propaty() {
@@ -268,10 +268,10 @@
         function FlipCreator() {
         }
         FlipCreator.prototype.createFlip = function (options) {
-            if (options.type.getType() === Q.FlipTypeEnum.Simple) {
+            if (options.type.getType() === 0 /* Simple */) {
                 return new Q.SimpleFlip(options);
             }
-            if (options.type.getType() === Q.FlipTypeEnum.Rich) {
+            if (options.type.getType() === 1 /* Rich */) {
                 return new Q.RichFlip(options);
             }
         };
@@ -670,7 +670,7 @@ var Q;
     })();
     Q.Flipper = Flipper;
 })(Q || (Q = {}));
-;var Q;
+;;var Q;
 (function (Q) {
     var MoveDistanceHelper = (function () {
         function MoveDistanceHelper(startPositionX, touchmoveEvent) {
@@ -681,11 +681,11 @@ var Q;
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
 
-            if ($name === Q.$NameEnum.jQuery) {
+            if ($name === 0 /* jQuery */) {
                 return this.startPositionX - this.touchmoveEvent.originalEvent.touches[0].clientX;
             }
 
-            if ($name === Q.$NameEnum.Zepto) {
+            if ($name === 1 /* Zepto */) {
                 return this.startPositionX - this.touchmoveEvent.changedTouches[0].clientX;
             }
         };
@@ -732,10 +732,10 @@ var Q;
         function Type(type) {
             if (typeof type === "undefined") { type = 'simple'; }
             if (type === 'simple') {
-                this.type = Q.FlipTypeEnum.Simple;
+                this.type = 0 /* Simple */;
             }
             if (type === 'rich') {
-                this.type = Q.FlipTypeEnum.Rich;
+                this.type = 1 /* Rich */;
             }
         }
         Type.prototype.getType = function () {
@@ -767,11 +767,11 @@ var Q;
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
 
-            if ($name === Q.$NameEnum.jQuery) {
+            if ($name === 0 /* jQuery */) {
                 return new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
             }
 
-            if ($name === Q.$NameEnum.Zepto) {
+            if ($name === 1 /* Zepto */) {
                 return new Q.Position(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
             }
         };
@@ -791,13 +791,13 @@ var Q;
             var $name = $nameChecker.get$Name();
 
             $.each(checkList, function (val, key) {
-                if ($name === Q.$NameEnum.jQuery) {
+                if ($name === 0 /* jQuery */) {
                     if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
                         _prefix = _self.prefixEnum[key];
                     }
                 }
 
-                if ($name === Q.$NameEnum.Zepto) {
+                if ($name === 1 /* Zepto */) {
                     if (parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
                         _prefix = _self.prefixEnum[key];
                     }
@@ -813,3 +813,4 @@ var Q;
     })();
     Q.PrefixChecker = PrefixChecker;
 })(Q || (Q = {}));
+;

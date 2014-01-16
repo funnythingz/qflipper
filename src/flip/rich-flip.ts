@@ -35,7 +35,7 @@ module Q {
         private touchmove() {
             this.animationFlag.disabled();
 
-            var fptouchmoveEventCreator = new TriggerEventCreator();
+            var fptouchmoveEventCreator: TriggerEventCreator = new TriggerEventCreator();
 
             this.$el.on('touchmove', (event: any) => {
                 event.stopPropagation();
@@ -45,8 +45,8 @@ module Q {
                 }
 
                 if(this.animationFlag.checkStatus()) {
-                    var moveDistanceHelper = new MoveDistanceHelper(this.startPosition.getX(), event)
-                    var moveDistance = moveDistanceHelper.getMoveDistance();
+                    var moveDistanceHelper = new MoveDistanceHelper(this.startPosition.getX(), event);
+                    var moveDistance: number = moveDistanceHelper.getMoveDistance();
                     this.snapFitAnimation(moveDistance);
                     this.delegateDistancePosition(event);
                 }

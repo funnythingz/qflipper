@@ -5,10 +5,10 @@ module Q {
         private prefixEnum = PrefixEnum;
         private _prefix: string;
 
-        constructor(checkList: any) {
+        constructor($el: JQuery, checkList: any) {
             var _prefix: string;
             var _self = this;
-            var _$el: JQuery = FLIP_ELEMENT.getElement();
+            var _$el: JQuery = $el;
             var $nameChecker = new $NameChecker();
             var $name = $nameChecker.get$Name();
 

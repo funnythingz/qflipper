@@ -1,6 +1,6 @@
 /**
 * qflipper.js
-* @version 1.3.3
+* @version 1.4.0
 * @author: Hiroki Oiwa;
 * @url: http://funnythingz.github.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -28,7 +28,7 @@
     })(Q.$NameEnum || (Q.$NameEnum = {}));
     var $NameEnum = Q.$NameEnum;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var AnimationFlag = (function () {
         function AnimationFlag(flag) {
@@ -50,13 +50,13 @@
     })();
     Q.AnimationFlag = AnimationFlag;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var Animator = (function () {
-        function Animator() {
-            this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(new Q.TransitionCss3Propaty());
-            this.transformWithPrefix = new Q.TransformWithPrefixDecorator(new Q.TransformCss3Propaty());
-            this.$el = Q.FLIP_ELEMENT.getElement();
+        function Animator($el) {
+            this.$el = $el;
+            this.transitionWithPrefix = new Q.TransitionWithPrefixDecorator(this.$el, new Q.TransitionCss3Propaty());
+            this.transformWithPrefix = new Q.TransformWithPrefixDecorator(this.$el, new Q.TransformCss3Propaty());
         }
         Animator.prototype.transAnimation = function (movePosition) {
             this.setTransition();
@@ -85,7 +85,7 @@
     })();
     Q.Animator = Animator;
 })(Q || (Q = {}));
-;;var Q;
+var Q;
 (function (Q) {
     var TransformCss3Propaty = (function () {
         function TransformCss3Propaty() {
@@ -97,12 +97,12 @@
     })();
     Q.TransformCss3Propaty = TransformCss3Propaty;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var TransformWithPrefixDecorator = (function () {
-        function TransformWithPrefixDecorator(css3PropatyName) {
+        function TransformWithPrefixDecorator($el, css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker(Q.TransformEnum);
+            this.prefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
         }
         TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -115,7 +115,7 @@
     })();
     Q.TransformWithPrefixDecorator = TransformWithPrefixDecorator;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var TransitionCss3Propaty = (function () {
         function TransitionCss3Propaty() {
@@ -127,12 +127,12 @@
     })();
     Q.TransitionCss3Propaty = TransitionCss3Propaty;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var TransitionWithPrefixDecorator = (function () {
-        function TransitionWithPrefixDecorator(css3PropatyName) {
+        function TransitionWithPrefixDecorator($el, css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker(Q.TransitionEnum);
+            this.prefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
         }
         TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -141,7 +141,7 @@
     })();
     Q.TransitionWithPrefixDecorator = TransitionWithPrefixDecorator;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var TranslateX3d = (function () {
         function TranslateX3d(movePosition) {
@@ -155,12 +155,10 @@
     })();
     Q.TranslateX3d = TranslateX3d;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var ItemSize = (function () {
-        function ItemSize(options) {
-            var $el = Q.FLIP_ELEMENT.getElement();
-
+        function ItemSize($el, options) {
             this.soloWidth = $(options.view.getName()).width();
             this.totalLength = $(options.item.getName(), $el).length;
             this.totalWidth = this.soloWidth * this.totalLength;
@@ -180,7 +178,7 @@
     })();
     Q.ItemSize = ItemSize;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var Point = (function () {
         function Point(point) {
@@ -193,7 +191,7 @@
     })();
     Q.Point = Point;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var Position = (function () {
         function Position(x, y) {
@@ -211,7 +209,7 @@
     })();
     Q.Position = Position;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var DistancePositionCreator = (function () {
         function DistancePositionCreator(touchmovePosition) {
@@ -224,7 +222,7 @@
     })();
     Q.DistancePositionCreator = DistancePositionCreator;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     (function (FlipTypeEnum) {
         FlipTypeEnum[FlipTypeEnum["Simple"] = 0] = "Simple";
@@ -232,7 +230,7 @@
     })(Q.FlipTypeEnum || (Q.FlipTypeEnum = {}));
     var FlipTypeEnum = Q.FlipTypeEnum;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     (function (PrefixEnum) {
         PrefixEnum[PrefixEnum["webkit"] = 0] = "webkit";
@@ -242,7 +240,7 @@
     })(Q.PrefixEnum || (Q.PrefixEnum = {}));
     var PrefixEnum = Q.PrefixEnum;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     (function (TransformEnum) {
         TransformEnum[TransformEnum['-webkit-transform'] = 0] = '-webkit-transform';
@@ -252,7 +250,7 @@
     })(Q.TransformEnum || (Q.TransformEnum = {}));
     var TransformEnum = Q.TransformEnum;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     (function (TransitionEnum) {
         TransitionEnum[TransitionEnum['-webkit-transition'] = 0] = '-webkit-transition';
@@ -262,63 +260,36 @@
     })(Q.TransitionEnum || (Q.TransitionEnum = {}));
     var TransitionEnum = Q.TransitionEnum;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var FlipCreator = (function () {
-        function FlipCreator() {
+        function FlipCreator($el, options) {
+            this.$el = $el;
+            this.options = options;
         }
-        FlipCreator.prototype.createFlip = function (options) {
-            if (options.type.getType() === 0 /* Simple */) {
-                return new Q.SimpleFlip(options);
-            }
-            if (options.type.getType() === 1 /* Rich */) {
-                return new Q.RichFlip(options);
+        FlipCreator.prototype.createFlip = function () {
+            switch (this.options.type.getType()) {
+                case 0 /* Simple */:
+                    return new Q.SimpleFlip(this.$el, this.options);
+
+                case 1 /* Rich */:
+                    return new Q.RichFlip(this.$el, this.options);
             }
         };
         return FlipCreator;
     })();
     Q.FlipCreator = FlipCreator;
 })(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var FlipElementSingleton = (function () {
-        function FlipElementSingleton() {
-            if (FlipElementSingleton._instance) {
-                throw console.log('Error: Instantiation failed');
-            }
-            FlipElementSingleton._instance = this;
-        }
-        FlipElementSingleton.getInstance = function () {
-            if (FlipElementSingleton._instance === null) {
-                FlipElementSingleton._instance = new FlipElementSingleton();
-            }
-            return FlipElementSingleton._instance;
-        };
-
-        FlipElementSingleton.prototype.setElement = function ($el) {
-            this.$el = $el;
-        };
-
-        FlipElementSingleton.prototype.getElement = function () {
-            return this.$el;
-        };
-        FlipElementSingleton._instance = null;
-        return FlipElementSingleton;
-    })();
-    Q.FlipElementSingleton = FlipElementSingleton;
-
-    Q.FLIP_ELEMENT = FlipElementSingleton.getInstance();
-})(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var Flip = (function () {
-        function Flip(options) {
+        function Flip($el, options) {
+            this.$el = $el;
             this.options = options;
-            this.$el = Q.FLIP_ELEMENT.getElement();
             this.resetPoint();
 
-            this.itemSize = new Q.ItemSize(this.options);
-            this.animator = new Q.Animator();
+            this.itemSize = new Q.ItemSize(this.$el, this.options);
+            this.animator = new Q.Animator(this.$el);
 
             this.setFlipView();
         }
@@ -388,7 +359,7 @@
     })();
     Q.Flip = Flip;
 })(Q || (Q = {}));
-;var __extends = this.__extends || function (d, b) {
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -398,8 +369,8 @@ var Q;
 (function (Q) {
     var RichFlip = (function (_super) {
         __extends(RichFlip, _super);
-        function RichFlip(options) {
-            _super.call(this, options);
+        function RichFlip($el, options) {
+            _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
 
             this.bindTouchEvents();
@@ -419,7 +390,7 @@ var Q;
                 var startPositionCreator = new Q.PositionCreator();
                 _this.startPosition = startPositionCreator.createPosition(event);
 
-                fptouchstartEventCreator.createEvent('fptouchstart');
+                fptouchstartEventCreator.createEvent(_this.$el, 'fptouchstart');
             });
         };
 
@@ -443,7 +414,7 @@ var Q;
                     _this.delegateDistancePosition(event);
                 }
 
-                fptouchmoveEventCreator.createEvent('fptouchmove');
+                fptouchmoveEventCreator.createEvent(_this.$el, 'fptouchmove');
             });
         };
 
@@ -454,7 +425,7 @@ var Q;
 
                 if (_this.animationFlag.checkStatus()) {
                     _this.startAnimation();
-                    fptouchendEventCreator.createEvent('fptouchend');
+                    fptouchendEventCreator.createEvent(_this.$el, 'fptouchend');
                 }
                 _this.animationFlag.disabled();
             });
@@ -498,18 +469,12 @@ var Q;
     })(Q.Flip);
     Q.RichFlip = RichFlip;
 })(Q || (Q = {}));
-;var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var Q;
 (function (Q) {
     var SimpleFlip = (function (_super) {
         __extends(SimpleFlip, _super);
-        function SimpleFlip(options) {
-            _super.call(this, options);
+        function SimpleFlip($el, options) {
+            _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
             this.$nameChecker = new Q.$NameChecker();
 
@@ -531,7 +496,7 @@ var Q;
                 var startPositionCreator = new Q.PositionCreator();
                 _this.startPosition = startPositionCreator.createPosition(event);
 
-                fpstarttouchEventCreator.createEvent('fptouchstart');
+                fpstarttouchEventCreator.createEvent(_this.$el, 'fptouchstart');
             });
         };
 
@@ -548,12 +513,12 @@ var Q;
                 if (!_this.animationFlag.checkStatus()) {
                     _this.traseDistance(event);
 
-                    fptouchmoveEventCreator.createEvent('fptouchmove');
+                    fptouchmoveEventCreator.createEvent(_this.$el, 'fptouchmove');
 
                     if (_this.animationFlag.checkStatus()) {
                         _this.startAnimation();
 
-                        fptouchendEventCreator.createEvent('fptouchend');
+                        fptouchendEventCreator.createEvent(_this.$el, 'fptouchend');
                     }
                 }
             });
@@ -596,20 +561,139 @@ var Q;
     })(Q.Flip);
     Q.SimpleFlip = SimpleFlip;
 })(Q || (Q = {}));
-;var Q;
+var Q;
 (function (Q) {
     var TriggerEventCreator = (function () {
         function TriggerEventCreator() {
         }
-        TriggerEventCreator.prototype.createEvent = function (type) {
-            var $el = Q.FLIP_ELEMENT.getElement();
+        TriggerEventCreator.prototype.createEvent = function ($el, type) {
             return $el.trigger($.Event(type));
         };
         return TriggerEventCreator;
     })();
     Q.TriggerEventCreator = TriggerEventCreator;
 })(Q || (Q = {}));
-;var Q;
+var Q;
+(function (Q) {
+    var PrefixChecker = (function () {
+        function PrefixChecker($el, checkList) {
+            this.prefixEnum = Q.PrefixEnum;
+            var _prefix;
+            var _self = this;
+            var _$el = $el;
+            var $nameChecker = new Q.$NameChecker();
+            var $name = $nameChecker.get$Name();
+
+            $.each(checkList, function (val, key) {
+                if ($name === 0 /* jQuery */) {
+                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
+                        _prefix = _self.prefixEnum[key];
+                    }
+                }
+
+                if ($name === 1 /* Zepto */) {
+                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
+                        _prefix = _self.prefixEnum[key];
+                    }
+                }
+            });
+
+            this._prefix = _prefix;
+        }
+        PrefixChecker.prototype.getPrefix = function () {
+            return this._prefix;
+        };
+        return PrefixChecker;
+    })();
+    Q.PrefixChecker = PrefixChecker;
+})(Q || (Q = {}));
+var Q;
+(function (Q) {
+    var Options = (function () {
+        function Options() {
+        }
+        Options.prototype.createType = function (type) {
+            this.type = new Q.Type(type);
+        };
+
+        Options.prototype.createView = function (view) {
+            this.view = new Q.View(view);
+        };
+
+        Options.prototype.createItem = function (item) {
+            this.item = new Q.Item(item);
+        };
+        return Options;
+    })();
+    Q.Options = Options;
+})(Q || (Q = {}));
+var Q;
+(function (Q) {
+    var Item = (function () {
+        function Item(name) {
+            this.name = name;
+        }
+        Item.prototype.getName = function () {
+            return this.name;
+        };
+        return Item;
+    })();
+    Q.Item = Item;
+})(Q || (Q = {}));
+var Q;
+(function (Q) {
+    var Type = (function () {
+        function Type(type) {
+            if (typeof type === "undefined") { type = 'simple'; }
+            if (type === 'simple') {
+                this.type = 0 /* Simple */;
+            }
+            if (type === 'rich') {
+                this.type = 1 /* Rich */;
+            }
+        }
+        Type.prototype.getType = function () {
+            return this.type;
+        };
+        return Type;
+    })();
+    Q.Type = Type;
+})(Q || (Q = {}));
+var Q;
+(function (Q) {
+    var View = (function () {
+        function View(name) {
+            this.name = name;
+        }
+        View.prototype.getName = function () {
+            return this.name;
+        };
+        return View;
+    })();
+    Q.View = View;
+})(Q || (Q = {}));
+var Q;
+(function (Q) {
+    var PositionCreator = (function () {
+        function PositionCreator() {
+        }
+        PositionCreator.prototype.createPosition = function (event) {
+            var $nameChecker = new Q.$NameChecker();
+            var $name = $nameChecker.get$Name();
+
+            if ($name === 0 /* jQuery */) {
+                return new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
+            }
+
+            if ($name === 1 /* Zepto */) {
+                return new Q.Position(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+            }
+        };
+        return PositionCreator;
+    })();
+    Q.PositionCreator = PositionCreator;
+})(Q || (Q = {}));
+var Q;
 (function (Q) {
     var Flipper = (function () {
         function Flipper(id, args) {
@@ -624,10 +708,10 @@ var Q;
             options.createView((args.view) ? args.view : '.view');
             options.createItem((args.item) ? args.item : '.item');
 
-            Q.FLIP_ELEMENT.setElement($(id));
+            this.$el = $(id);
 
-            var flipCreator = new Q.FlipCreator();
-            this.flip = flipCreator.createFlip(options);
+            var flipCreator = new Q.FlipCreator(this.$el, options);
+            this.flip = flipCreator.createFlip();
 
             this.refresh();
         }
@@ -664,13 +748,13 @@ var Q;
         };
 
         Flipper.prototype.flipElement = function () {
-            return Q.FLIP_ELEMENT.getElement();
+            return this.$el;
         };
         return Flipper;
     })();
     Q.Flipper = Flipper;
 })(Q || (Q = {}));
-;;var Q;
+var Q;
 (function (Q) {
     var MoveDistanceHelper = (function () {
         function MoveDistanceHelper(startPositionX, touchmoveEvent) {
@@ -693,124 +777,4 @@ var Q;
     })();
     Q.MoveDistanceHelper = MoveDistanceHelper;
 })(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Item = (function () {
-        function Item(name) {
-            this.name = name;
-        }
-        Item.prototype.getName = function () {
-            return this.name;
-        };
-        return Item;
-    })();
-    Q.Item = Item;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Options = (function () {
-        function Options() {
-        }
-        Options.prototype.createType = function (type) {
-            this.type = new Q.Type(type);
-        };
-
-        Options.prototype.createView = function (view) {
-            this.view = new Q.View(view);
-        };
-
-        Options.prototype.createItem = function (item) {
-            this.item = new Q.Item(item);
-        };
-        return Options;
-    })();
-    Q.Options = Options;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var Type = (function () {
-        function Type(type) {
-            if (typeof type === "undefined") { type = 'simple'; }
-            if (type === 'simple') {
-                this.type = 0 /* Simple */;
-            }
-            if (type === 'rich') {
-                this.type = 1 /* Rich */;
-            }
-        }
-        Type.prototype.getType = function () {
-            return this.type;
-        };
-        return Type;
-    })();
-    Q.Type = Type;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var View = (function () {
-        function View(name) {
-            this.name = name;
-        }
-        View.prototype.getName = function () {
-            return this.name;
-        };
-        return View;
-    })();
-    Q.View = View;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var PositionCreator = (function () {
-        function PositionCreator() {
-        }
-        PositionCreator.prototype.createPosition = function (event) {
-            var $nameChecker = new Q.$NameChecker();
-            var $name = $nameChecker.get$Name();
-
-            if ($name === 0 /* jQuery */) {
-                return new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
-            }
-
-            if ($name === 1 /* Zepto */) {
-                return new Q.Position(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-            }
-        };
-        return PositionCreator;
-    })();
-    Q.PositionCreator = PositionCreator;
-})(Q || (Q = {}));
-;var Q;
-(function (Q) {
-    var PrefixChecker = (function () {
-        function PrefixChecker(checkList) {
-            this.prefixEnum = Q.PrefixEnum;
-            var _prefix;
-            var _self = this;
-            var _$el = Q.FLIP_ELEMENT.getElement();
-            var $nameChecker = new Q.$NameChecker();
-            var $name = $nameChecker.get$Name();
-
-            $.each(checkList, function (val, key) {
-                if ($name === 0 /* jQuery */) {
-                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                        _prefix = _self.prefixEnum[key];
-                    }
-                }
-
-                if ($name === 1 /* Zepto */) {
-                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
-                        _prefix = _self.prefixEnum[key];
-                    }
-                }
-            });
-
-            this._prefix = _prefix;
-        }
-        PrefixChecker.prototype.getPrefix = function () {
-            return this._prefix;
-        };
-        return PrefixChecker;
-    })();
-    Q.PrefixChecker = PrefixChecker;
-})(Q || (Q = {}));
-;
+//# sourceMappingURL=qflipper.js.map

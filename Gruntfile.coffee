@@ -1,4 +1,16 @@
 module.exports = (grunt)->
+
+  grunt.loadNpmTasks('grunt-contrib-compass')
+  grunt.loadNpmTasks('grunt-typescript')
+  grunt.loadNpmTasks('grunt-contrib-concat')
+  grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-connect')
+  grunt.loadNpmTasks('grunt-contrib-clean')
+
+  grunt.registerTask('default', ['typescript', 'uglify', 'concat', 'clean', 'compass'])
+  grunt.registerTask('server', ['connect'])
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
 
@@ -7,10 +19,6 @@ module.exports = (grunt)->
         files: 'qflipper.min.js': ['qflipper.js']
 
     concat:
-      qflipper:
-        src: ['src/**/*.js']
-        dest: 'qflipper.js'
-
       license:
         src: ['license/mit.js', 'qflipper.js']
         dest: 'qflipper.js'
@@ -25,8 +33,9 @@ module.exports = (grunt)->
     typescript:
       base:
         src: ['src/**/*.ts']
+        dest: 'qflipper.js'
         options:
-          sourceMap: false
+          sourceMap: true
 
     compass:
       dist:
@@ -36,7 +45,7 @@ module.exports = (grunt)->
     watch:
       ts:
         files: ['src/**/*.ts']
-        tasks: ['typescript', 'concat', 'uglify', 'concat', 'clean']
+        tasks: ['typescript', 'uglify', 'concat', 'clean']
         options:
           atBegin: true
 
@@ -56,14 +65,3 @@ module.exports = (grunt)->
           keepalive: true
 
   })
-
-  grunt.loadNpmTasks('grunt-contrib-compass')
-  grunt.loadNpmTasks('grunt-typescript')
-  grunt.loadNpmTasks('grunt-contrib-concat')
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-contrib-connect')
-  grunt.loadNpmTasks('grunt-contrib-clean')
-
-  grunt.registerTask('default', ['typescript', 'concat', 'uglify', 'concat', 'clean', 'compass'])
-  grunt.registerTask('server', ['connect'])

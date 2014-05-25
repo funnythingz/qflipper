@@ -7,10 +7,8 @@ module Q {
         private animationFlag = new AnimationFlag();
         private $nameChecker = new $NameChecker();
 
-        constructor(
-            options: Options
-        ) {
-            super(options);
+        constructor($el: JQuery, options: Options) {
+            super($el, options);
 
             this.bindTouchEvents();
         }
@@ -30,7 +28,7 @@ module Q {
                 var startPositionCreator = new PositionCreator();
                 this.startPosition = startPositionCreator.createPosition(event);
 
-                fpstarttouchEventCreator.createEvent('fptouchstart');
+                fpstarttouchEventCreator.createEvent(this.$el, 'fptouchstart');
             });
         }
 
@@ -46,12 +44,12 @@ module Q {
                 if(!this.animationFlag.checkStatus()) {
                     this.traseDistance(event);
 
-                    fptouchmoveEventCreator.createEvent('fptouchmove');
+                    fptouchmoveEventCreator.createEvent(this.$el, 'fptouchmove');
 
                     if(this.animationFlag.checkStatus()) {
                         this.startAnimation();
 
-                        fptouchendEventCreator.createEvent('fptouchend');
+                        fptouchendEventCreator.createEvent(this.$el, 'fptouchend');
                     }
                 }
 

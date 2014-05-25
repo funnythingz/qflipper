@@ -2,10 +2,14 @@ module Q {
     
     export class Animator {
 
-        private transitionWithPrefix = new TransitionWithPrefixDecorator(new TransitionCss3Propaty());
-        private transformWithPrefix = new TransformWithPrefixDecorator(new TransformCss3Propaty());
+        private transitionWithPrefix: TransitionWithPrefixDecorator;
+        private transformWithPrefix: TransformWithPrefixDecorator;
 
-        private $el: JQuery = FLIP_ELEMENT.getElement();
+        constructor(private $el: JQuery) {
+
+            this.transitionWithPrefix = new TransitionWithPrefixDecorator(this.$el, new TransitionCss3Propaty());
+            this.transformWithPrefix = new TransformWithPrefixDecorator(this.$el, new TransformCss3Propaty());
+        }
 
         transAnimation(movePosition: number) {
             this.setTransition();

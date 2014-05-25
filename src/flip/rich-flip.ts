@@ -6,10 +6,8 @@ module Q {
         private distancePosition: Position;
         private animationFlag = new AnimationFlag();
 
-        constructor(
-            options: Options
-        ) {
-            super(options);
+        constructor($el: JQuery, options: Options) {
+            super($el, options);
 
             this.bindTouchEvents();
         }
@@ -28,7 +26,7 @@ module Q {
                 var startPositionCreator = new PositionCreator();
                 this.startPosition = startPositionCreator.createPosition(event);
 
-                fptouchstartEventCreator.createEvent('fptouchstart');
+                fptouchstartEventCreator.createEvent(this.$el, 'fptouchstart');
             });
         }
 
@@ -51,7 +49,7 @@ module Q {
                     this.delegateDistancePosition(event);
                 }
 
-                fptouchmoveEventCreator.createEvent('fptouchmove');
+                fptouchmoveEventCreator.createEvent(this.$el, 'fptouchmove');
             });
         }
 
@@ -61,7 +59,7 @@ module Q {
 
                 if(this.animationFlag.checkStatus()) {
                     this.startAnimation();
-                    fptouchendEventCreator.createEvent('fptouchend');
+                    fptouchendEventCreator.createEvent(this.$el, 'fptouchend');
                 }
                 this.animationFlag.disabled();
             });

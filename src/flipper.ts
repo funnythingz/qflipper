@@ -4,28 +4,29 @@ module Q {
     
     export class Flipper implements IFlipper {
 
+        private $el: JQuery;
         private flip: Flip;
 
-        constructor(
-            id: string,
-            args: any = {
-                type: 'simple',
-                view: '.view',
-                item: '.item'
-            }
-        ) {
+        constructor(id: string,
+                    args: any = {
+                        type: 'simple',
+                        view: '.view',
+                        item: '.item'
+                    }) {
+
             var options = new Options();
 
             options.createType((args.type)? args.type: 'simple');
             options.createView((args.view)? args.view: '.view');
             options.createItem((args.item)? args.item: '.item');
 
-            FLIP_ELEMENT.setElement($(id));
+            this.$el = $(id);
 
-            var flipCreator = new FlipCreator();
-            this.flip = flipCreator.createFlip(options);
+            var flipCreator = new FlipCreator(this.$el, options);
+            this.flip = flipCreator.createFlip();
 
             this.refresh();
+
         }
 
         refresh() {
@@ -61,7 +62,7 @@ module Q {
         }
 
         flipElement(): JQuery {
-            return FLIP_ELEMENT.getElement();
+            return this.$el;
         }
 
     }

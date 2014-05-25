@@ -2,13 +2,18 @@ module Q {
     
     export class FlipCreator {
 
-        createFlip(options: Options): Flip {
+        constructor(private $el: JQuery, private options: Options) {}
 
-            if(options.type.getType() === FlipTypeEnum.Simple) {
-                return new SimpleFlip(options);
-            }
-            if(options.type.getType() === FlipTypeEnum.Rich) {
-                return new RichFlip(options);
+        createFlip(): Flip {
+
+            switch(this.options.type.getType()) {
+
+                case FlipTypeEnum.Simple:
+                    return new SimpleFlip(this.$el, this.options);
+
+                case FlipTypeEnum.Rich:
+                    return new RichFlip(this.$el, this.options);
+
             }
 
         }

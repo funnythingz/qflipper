@@ -1,5 +1,6 @@
-qflipper.js
-=====
+# qflipper.js
+
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 qflipper.js is flick framework made of TypeScript &amp; jQuery for SmartPhone.
 

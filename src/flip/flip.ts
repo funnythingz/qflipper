@@ -46,17 +46,11 @@ module Q {
         }
 
         hasNext(): boolean {
-            if(this.getPoint() < this.getMaxPoint() - 1) {
-                return true;
-            }
-            return false;
+            return (this.getPoint() < this.getMaxPoint() - 1);
         }
 
         hasPrev(): boolean {
-            if(0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1) {
-                return true;
-            }
-            return false;
+            return (0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1);
         }
 
         getPoint(): number {

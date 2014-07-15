@@ -1,5 +1,7 @@
 # qflipper.js
 
+[![GitHub version](https://badge.fury.io/gh/funnythingz%2Fqflipper.svg)](http://badge.fury.io/gh/funnythingz%2Fqflipper)
+[![Build Status](https://travis-ci.org/funnythingz/qflipper.svg)](https://travis-ci.org/funnythingz/qflipper)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 qflipper.js is flick framework made of TypeScript &amp; jQuery for SmartPhone.

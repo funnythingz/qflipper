@@ -1,8 +1,8 @@
 /**
 * qflipper.js
-* @version 1.4.0
+* @version 1.4.1
 * @author: Hiroki Oiwa;
-* @url: http://funnythingz.github.com/qflipper/
+* @url: http://www.funnythingz.com/qflipper/
 * @license MIT (http://www.opensource.org/licenses/mit-license.php)
 */
 ;var Q;
@@ -323,17 +323,11 @@ var Q;
         };
 
         Flip.prototype.hasNext = function () {
-            if (this.getPoint() < this.getMaxPoint() - 1) {
-                return true;
-            }
-            return false;
+            return (this.getPoint() < this.getMaxPoint() - 1);
         };
 
         Flip.prototype.hasPrev = function () {
-            if (0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1) {
-                return true;
-            }
-            return false;
+            return (0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1);
         };
 
         Flip.prototype.getPoint = function () {

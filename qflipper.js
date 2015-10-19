@@ -12,16 +12,15 @@
         }
         $NameChecker.prototype.get$Name = function () {
             if (typeof jQuery === 'function') {
-                return 0 /* jQuery */;
+                return $NameEnum.jQuery;
             }
             if (typeof Zepto === 'function') {
-                return 1 /* Zepto */;
+                return $NameEnum.Zepto;
             }
         };
         return $NameChecker;
     })();
     Q.$NameChecker = $NameChecker;
-
     (function ($NameEnum) {
         $NameEnum[$NameEnum["jQuery"] = 0] = "jQuery";
         $NameEnum[$NameEnum["Zepto"] = 1] = "Zepto";
@@ -32,17 +31,15 @@ var Q;
 (function (Q) {
     var AnimationFlag = (function () {
         function AnimationFlag(flag) {
-            if (typeof flag === "undefined") { flag = false; }
+            if (flag === void 0) { flag = false; }
             this.flag = flag;
         }
         AnimationFlag.prototype.enabled = function () {
             this.flag = true;
         };
-
         AnimationFlag.prototype.disabled = function () {
             this.flag = false;
         };
-
         AnimationFlag.prototype.checkStatus = function () {
             return this.flag;
         };
@@ -60,24 +57,17 @@ var Q;
         }
         Animator.prototype.transAnimation = function (movePosition) {
             this.setTransition();
-
             var translateX3d = new Q.TranslateX3d(movePosition);
-
             this.$el.css(this.transformWithPrefix.getCss3PropatyName(), translateX3d.getMovePosition());
         };
-
         Animator.prototype.noTransAnimation = function (movePosition) {
             this.unsetTransition();
-
             var translateX3d = new Q.TranslateX3d(movePosition);
-
             this.$el.css(this.transformWithPrefix.getCss3PropatyName(), translateX3d.getMovePosition());
         };
-
         Animator.prototype.setTransition = function () {
             this.$el.css(this.transitionWithPrefix.getCss3PropatyName(), this.transformWithPrefix.getCss3PropatyNameWithEffect());
         };
-
         Animator.prototype.unsetTransition = function () {
             this.$el.css(this.transitionWithPrefix.getCss3PropatyName(), 'none');
         };
@@ -107,7 +97,6 @@ var Q;
         TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
         };
-
         TransformWithPrefixDecorator.prototype.getCss3PropatyNameWithEffect = function () {
             return this.getCss3PropatyName() + ' .3s ease-in-out';
         };
@@ -166,11 +155,9 @@ var Q;
         ItemSize.prototype.getSoloWidth = function () {
             return this.soloWidth;
         };
-
         ItemSize.prototype.getTotalWidth = function () {
             return this.totalWidth;
         };
-
         ItemSize.prototype.getTotalLength = function () {
             return this.totalLength;
         };
@@ -201,7 +188,6 @@ var Q;
         Position.prototype.getX = function () {
             return this.x;
         };
-
         Position.prototype.getY = function () {
             return this.y;
         };
@@ -242,6 +228,15 @@ var Q;
 })(Q || (Q = {}));
 var Q;
 (function (Q) {
+    // FIXME: zeptoに対応するためにハイフン区切りにした
+    // ほんとはこうしたい
+    /*
+    export enum TransformEnum {
+        WebkitTransform,
+        MozTransform,
+        OTransform,
+        msTransform
+    }*/
     (function (TransformEnum) {
         TransformEnum[TransformEnum['-webkit-transform'] = 0] = '-webkit-transform';
         TransformEnum[TransformEnum['-moz-transform'] = 1] = '-moz-transform';
@@ -252,6 +247,15 @@ var Q;
 })(Q || (Q = {}));
 var Q;
 (function (Q) {
+    // FIXME: zeptoに対応するためにハイフン区切りにした
+    // ほんとはこうしたい
+    /*
+    export enum TransitionEnum {
+        WebkitTransitionProperty,
+        MozTransitionProperty,
+        OTransitionProperty,
+        msTransitionProperty
+    }*/
     (function (TransitionEnum) {
         TransitionEnum[TransitionEnum['-webkit-transition'] = 0] = '-webkit-transition';
         TransitionEnum[TransitionEnum['-moz-transition'] = 1] = '-moz-transition';
@@ -269,10 +273,9 @@ var Q;
         }
         FlipCreator.prototype.createFlip = function () {
             switch (this.options.type.getType()) {
-                case 0 /* Simple */:
+                case Q.FlipTypeEnum.Simple:
                     return new Q.SimpleFlip(this.$el, this.options);
-
-                case 1 /* Rich */:
+                case Q.FlipTypeEnum.Rich:
                     return new Q.RichFlip(this.$el, this.options);
             }
         };
@@ -287,31 +290,26 @@ var Q;
             this.$el = $el;
             this.options = options;
             this.resetPoint();
-
             this.itemSize = new Q.ItemSize(this.$el, this.options);
             this.animator = new Q.Animator(this.$el);
-
             this.setFlipView();
         }
         Flip.prototype.refresh = function () {
             this.resetPoint();
             this.transAnimation();
         };
-
         Flip.prototype.toNext = function () {
             if (this.hasNext()) {
                 this.point = new Q.Point(this.getPoint() + 1);
             }
             this.transAnimation();
         };
-
         Flip.prototype.toPrev = function () {
             if (this.hasPrev()) {
                 this.point = new Q.Point(this.getPoint() - 1);
             }
             this.transAnimation();
         };
-
         Flip.prototype.moveToPoint = function (point) {
             if (point < this.getMaxPoint()) {
                 this.point = new Q.Point(point);
@@ -321,31 +319,24 @@ var Q;
             }
             this.transAnimation();
         };
-
         Flip.prototype.hasNext = function () {
             return (this.getPoint() < this.getMaxPoint() - 1);
         };
-
         Flip.prototype.hasPrev = function () {
             return (0 < this.getPoint() && this.getPoint() <= this.getMaxPoint() - 1);
         };
-
         Flip.prototype.getPoint = function () {
             return this.point.getPoint();
         };
-
         Flip.prototype.getMaxPoint = function () {
             return this.itemSize.getTotalLength();
         };
-
         Flip.prototype.resetPoint = function () {
             this.point = new Q.Point(0);
         };
-
         Flip.prototype.setFlipView = function () {
             this.$el.css({ width: this.itemSize.getTotalWidth().toString() + 'px' });
         };
-
         Flip.prototype.transAnimation = function () {
             this.animator.transAnimation(-(this.getPoint() * this.itemSize.getSoloWidth()));
         };
@@ -353,7 +344,7 @@ var Q;
     })();
     Q.Flip = Flip;
 })(Q || (Q = {}));
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -366,7 +357,6 @@ var Q;
         function RichFlip($el, options) {
             _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
-
             this.bindTouchEvents();
         }
         RichFlip.prototype.bindTouchEvents = function () {
@@ -375,48 +365,37 @@ var Q;
             this.touchend();
             this.touchcancel();
         };
-
         RichFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
                 var fptouchstartEventCreator = new Q.TriggerEventCreator();
-
                 var startPositionCreator = new Q.PositionCreator();
                 _this.startPosition = startPositionCreator.createPosition(event);
-
                 fptouchstartEventCreator.createEvent(_this.$el, 'fptouchstart');
             });
         };
-
         RichFlip.prototype.touchmove = function () {
             var _this = this;
             this.animationFlag.disabled();
-
             var fptouchmoveEventCreator = new Q.TriggerEventCreator();
-
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
-
                 if (!_this.animationFlag.checkStatus()) {
                     _this.traseDistance(event);
                 }
-
                 if (_this.animationFlag.checkStatus()) {
                     var moveDistanceHelper = new Q.MoveDistanceHelper(_this.startPosition.getX(), event);
                     var moveDistance = moveDistanceHelper.getMoveDistance();
                     _this.snapFitAnimation(moveDistance);
                     _this.delegateDistancePosition(event);
                 }
-
                 fptouchmoveEventCreator.createEvent(_this.$el, 'fptouchmove');
             });
         };
-
         RichFlip.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
                 var fptouchendEventCreator = new Q.TriggerEventCreator();
-
                 if (_this.animationFlag.checkStatus()) {
                     _this.startAnimation();
                     fptouchendEventCreator.createEvent(_this.$el, 'fptouchend');
@@ -424,12 +403,9 @@ var Q;
                 _this.animationFlag.disabled();
             });
         };
-
         RichFlip.prototype.touchcancel = function () {
-            this.$el.on('touchcancel', function (event) {
-            });
+            this.$el.on('touchcancel', function (event) { });
         };
-
         RichFlip.prototype.traseDistance = function (touchmoveEvent) {
             this.delegateDistancePosition(touchmoveEvent);
             if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
@@ -437,15 +413,12 @@ var Q;
                 this.animationFlag.enabled();
             }
         };
-
         RichFlip.prototype.delegateDistancePosition = function (touchmoveEvent) {
             var touchmovePositionCreator = new Q.PositionCreator();
             var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
-
             var distancePositionCreator = new Q.DistancePositionCreator(touchmovePosition);
             this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
         };
-
         RichFlip.prototype.startAnimation = function () {
             if (this.distancePosition.getX() > 0) {
                 this.toNext();
@@ -454,9 +427,8 @@ var Q;
                 this.toPrev();
             }
         };
-
         RichFlip.prototype.snapFitAnimation = function (moveDistance) {
-            if (typeof moveDistance === "undefined") { moveDistance = 0; }
+            if (moveDistance === void 0) { moveDistance = 0; }
             this.animator.noTransAnimation(-((this.getPoint() * this.itemSize.getSoloWidth()) + moveDistance));
         };
         return RichFlip;
@@ -471,7 +443,6 @@ var Q;
             _super.call(this, $el, options);
             this.animationFlag = new Q.AnimationFlag();
             this.$nameChecker = new Q.$NameChecker();
-
             this.bindTouchEvents();
         }
         SimpleFlip.prototype.bindTouchEvents = function () {
@@ -480,69 +451,52 @@ var Q;
             this.touchend();
             this.touchcancel();
         };
-
         SimpleFlip.prototype.touchstart = function () {
             var _this = this;
             this.$el.on('touchstart', function (event) {
                 var fpstarttouchEventCreator = new Q.TriggerEventCreator();
                 var $name = _this.$nameChecker.get$Name();
-
                 var startPositionCreator = new Q.PositionCreator();
                 _this.startPosition = startPositionCreator.createPosition(event);
-
                 fpstarttouchEventCreator.createEvent(_this.$el, 'fptouchstart');
             });
         };
-
         SimpleFlip.prototype.touchmove = function () {
             var _this = this;
             this.animationFlag.disabled();
-
             var fptouchmoveEventCreator = new Q.TriggerEventCreator();
             var fptouchendEventCreator = new Q.TriggerEventCreator();
-
             this.$el.on('touchmove', function (event) {
                 event.stopPropagation();
-
                 if (!_this.animationFlag.checkStatus()) {
                     _this.traseDistance(event);
-
                     fptouchmoveEventCreator.createEvent(_this.$el, 'fptouchmove');
-
                     if (_this.animationFlag.checkStatus()) {
                         _this.startAnimation();
-
                         fptouchendEventCreator.createEvent(_this.$el, 'fptouchend');
                     }
                 }
             });
         };
-
         SimpleFlip.prototype.touchend = function () {
             var _this = this;
             this.$el.on('touchend', function (event) {
                 _this.animationFlag.disabled();
             });
         };
-
         SimpleFlip.prototype.touchcancel = function () {
-            this.$el.on('touchcancel', function (event) {
-            });
+            this.$el.on('touchcancel', function (event) { });
         };
-
         SimpleFlip.prototype.traseDistance = function (touchmoveEvent) {
             var touchmovePositionCreator = new Q.PositionCreator();
             var touchmovePosition = touchmovePositionCreator.createPosition(touchmoveEvent);
-
             var distancePositionCreator = new Q.DistancePositionCreator(touchmovePosition);
             this.distancePosition = distancePositionCreator.createPosition(this.startPosition);
-
             if (Math.abs(this.distancePosition.getY()) < 10 && Math.abs(this.distancePosition.getX()) > 10) {
                 event.preventDefault();
                 this.animationFlag.enabled();
             }
         };
-
         SimpleFlip.prototype.startAnimation = function () {
             if (this.distancePosition.getX() > 0) {
                 this.toNext();
@@ -577,21 +531,22 @@ var Q;
             var _$el = $el;
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
-
             $.each(checkList, function (val, key) {
-                if ($name === 0 /* jQuery */) {
+                // FIXME: jQueryとzeptoで`.css()`の挙動が違うっぽい
+                // jQuery: _$el.css(val) !== undefined
+                // zepto:  _$el.css(val) !== null
+                // あとzeptoだと`WebkitTransitionPropaty`みたいなのがとれないっぽい
+                if ($name === Q.$NameEnum.jQuery) {
                     if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
                         _prefix = _self.prefixEnum[key];
                     }
                 }
-
-                if ($name === 1 /* Zepto */) {
-                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
+                if ($name === Q.$NameEnum.Zepto) {
+                    if (parseInt(key, 10) >= 0 && _$el.css(val)) {
                         _prefix = _self.prefixEnum[key];
                     }
                 }
             });
-
             this._prefix = _prefix;
         }
         PrefixChecker.prototype.getPrefix = function () {
@@ -609,11 +564,9 @@ var Q;
         Options.prototype.createType = function (type) {
             this.type = new Q.Type(type);
         };
-
         Options.prototype.createView = function (view) {
             this.view = new Q.View(view);
         };
-
         Options.prototype.createItem = function (item) {
             this.item = new Q.Item(item);
         };
@@ -638,12 +591,12 @@ var Q;
 (function (Q) {
     var Type = (function () {
         function Type(type) {
-            if (typeof type === "undefined") { type = 'simple'; }
+            if (type === void 0) { type = 'simple'; }
             if (type === 'simple') {
-                this.type = 0 /* Simple */;
+                this.type = Q.FlipTypeEnum.Simple;
             }
             if (type === 'rich') {
-                this.type = 1 /* Rich */;
+                this.type = Q.FlipTypeEnum.Rich;
             }
         }
         Type.prototype.getType = function () {
@@ -674,12 +627,10 @@ var Q;
         PositionCreator.prototype.createPosition = function (event) {
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
-
-            if ($name === 0 /* jQuery */) {
+            if ($name === Q.$NameEnum.jQuery) {
                 return new Q.Position(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
             }
-
-            if ($name === 1 /* Zepto */) {
+            if ($name === Q.$NameEnum.Zepto) {
                 return new Q.Position(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
             }
         };
@@ -687,60 +638,81 @@ var Q;
     })();
     Q.PositionCreator = PositionCreator;
 })(Q || (Q = {}));
+/// <reference path="../definitions/jquery.d.ts" />
+/// <reference path="../definitions/zepto.d.ts" />
+/// <reference path="iflipper.ts" />
+/// <reference path="flipper.ts" />
+/// <reference path="flip-creator.ts" />
+/// <reference path="prefix-checker.ts" />
+/// <reference path="$name-checker.ts" />
+/// <reference path="animation/animator.ts" />
+/// <reference path="animation/animation-flag.ts" />
+/// <reference path="animation/translate-x-3d.ts" />
+/// <reference path="animation/icss3propaty.ts" />
+/// <reference path="animation/transform-css3-propaty.ts" />
+/// <reference path="animation/transform-with-prefix-decorator.ts" />
+/// <reference path="animation/transition-css3-propaty.ts" />
+/// <reference path="animation/transition-with-prefix-decorator.ts" />
+/// <reference path="flip/flip.ts" />
+/// <reference path="flip/simple-flip.ts" />
+/// <reference path="flip/rich-flip.ts" />
+/// <reference path="flip/trigger-event-creator.ts" />
+/// <reference path="enum/transform-enum.ts" />
+/// <reference path="enum/transition-enum.ts" />
+/// <reference path="enum/prefix-enum.ts" />
+/// <reference path="enum/fliptype-enum.ts" />
+/// <reference path="data/item-size.ts" />
+/// <reference path="data/point.ts" />
+/// <reference path="data/position.ts" />
+/// <reference path="options/options.ts" />
+/// <reference path="options/item.ts" />
+/// <reference path="options/type.ts" />
+/// <reference path="options/view.ts" />
+/// <reference path="position-creator.ts" />
+/// <reference path="distance-position-creator.ts" />
+/// <reference path="./reference.ts" />
 var Q;
 (function (Q) {
     var Flipper = (function () {
         function Flipper(id, args) {
-            if (typeof args === "undefined") { args = {
+            if (args === void 0) { args = {
                 type: 'simple',
                 view: '.view',
                 item: '.item'
             }; }
             var options = new Q.Options();
-
             options.createType((args.type) ? args.type : 'simple');
             options.createView((args.view) ? args.view : '.view');
             options.createItem((args.item) ? args.item : '.item');
-
             this.$el = $(id);
-
             var flipCreator = new Q.FlipCreator(this.$el, options);
             this.flip = flipCreator.createFlip();
-
             this.refresh();
         }
         Flipper.prototype.refresh = function () {
             this.flip.refresh();
         };
-
         Flipper.prototype.toNext = function () {
             this.flip.toNext();
         };
-
         Flipper.prototype.toPrev = function () {
             this.flip.toPrev();
         };
-
         Flipper.prototype.moveToPoint = function (point) {
             this.flip.moveToPoint(point);
         };
-
         Flipper.prototype.hasNext = function () {
             return this.flip.hasNext();
         };
-
         Flipper.prototype.hasPrev = function () {
             return this.flip.hasPrev();
         };
-
         Flipper.prototype.getPoint = function () {
             return this.flip.getPoint();
         };
-
         Flipper.prototype.getMaxPoint = function () {
             return this.flip.getMaxPoint();
         };
-
         Flipper.prototype.flipElement = function () {
             return this.$el;
         };
@@ -758,12 +730,10 @@ var Q;
         MoveDistanceHelper.prototype.getMoveDistance = function () {
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
-
-            if ($name === 0 /* jQuery */) {
+            if ($name === Q.$NameEnum.jQuery) {
                 return this.startPositionX - this.touchmoveEvent.originalEvent.touches[0].clientX;
             }
-
-            if ($name === 1 /* Zepto */) {
+            if ($name === Q.$NameEnum.Zepto) {
                 return this.startPositionX - this.touchmoveEvent.changedTouches[0].clientX;
             }
         };

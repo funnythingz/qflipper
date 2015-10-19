@@ -26,7 +26,7 @@ module Q {
                 }
 
                 if($name === $NameEnum.Zepto) {
-                    if(parseInt(key, 10) >= 0 && _$el.css(val) !== null) {
+                    if(parseInt(key, 10) >= 0 && _$el.css(val)) {
                         _prefix = _self.prefixEnum[key];
                     }
                 }

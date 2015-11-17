@@ -5,8 +5,7 @@ module Q {
         private prefixChecker: PrefixChecker;
 
         constructor($el: JQuery, private css3PropatyName: ICss3Propaty) {
-
-            this.prefixChecker = new PrefixChecker($el, TransformEnum);
+            this.prefixChecker = new PrefixChecker($el, css3PropatyName);
         }
 
         getCss3PropatyName(): string {

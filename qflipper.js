@@ -92,7 +92,7 @@ var Q;
     var TransformWithPrefixDecorator = (function () {
         function TransformWithPrefixDecorator($el, css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker($el, Q.TransformEnum);
+            this.prefixChecker = new Q.PrefixChecker($el, css3PropatyName);
         }
         TransformWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -121,7 +121,7 @@ var Q;
     var TransitionWithPrefixDecorator = (function () {
         function TransitionWithPrefixDecorator($el, css3PropatyName) {
             this.css3PropatyName = css3PropatyName;
-            this.prefixChecker = new Q.PrefixChecker($el, Q.TransitionEnum);
+            this.prefixChecker = new Q.PrefixChecker($el, css3PropatyName);
         }
         TransitionWithPrefixDecorator.prototype.getCss3PropatyName = function () {
             return '-' + this.prefixChecker.getPrefix() + '-' + this.css3PropatyName.getCss3PropatyName();
@@ -218,54 +218,6 @@ var Q;
 })(Q || (Q = {}));
 var Q;
 (function (Q) {
-    (function (PrefixEnum) {
-        PrefixEnum[PrefixEnum["webkit"] = 0] = "webkit";
-        PrefixEnum[PrefixEnum["moz"] = 1] = "moz";
-        PrefixEnum[PrefixEnum["o"] = 2] = "o";
-        PrefixEnum[PrefixEnum["ms"] = 3] = "ms";
-    })(Q.PrefixEnum || (Q.PrefixEnum = {}));
-    var PrefixEnum = Q.PrefixEnum;
-})(Q || (Q = {}));
-var Q;
-(function (Q) {
-    // FIXME: zeptoに対応するためにハイフン区切りにした
-    // ほんとはこうしたい
-    /*
-    export enum TransformEnum {
-        WebkitTransform,
-        MozTransform,
-        OTransform,
-        msTransform
-    }*/
-    (function (TransformEnum) {
-        TransformEnum[TransformEnum['-webkit-transform'] = 0] = '-webkit-transform';
-        TransformEnum[TransformEnum['-moz-transform'] = 1] = '-moz-transform';
-        TransformEnum[TransformEnum['-o-transform'] = 2] = '-o-transform';
-        TransformEnum[TransformEnum['-ms-transform'] = 3] = '-ms-transform';
-    })(Q.TransformEnum || (Q.TransformEnum = {}));
-    var TransformEnum = Q.TransformEnum;
-})(Q || (Q = {}));
-var Q;
-(function (Q) {
-    // FIXME: zeptoに対応するためにハイフン区切りにした
-    // ほんとはこうしたい
-    /*
-    export enum TransitionEnum {
-        WebkitTransitionProperty,
-        MozTransitionProperty,
-        OTransitionProperty,
-        msTransitionProperty
-    }*/
-    (function (TransitionEnum) {
-        TransitionEnum[TransitionEnum['-webkit-transition'] = 0] = '-webkit-transition';
-        TransitionEnum[TransitionEnum['-moz-transition'] = 1] = '-moz-transition';
-        TransitionEnum[TransitionEnum['-o-transition'] = 2] = '-o-transition';
-        TransitionEnum[TransitionEnum['-ms-transition'] = 3] = '-ms-transition';
-    })(Q.TransitionEnum || (Q.TransitionEnum = {}));
-    var TransitionEnum = Q.TransitionEnum;
-})(Q || (Q = {}));
-var Q;
-(function (Q) {
     var FlipCreator = (function () {
         function FlipCreator($el, options) {
             this.$el = $el;
@@ -347,8 +299,7 @@ var Q;
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Q;
 (function (Q) {
@@ -523,32 +474,41 @@ var Q;
 })(Q || (Q = {}));
 var Q;
 (function (Q) {
+    var Prefixes = [
+        'webkit',
+        'moz',
+        'o',
+        'ms'
+    ];
     var PrefixChecker = (function () {
-        function PrefixChecker($el, checkList) {
-            this.prefixEnum = Q.PrefixEnum;
+        function PrefixChecker($el, property) {
+            var _this = this;
             var _prefix;
-            var _self = this;
             var _$el = $el;
             var $nameChecker = new Q.$NameChecker();
             var $name = $nameChecker.get$Name();
-            $.each(checkList, function (val, key) {
+            $.each(Prefixes, function (index, prefix) {
+                var propertyWithPrefix = _this.mergePrefixWithProperty(prefix, property);
                 // FIXME: jQueryとzeptoで`.css()`の挙動が違うっぽい
                 // jQuery: _$el.css(val) !== undefined
                 // zepto:  _$el.css(val) !== null
                 // あとzeptoだと`WebkitTransitionPropaty`みたいなのがとれないっぽい
                 if ($name === Q.$NameEnum.jQuery) {
-                    if (parseInt(key, 10) >= 0 && _$el.css(val) !== undefined) {
-                        _prefix = _self.prefixEnum[key];
+                    if (_$el.css(propertyWithPrefix) !== undefined) {
+                        _prefix = prefix;
                     }
                 }
                 if ($name === Q.$NameEnum.Zepto) {
-                    if (parseInt(key, 10) >= 0 && _$el.css(val)) {
-                        _prefix = _self.prefixEnum[key];
+                    if (_$el.css(propertyWithPrefix)) {
+                        _prefix = prefix;
                     }
                 }
             });
             this._prefix = _prefix;
         }
+        PrefixChecker.prototype.mergePrefixWithProperty = function (prefix, property) {
+            return "-" + prefix + "-" + property.getCss3PropatyName();
+        };
         PrefixChecker.prototype.getPrefix = function () {
             return this._prefix;
         };
@@ -657,9 +617,6 @@ var Q;
 /// <reference path="flip/simple-flip.ts" />
 /// <reference path="flip/rich-flip.ts" />
 /// <reference path="flip/trigger-event-creator.ts" />
-/// <reference path="enum/transform-enum.ts" />
-/// <reference path="enum/transition-enum.ts" />
-/// <reference path="enum/prefix-enum.ts" />
 /// <reference path="enum/fliptype-enum.ts" />
 /// <reference path="data/item-size.ts" />
 /// <reference path="data/point.ts" />
